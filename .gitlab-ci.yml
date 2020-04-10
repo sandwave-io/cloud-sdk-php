@@ -1,0 +1,43 @@
+before_script:
+  - apt update && apt install -y git
+  - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+  - composer install --no-interaction --no-ansi
+
+stages:
+  - test
+
+cache:
+  paths:
+    - vendor/
+
+test-71:
+  image: php:7.1
+  stage: test
+  script:
+    - composer validate --strict
+    - vendor/bin/phpstan analyze src --level=5 --no-progress
+    - vendor/bin/phpunit
+
+test-72:
+  image: php:7.2
+  stage: test
+  script:
+    - composer validate --strict
+    - vendor/bin/phpstan analyze src --level=5 --no-progress
+    - vendor/bin/phpunit
+
+test-73:
+  image: php:7.3
+  stage: test
+  script:
+    - composer validate --strict
+    - vendor/bin/phpstan analyze src --level=5 --no-progress
+    - vendor/bin/phpunit
+
+test-74:
+  image: php:7.4
+  stage: test
+  script:
+    - composer validate --strict
+    - vendor/bin/phpstan analyze src --level=5 --no-progress
+    - vendor/bin/phpunit
