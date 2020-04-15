@@ -27,12 +27,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PCextreme\\CloudSdkPhp\\": "./src"
+            "SandwaveIo\\CloudSdkPhp\\": "./src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PCextreme\\CloudSdkPhp\\Tests\\": "tests/"
+            "SandwaveIo\\CloudSdkPhp\\Tests\\": "tests/"
         }
     },
     "config": {

@@ -1,14 +1,14 @@
 <?php
 
-namespace PCextreme\CloudSdkPhp\Tests\CloudSdk;
+namespace SandwaveIo\CloudSdkPhp\Tests\CloudSdk;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use Mockery;
-use PCextreme\CloudSdkPhp\Client\ApiException;
-use PCextreme\CloudSdkPhp\CloudSdk;
-use PCextreme\CloudSdkPhp\Client\APIClient;
-use PCextreme\CloudSdkPhp\Support\UserDataFactory;
+use SandwaveIo\CloudSdkPhp\Client\ApiException;
+use SandwaveIo\CloudSdkPhp\CloudSdk;
+use SandwaveIo\CloudSdkPhp\Client\APIClient;
+use SandwaveIo\CloudSdkPhp\Support\UserDataFactory;
 
 class ServerTest extends AbstractCloudSdkCase
 {

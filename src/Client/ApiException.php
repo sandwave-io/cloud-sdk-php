@@ -1,5 +1,5 @@
 <?php
 
-namespace PCextreme\CloudSdkPhp\Client;
+namespace SandwaveIo\CloudSdkPhp\Client;
 
 class ApiException extends \RuntimeException {}

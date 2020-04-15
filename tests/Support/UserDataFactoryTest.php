@@ -1,8 +1,8 @@
 <?php
 
-namespace PCextreme\CloudSdkPhp\Tests\Support;
+namespace SandwaveIo\CloudSdkPhp\Tests\Support;
 
-use PCextreme\CloudSdkPhp\Support\UserDataFactory;
+use SandwaveIo\CloudSdkPhp\Support\UserDataFactory;
 use PHPUnit\Framework\TestCase;
 
 class UserDataFactoryTest extends TestCase

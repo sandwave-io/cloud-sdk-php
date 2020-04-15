@@ -1,9 +1,9 @@
 <?php
 
-namespace PCextreme\CloudSdkPhp;
+namespace SandwaveIo\CloudSdkPhp;
 
-use PCextreme\CloudSdkPhp\Client\APIClient;
-use PCextreme\CloudSdkPhp\Support\UserDataFactory;
+use SandwaveIo\CloudSdkPhp\Client\APIClient;
+use SandwaveIo\CloudSdkPhp\Support\UserDataFactory;
 
 final class CloudSdk
 {

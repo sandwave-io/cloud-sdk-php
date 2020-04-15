@@ -1,6 +1,6 @@
 <?php
 
-namespace PCextreme\CloudSdkPhp\Client;
+namespace SandwaveIo\CloudSdkPhp\Client;
 
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;

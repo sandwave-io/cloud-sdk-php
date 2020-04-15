@@ -1,6 +1,6 @@
 <?php
 
-namespace PCextreme\CloudSdkPhp\Support;
+namespace SandwaveIo\CloudSdkPhp\Support;
 
 use Symfony\Component\Yaml\Yaml;
 
