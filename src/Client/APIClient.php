@@ -82,6 +82,9 @@ final class APIClient
         if ($response->getStatusCode() !== $expectedResponse) {
             throw new ApiException(sprintf("API responded with %s:\n%s", $response->getStatusCode(), $response->getBody()));
         }
+        if ($response->getBody()->getSize() === 0) {
+            return [];
+        }
 
         $json = json_decode($response->getBody(), true);
 
