@@ -101,22 +101,19 @@ final class CloudSdk
 
     public function rebootServer(string $id) : array
     {
-        return $this->client->post("vms/{$id}/start");
+        return $this->client->post("vms/{$id}/start", [], [], 204);
     }
-
     public function stopServer(string $id) : array
     {
-        return $this->client->post("vms/{$id}/stop");
+        return $this->client->post("vms/{$id}/stop", [], [], 204);
     }
-
     public function startServer(string $id) : array
     {
-        return $this->client->post("vms/{$id}/start");
+        return $this->client->post("vms/{$id}/start", [], [], 204);
     }
-
     public function deleteServer(string $id) : array
     {
-        return $this->client->delete("vms/{$id}");
+        return $this->client->delete("vms/{$id}", [], 204);
     }
 
     public function showDetails(string $id) : array
