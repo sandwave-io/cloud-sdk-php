@@ -190,7 +190,7 @@ class ServerTest extends AbstractCloudSdkCase
     {
         $sdk = $this->getSdkWithMockedClient(
             'post',
-            201,
+            204,
             '{}'
         );
 
@@ -203,7 +203,7 @@ class ServerTest extends AbstractCloudSdkCase
     {
         $sdk = $this->getSdkWithMockedClient(
             'post',
-            201,
+            204,
             '{}'
         );
 
@@ -216,7 +216,7 @@ class ServerTest extends AbstractCloudSdkCase
     {
         $sdk = $this->getSdkWithMockedClient(
             'post',
-            201,
+            204,
             '{}'
         );
 
