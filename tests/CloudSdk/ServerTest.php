@@ -5,7 +5,7 @@ namespace SandwaveIo\CloudSdkPhp\Tests\CloudSdk;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use Mockery;
-use SandwaveIo\CloudSdkPhp\Client\ApiException;
+use SandwaveIo\CloudSdkPhp\Exceptions\CloudHttpException;
 use SandwaveIo\CloudSdkPhp\CloudSdk;
 use SandwaveIo\CloudSdkPhp\Client\APIClient;
 use SandwaveIo\CloudSdkPhp\Support\UserDataFactory;
@@ -146,11 +146,11 @@ class ServerTest extends AbstractCloudSdkCase
     }
 
     /*
-    * @expectedException PCextreme\CloudSdkPhp\Client\ApiException
+    * @expectedException PCextreme\CloudSdkPhp\Exceptions\CloudHttpException
     */
     public function test_create_server_negative()
     {
-        $this->expectException(ApiException::class);
+        $this->expectException(CloudHttpException::class);
         $guzzle = Mockery::mock(Client::class);
         $client = new APIClient('a', 'b', $guzzle);
         $sdk    = new CloudSdk('a', 'b', new UserDataFactory, $client);
