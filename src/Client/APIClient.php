@@ -4,6 +4,8 @@ namespace SandwaveIo\CloudSdkPhp\Client;
 
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
+use SandwaveIo\CloudSdkPhp\Exceptions\CloudHttpException;
+use SandwaveIo\CloudSdkPhp\Exceptions\CloudNotFoundException;
 
 final class APIClient
 {
@@ -80,7 +82,18 @@ final class APIClient
     private function handleResponse(ResponseInterface $response, int $expectedResponse = 200): array
     {
         if ($response->getStatusCode() !== $expectedResponse) {
-            throw new ApiException(sprintf("API responded with %s:\n%s", $response->getStatusCode(), $response->getBody()));
+            $message = sprintf(
+                "API responded with %s:\n%s",
+                $response->getStatusCode(),
+                $response->getBody()
+            );
+
+            switch ($response->getStatusCode()) {
+                case 404:
+                    throw new CloudNotFoundException($message);
+                default:
+                    throw new CloudHttpException($message);
+            }
         }
         if ($response->getBody()->getSize() === 0) {
             return [];
