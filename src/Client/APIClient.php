@@ -102,7 +102,7 @@ final class APIClient
         $json = json_decode($response->getBody(), true);
 
         if (json_last_error()) {
-            throw new ApiException("Could not parse JSON reponse body:\n" . $response->getBody());
+            throw new CloudHttpException("Could not parse JSON reponse body:\n" . $response->getBody());
         }
 
         return $response->getStatusCode() === 200 ? $json['data'] : $json;
