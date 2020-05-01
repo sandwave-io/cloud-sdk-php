@@ -15,7 +15,7 @@ test-71:
   stage: test
   script:
     - composer validate --strict
-    - vendor/bin/phpstan analyze src --level=6 --no-progress
+    - vendor/bin/phpstan analyze src --level=7 --no-progress
     - vendor/bin/phpunit
 
 test-72:
@@ -23,7 +23,7 @@ test-72:
   stage: test
   script:
     - composer validate --strict
-    - vendor/bin/phpstan analyze src --level=6 --no-progress
+    - vendor/bin/phpstan analyze src --level=7 --no-progress
     - vendor/bin/phpunit
 
 test-73:
@@ -31,7 +31,7 @@ test-73:
   stage: test
   script:
     - composer validate --strict
-    - vendor/bin/phpstan analyze src --level=6 --no-progress
+    - vendor/bin/phpstan analyze src --level=7 --no-progress
     - vendor/bin/phpunit
 
 test-74:
@@ -39,5 +39,5 @@ test-74:
   stage: test
   script:
     - composer validate --strict
-    - vendor/bin/phpstan analyze src --level=6 --no-progress
+    - vendor/bin/phpstan analyze src --level=7 --no-progress
     - vendor/bin/phpunit --coverage-text --colors=never

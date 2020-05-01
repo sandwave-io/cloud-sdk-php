@@ -164,7 +164,7 @@ final class APIClient
     /**
      * Includes account_id parameter.
      * Returns a string like so: "?account_id=xxx-yyy-zzz&foo=bar"
-     * @param array<string,string> $parameters
+     * @param array<string,string|int> $parameters
      * @return string
      */
     private function queryParameters(array $parameters): string
