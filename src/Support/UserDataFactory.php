@@ -25,6 +25,7 @@ class UserDataFactory
             ]
         );
 
+        // We cast the result of preg_replace, as it may return null. And preg_replace cannot take null as an input.
         $dump = (string) preg_replace('/True/', 'true', str_replace('true', 'True', $dump), 1);
         $dump = (string) preg_replace('/msterdam/', "msterdam\n", $dump, 1);
         $dump = (string) preg_replace('/True/', "True\n", $dump, 1);
