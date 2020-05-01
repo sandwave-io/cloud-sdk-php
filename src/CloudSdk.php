@@ -18,6 +18,13 @@ final class CloudSdk
      */
     private $userDataFactory;
 
+    /**
+     * CloudSdk constructor.
+     * @param string $apiKey
+     * @param string $accountId
+     * @param UserDataFactory|null $userDataFactory
+     * @param APIClient|null $client
+     */
     public function __construct(string $apiKey, string $accountId, ?UserDataFactory $userDataFactory= null, ?APIClient $client = null)
     {
         $this->userDataFactory = $userDataFactory ?? new UserDataFactory;
@@ -31,6 +38,15 @@ final class CloudSdk
             );
     }
 
+    /**
+     * @param string $hostname
+     * @param string $password
+     * @param string $offerId
+     * @param string $templateId
+     * @param string $datacenterId
+     * @param array<string> $sshKeys
+     * @return array<mixed>
+     */
     public function createServer(
         string $hostname,
         string $password,
@@ -52,6 +68,9 @@ final class CloudSdk
         );
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function listServers() : array
     {
         return $this->client->get(
@@ -62,6 +81,10 @@ final class CloudSdk
         );
     }
 
+    /**
+     * @param string $id UUID of server.
+     * @return array<mixed>
+     */
     public function showServer(string $id) : array
     {
         return $this->client->get(
@@ -72,6 +95,11 @@ final class CloudSdk
         );
     }
 
+    /**
+     * @param string $id UUID of server.
+     * @param string $offerId UUID of offer, use listOffers to acquire.
+     * @return array<mixed>
+     */
     public function upgradeServer(string $id, string $offerId) : array
     {
         return $this->client->patch(
@@ -82,6 +110,10 @@ final class CloudSdk
         );
     }
 
+    /**
+     * @param string $id UUID of server.
+     * @return array<mixed>
+     */
     public function getConsoleUrl(string $id) : array
     {
         return $this->client->get(
@@ -89,43 +121,84 @@ final class CloudSdk
         );
     }
 
+    /**
+     * @param string $id UUID of server.
+     * @return array<mixed>
+     */
     public function detachRescueIso(string $id) : array
     {
         return $this->client->post("vms/{$id}/detachRescue");
     }
 
+    /**
+     * @param string $id UUID of server.
+     * @return array<mixed>
+     */
     public function attachRescueIso(string $id) : array
     {
         return $this->client->post("vms/{$id}/attachRescue");
     }
 
+    /**
+     * @param string $id UUID of server.
+     * @return array<mixed>
+     */
     public function rebootServer(string $id) : array
     {
         return $this->client->post("vms/{$id}/start", [], [], 204);
     }
+
+    /**
+     * @param string $id UUID of server.
+     * @return array<mixed>
+     */
     public function stopServer(string $id) : array
     {
         return $this->client->post("vms/{$id}/stop", [], [], 204);
     }
+
+    /**
+     * @param string $id UUID of server.
+     * @return array<mixed>
+     */
     public function startServer(string $id) : array
     {
         return $this->client->post("vms/{$id}/start", [], [], 204);
     }
+
+    /**
+     * @param string $id UUID of server.
+     * @return array<mixed>
+     */
     public function deleteServer(string $id) : array
     {
         return $this->client->delete("vms/{$id}", [], 204);
     }
 
+
+    /**
+     * @param string $id UUID of server.
+     * @return array<mixed>
+     */
     public function showDetails(string $id) : array
     {
         return $this->client->get("vms/{$id}/details");
     }
 
+
+    /**
+     * Retrieve current resource usage of the account.
+     * @return array<mixed>
+     */
     public function getUsage()
     {
         return $this->client->get("usage");
     }
 
+    /**
+     * List offers available for server deployments.
+     * @return array<mixed>
+     */
     public function listOffers() : array
     {
         return $this->client->get("products/offers", [
@@ -136,11 +209,19 @@ final class CloudSdk
         ]);
     }
 
+    /**
+     * List datacenters available for server deployments.
+     * @return array<mixed>
+     */
     public function listDatacenters() : array
     {
         return $this->client->get('datacenters');
     }
 
+    /**
+     * List templates available for server deployments.
+     * @return array<mixed>
+     */
     public function listTemplates() : array
     {
         return $this->client->get('templates');

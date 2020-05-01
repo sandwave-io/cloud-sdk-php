@@ -6,6 +6,12 @@ use Symfony\Component\Yaml\Yaml;
 
 class UserDataFactory
 {
+    /**
+     * @param string $hostname
+     * @param string $password
+     * @param array<string> $sshKeys
+     * @return string
+     */
     public function generateUserData(string $hostname, string $password, array $sshKeys = []) : string
     {
         $dump = Yaml::dump(
@@ -29,7 +35,7 @@ class UserDataFactory
                 'ssh_authorized_keys' => $sshKeys
             ]);
         }
-        
+
         return base64_encode($dump);
     }
 }

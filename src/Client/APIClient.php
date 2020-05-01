@@ -33,7 +33,13 @@ final class APIClient
         ]);
     }
 
-    public function get(string $endpoint, array $queryParameters = [], int $expectedResponse = 200)
+    /**
+     * @param string $endpoint
+     * @param array<string,string|int> $queryParameters
+     * @param int $expectedResponse
+     * @return array<mixed>
+     */
+    public function get(string $endpoint, array $queryParameters = [], int $expectedResponse = 200) : array
     {
         $response = $this->client->get($endpoint . $this->queryParameters($queryParameters), [
             'headers' => $this->buildHeaders(),
@@ -42,7 +48,14 @@ final class APIClient
         return $this->handleResponse($response, $expectedResponse);
     }
 
-    public function post(string $endpoint, array $body = [], array $queryParameters = [], int $expectedResponse = 201)
+    /**
+     * @param string $endpoint
+     * @param array<string,string> $body
+     * @param array<string,string|int> $queryParameters
+     * @param int $expectedResponse
+     * @return array<mixed>
+     */
+    public function post(string $endpoint, array $body = [], array $queryParameters = [], int $expectedResponse = 201) : array
     {
         $response = $this->client->post($endpoint . $this->queryParameters($queryParameters), [
             'headers' => $this->buildHeaders(),
@@ -52,7 +65,14 @@ final class APIClient
         return $this->handleResponse($response, $expectedResponse);
     }
 
-    public function patch(string $endpoint, array $body = [], array $queryParameters = [], int $expectedResponse = 204)
+    /**
+     * @param string $endpoint
+     * @param array<string,string> $body
+     * @param array<string,string|int> $queryParameters
+     * @param int $expectedResponse
+     * @return array<mixed>
+     */
+    public function patch(string $endpoint, array $body = [], array $queryParameters = [], int $expectedResponse = 204) : array
     {
         $response = $this->client->patch($endpoint . $this->queryParameters($queryParameters), [
             'headers' => $this->buildHeaders(),
@@ -62,7 +82,14 @@ final class APIClient
         return $this->handleResponse($response, $expectedResponse);
     }
 
-    public function put(string $endpoint, array $body = [], array $queryParameters = [], int $expectedResponse = 204)
+    /**
+     * @param string $endpoint
+     * @param array<string,string> $body
+     * @param array<string,string|int> $queryParameters
+     * @param int $expectedResponse
+     * @return array<mixed>
+     */
+    public function put(string $endpoint, array $body = [], array $queryParameters = [], int $expectedResponse = 204) : array
     {
         $response = $this->client->put($endpoint . $this->queryParameters($queryParameters), [
             'headers' => $this->buildHeaders(),
@@ -72,7 +99,13 @@ final class APIClient
         return $this->handleResponse($response, $expectedResponse);
     }
 
-    public function delete(string $endpoint, array $queryParameters = [], int $expectedResponse = 204)
+    /**
+     * @param string $endpoint
+     * @param array<string,string|int> $queryParameters
+     * @param int $expectedResponse
+     * @return array<mixed>
+     */
+    public function delete(string $endpoint, array $queryParameters = [], int $expectedResponse = 204) : array
     {
         $response = $this->client->delete($endpoint . $this->queryParameters($queryParameters), [
             'headers' => $this->buildHeaders(),
@@ -83,8 +116,11 @@ final class APIClient
 
     /**
      * Check for status code and parse JSON.
+     * @param ResponseInterface $response
+     * @param int $expectedResponse
+     * @return array<mixed>
      */
-    private function handleResponse(ResponseInterface $response, int $expectedResponse = 200): array
+    private function handleResponse(ResponseInterface $response, int $expectedResponse = 200) : array
     {
         if ($response->getStatusCode() !== $expectedResponse) {
             $message = sprintf(
@@ -116,6 +152,7 @@ final class APIClient
 
     /**
      * Render header array for use in guzzle client.
+     * @return array<string,string>
      */
     private function buildHeaders(): array
     {
@@ -127,6 +164,8 @@ final class APIClient
     /**
      * Includes account_id parameter.
      * Returns a string like so: "?account_id=xxx-yyy-zzz&foo=bar"
+     * @param array<string,string> $parameters
+     * @return string
      */
     private function queryParameters(array $parameters): string
     {
