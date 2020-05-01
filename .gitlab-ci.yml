@@ -11,7 +11,7 @@ cache:
     - vendor/
 
 test-71:
-  image: php:7.1
+  image: mileschou/xdebug:7.1
   stage: test
   script:
     - composer validate --strict
@@ -19,7 +19,7 @@ test-71:
     - vendor/bin/phpunit
 
 test-72:
-  image: php:7.2
+  image: mileschou/xdebug:7.2
   stage: test
   script:
     - composer validate --strict
@@ -27,7 +27,7 @@ test-72:
     - vendor/bin/phpunit
 
 test-73:
-  image: php:7.3
+  image: mileschou/xdebug:7.3
   stage: test
   script:
     - composer validate --strict
@@ -35,9 +35,9 @@ test-73:
     - vendor/bin/phpunit
 
 test-74:
-  image: php:7.4
+  image: mileschou/xdebug:7.4
   stage: test
   script:
     - composer validate --strict
     - vendor/bin/phpstan analyze src --level=5 --no-progress
-    - vendor/bin/phpunit
+    - vendor/bin/phpunit --coverage-text --colors=never
