@@ -25,10 +25,10 @@ class UserDataFactory
             ]
         );
 
-        $dump = preg_replace('/True/', 'true', str_replace('true', 'True', $dump), 1);
-        $dump = preg_replace('/msterdam/', "msterdam\n", $dump, 1);
-        $dump = preg_replace('/True/', "True\n", $dump, 1);
-        $dump = preg_replace('/manage_etc_hosts/', "#cloud-config\nmanage_etc_hosts", $dump, 1);
+        $dump = (string) preg_replace('/True/', 'true', str_replace('true', 'True', $dump), 1);
+        $dump = (string) preg_replace('/msterdam/', "msterdam\n", $dump, 1);
+        $dump = (string) preg_replace('/True/', "True\n", $dump, 1);
+        $dump = (string) preg_replace('/manage_etc_hosts/', "#cloud-config\nmanage_etc_hosts", $dump, 1);
 
         if (! empty($sshKeys)) {
             $dump .= "\n" . Yaml::dump([
