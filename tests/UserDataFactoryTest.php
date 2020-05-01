@@ -1,6 +1,6 @@
 <?php
 
-namespace SandwaveIo\CloudSdkPhp\Tests\Support;
+namespace SandwaveIo\CloudSdkPhp\Tests;
 
 use SandwaveIo\CloudSdkPhp\Support\UserDataFactory;
 use PHPUnit\Framework\TestCase;

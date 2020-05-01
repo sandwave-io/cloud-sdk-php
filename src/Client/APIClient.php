@@ -37,6 +37,7 @@ final class APIClient
     {
         $response = $this->client->get($endpoint . $this->queryParameters($queryParameters), [
             'headers' => $this->buildHeaders(),
+            'http_errors' => false,
         ]);
         return $this->handleResponse($response, $expectedResponse);
     }
@@ -45,6 +46,7 @@ final class APIClient
     {
         $response = $this->client->post($endpoint . $this->queryParameters($queryParameters), [
             'headers' => $this->buildHeaders(),
+            'http_errors' => false,
             'json' => $body,
         ]);
         return $this->handleResponse($response, $expectedResponse);
@@ -54,6 +56,7 @@ final class APIClient
     {
         $response = $this->client->patch($endpoint . $this->queryParameters($queryParameters), [
             'headers' => $this->buildHeaders(),
+            'http_errors' => false,
             'json' => $body,
         ]);
         return $this->handleResponse($response, $expectedResponse);
@@ -63,6 +66,7 @@ final class APIClient
     {
         $response = $this->client->put($endpoint . $this->queryParameters($queryParameters), [
             'headers' => $this->buildHeaders(),
+            'http_errors' => false,
             'json' => $body,
         ]);
         return $this->handleResponse($response, $expectedResponse);
@@ -72,6 +76,7 @@ final class APIClient
     {
         $response = $this->client->delete($endpoint . $this->queryParameters($queryParameters), [
             'headers' => $this->buildHeaders(),
+            'http_errors' => false,
         ]);
         return $this->handleResponse($response, $expectedResponse);
     }
@@ -83,8 +88,9 @@ final class APIClient
     {
         if ($response->getStatusCode() !== $expectedResponse) {
             $message = sprintf(
-                "API responded with %s:\n%s",
+                "API responded with %s, expected %s. Response body:\n%s",
                 $response->getStatusCode(),
+                $expectedResponse,
                 $response->getBody()
             );
 
@@ -105,7 +111,7 @@ final class APIClient
             throw new CloudHttpException("Could not parse JSON reponse body:\n" . $response->getBody());
         }
 
-        return $response->getStatusCode() === 200 ? $json['data'] : $json;
+        return $response->getStatusCode() === $expectedResponse ? $json['data'] : $json;
     }
 
     /**

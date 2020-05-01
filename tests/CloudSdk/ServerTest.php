@@ -72,72 +72,12 @@ class ServerTest extends AbstractCloudSdkCase
         $this->assertEquals(['foo' => 'bar'], $json[0]);
     }
 
-    public function test_usage()
-    {
-        $sdk = $this->getSdkWithMockedClient(
-            'get',
-            200,
-            '{"data": [{"ram": 1}]}'
-        );
-
-        $json = $sdk->getUsage();
-
-        $this->assertIsArray($json);
-        $this->assertEquals(1, count($json));
-        $this->assertEquals(['ram' => 1], $json[0]);
-    }
-
-    public function test_list_offers()
-    {
-        $sdk = $this->getSdkWithMockedClient(
-            'get',
-            200,
-            '{"data": [{"foo":"bar"}]}'
-        );
-
-        $json = $sdk->listOffers();
-
-        $this->assertIsArray($json);
-        $this->assertEquals(1, count($json));
-        $this->assertEquals(['foo' => 'bar'], $json[0]);
-    }
-
-    public function test_list_datacenters()
-    {
-        $sdk = $this->getSdkWithMockedClient(
-            'get',
-            200,
-            '{"data": [{"foo":"bar"}]}'
-        );
-
-        $json = $sdk->listDatacenters();
-
-        $this->assertIsArray($json);
-        $this->assertEquals(1, count($json));
-        $this->assertEquals(['foo' => 'bar'], $json[0]);
-    }
-
-    public function test_list_templates()
-    {
-        $sdk = $this->getSdkWithMockedClient(
-            'get',
-            200,
-            '{"data": [{"foo":"bar"}]}'
-        );
-
-        $json = $sdk->listTemplates();
-
-        $this->assertIsArray($json);
-        $this->assertEquals(1, count($json));
-        $this->assertEquals(['foo' => 'bar'], $json[0]);
-    }
-
     public function test_create_server()
     {
         $sdk = $this->getSdkWithMockedClient(
             'post',
             201,
-            '{}'
+            '{"data": {"id":"aaa-bbb-ccc-ddd"}}'
         );
 
         $json = $sdk->createServer('test.io', 'joee', '1', '1', '1', []);
@@ -145,9 +85,6 @@ class ServerTest extends AbstractCloudSdkCase
         $this->assertIsArray($json);
     }
 
-    /*
-    * @expectedException PCextreme\CloudSdkPhp\Exceptions\CloudHttpException
-    */
     public function test_create_server_negative()
     {
         $this->expectException(CloudHttpException::class);
@@ -157,6 +94,7 @@ class ServerTest extends AbstractCloudSdkCase
 
         $guzzle->shouldReceive('post')->once()->andReturn(new Response(422, [], '{}'));
 
+        $this->expectException(CloudHttpException::class);
         $sdk->createServer('test.io', 'joee', 1, '1', '1', []);
     }
 
@@ -165,7 +103,7 @@ class ServerTest extends AbstractCloudSdkCase
         $sdk = $this->getSdkWithMockedClient(
             'post',
             201,
-            '{}'
+            '{"data": []}'
         );
 
         $json = $sdk->detachRescueIso('eeee-aaaa-uuuu');
@@ -178,7 +116,7 @@ class ServerTest extends AbstractCloudSdkCase
         $sdk = $this->getSdkWithMockedClient(
             'post',
             201,
-            '{}'
+            '{"data": []}'
         );
 
         $json = $sdk->attachRescueIso('eeee-aaaa-uuuu');
@@ -191,7 +129,7 @@ class ServerTest extends AbstractCloudSdkCase
         $sdk = $this->getSdkWithMockedClient(
             'post',
             204,
-            '{}'
+            '{"data": []}'
         );
 
         $json = $sdk->rebootServer('eeee-aaaa-uuuu');
@@ -204,7 +142,7 @@ class ServerTest extends AbstractCloudSdkCase
         $sdk = $this->getSdkWithMockedClient(
             'post',
             204,
-            '{}'
+            '{"data": []}'
         );
 
         $json = $sdk->startServer('eeee-aaaa-uuuu');
@@ -217,7 +155,7 @@ class ServerTest extends AbstractCloudSdkCase
         $sdk = $this->getSdkWithMockedClient(
             'post',
             204,
-            '{}'
+            '{"data": []}'
         );
 
         $json = $sdk->stopServer('eeee-aaaa-uuuu');
@@ -230,7 +168,7 @@ class ServerTest extends AbstractCloudSdkCase
         $sdk = $this->getSdkWithMockedClient(
             'patch',
             204,
-            '{}'
+            '{"data": []}'
         );
 
         $json = $sdk->upgradeServer('eeee-aaaa-bbbb', '33');
@@ -243,7 +181,7 @@ class ServerTest extends AbstractCloudSdkCase
         $sdk = $this->getSdkWithMockedClient(
             'delete',
             204,
-            '{}'
+            '{"data": []}'
         );
 
         $json = $sdk->deleteServer('eeee-aaaa-bbbb');
