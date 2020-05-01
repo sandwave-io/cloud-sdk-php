@@ -1,5 +1,5 @@
 before_script:
-  - apt update && apt install -y git
+  - apk add git
   - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
   - composer install --no-interaction --no-ansi
 
