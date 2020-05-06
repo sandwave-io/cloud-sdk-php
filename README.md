@@ -355,6 +355,29 @@ $cloudSdk->listTemplates();
 ];
 ```
 
+#### Get private networks for account
+
+The templates used for VM deployments are predefined and can be seen using listTemplates.
+
+```php
+$cloudSdk->listNetworks();
+```
+
+```php
+[
+    [
+        "id" => "d11c06f5-ff1c-41cd-8fc9-1ebcb3084501",
+        "display_name" => "An example (No SG)",
+        "datacenter_id" => "36616598-8e93-4118-a03c-94f99e5e1169",
+        "manager" => "man.zone03.ams02.cldin.net",
+        "cidr_ipv4" => "185.109.217.64/26",
+        "cidr_ipv6" => "2a05:1500:600:4::/64",
+        "created_at" => "2019-09-09T08:58:05+00:00",
+        "updated_at" => "2019-09-09T08:58:05+00:00"
+    ]
+];
+```
+
 #### Get console url for current sever
 
 If you wish to open a browser based console, you can use this method to generate a URL.
