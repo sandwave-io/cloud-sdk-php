@@ -41,4 +41,34 @@ class ProductTest extends AbstractCloudSdkCase
         $this->assertEquals(1, count($json));
         $this->assertEquals(['foo' => 'bar'], $json[0]);
     }
+
+    public function test_list_server_offers()
+    {
+        $sdk = $this->getSdkWithMockedClient(
+            'get',
+            200,
+            '{"data": [{"foo":"bar"}]}'
+        );
+
+        $json = $sdk->listServerOffers();
+
+        $this->assertIsArray($json);
+        $this->assertEquals(1, count($json));
+        $this->assertEquals(['foo' => 'bar'], $json[0]);
+    }
+
+    public function test_list_disk_offers()
+    {
+        $sdk = $this->getSdkWithMockedClient(
+            'get',
+            200,
+            '{"data": [{"foo":"bar"}]}'
+        );
+
+        $json = $sdk->listDiskOffers();
+
+        $this->assertIsArray($json);
+        $this->assertEquals(1, count($json));
+        $this->assertEquals(['foo' => 'bar'], $json[0]);
+    }
 }
