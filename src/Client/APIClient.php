@@ -147,7 +147,7 @@ final class APIClient
             throw new CloudHttpException("Could not parse JSON reponse body:\n" . $response->getBody());
         }
 
-        return $response->getStatusCode() === $expectedResponse ? $json['data'] : $json;
+        return ($response->getStatusCode() === $expectedResponse && array_key_exists('data', $json)) ? $json['data'] : $json;
     }
 
     /**

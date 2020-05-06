@@ -15,15 +15,16 @@ class TemplatesTest extends AbstractCloudSdkCase
     public function test_list_templates()
     {
         $sdk = $this->getSdkWithMockedClient(
-            'get',
             200,
-            '{"data": [{"foo":"bar"}]}'
+            'json/template_list.json',
+            'get',
+            'templates'
         );
 
         $json = $sdk->listTemplates();
 
-        $this->assertIsArray($json);
-        $this->assertEquals(1, count($json));
-        $this->assertEquals(['foo' => 'bar'], $json[0]);
+        $this->assertTrue(is_array($json));
+        $this->assertNotEquals([], $json);
+        $this->assertArrayContains('display_name', 'CentOS 8.1', $json);
     }
 }
