@@ -82,7 +82,7 @@ This will return an array having all servers attached to your account.
         'id'                    => 'aaaa-bbbb-cccc-dddd-eeee',
         'display_name'          => 'display_name',
         'status'                => 'Running',
-        'rescue_iso_attached'   => 0,
+        'rescue_iso_attached'   => false,
         'has_security_group'    => true,
     
         'created_at'            => '2020-04-02T09:50:13+00:00',
@@ -103,7 +103,7 @@ $cloudSdk->showServer('aaaa-bbbb-cccc-dddd-eeee');
     'id'                    => 'aaaa-bbbb-cccc-dddd-eeee',
     'display_name'          => 'display_name',
     'status'                => 'Running',
-    'rescue_iso_attached'   => 0,
+    'rescue_iso_attached'   => false,
     'has_security_group'    => true,
 
     'created_at'            => '2020-04-02T09:50:13+00:00',

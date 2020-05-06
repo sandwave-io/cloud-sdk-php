@@ -1,0 +1,40 @@
+{
+  "data": [
+    {
+      "id": "08c1f18a-36e1-4faf-a843-8be5f7de408b",
+      "crn": 123456789,
+      "description": null,
+      "type": "private",
+      "recent_account": true,
+      "has_premium_phone": false,
+      "created_at": "2020-05-04T12:36:35+00:00",
+      "updated_at": "2020-05-04T12:36:35+00:00",
+      "details": {
+        "data": {
+          "first_name": "John",
+          "last_name": "Doe",
+          "phone_number": null,
+          "primary_address": null,
+          "billing_address": null,
+          "vat_code": null,
+          "vat_rate": null
+        }
+      },
+      "legacyprods": {
+        "data": {
+          "has_old_clb": false
+        }
+      }
+    }
+  ],
+  "meta": {
+    "pagination": {
+      "total": 1,
+      "count": 1,
+      "per_page": 20,
+      "current_page": 1,
+      "total_pages": 1,
+      "links": {}
+    }
+  }
+}
