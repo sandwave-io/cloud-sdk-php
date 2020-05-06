@@ -69,14 +69,18 @@ final class CloudSdk
     }
 
     /**
+     * @param int $limit
+     * @param int $page
      * @return array<mixed>
      */
-    public function listServers() : array
+    public function listServers(int $limit = 50, int $page = 1) : array
     {
         return $this->client->get(
             'vms',
             [
-                'include' => 'offer,datacenter'
+                'include' => 'offer,datacenter',
+                'limit'           => $limit,
+                'page'            => $page
             ]
         );
     }
@@ -197,15 +201,48 @@ final class CloudSdk
 
     /**
      * List offers available for server deployments.
+     * @deprecated Use listServerOffers or listDiskOffers instead.
      * @return array<mixed>
      */
     public function listOffers() : array
     {
-        return $this->client->get("products/offers", [
+        return $this->client->get("/products/offers", [
             'filter.category' => 'compute_servers',
             'include'         => 'categories',
             'limit'           => 50,
             'page'            => 1
+        ]);
+    }
+
+    /**
+     * List offers available for server deployments.
+     * @param int $limit
+     * @param int $page
+     * @return array<mixed>
+     */
+    public function listServerOffers(int $limit = 50, int $page = 1) : array
+    {
+        return $this->client->get("/products/offers", [
+            'filter.category' => 'compute_servers',
+            'include'         => 'categories',
+            'limit'           => $limit,
+            'page'            => $page
+        ]);
+    }
+
+    /**
+     * List offers available for disk deployments.
+     * @param int $limit
+     * @param int $page
+     * @return array<mixed>
+     */
+    public function listDiskOffers(int $limit = 50, int $page = 1) : array
+    {
+        return $this->client->get("/products/offers", [
+            'filter.category' => 'compute_disks',
+            'include'         => 'categories',
+            'limit'           => $limit,
+            'page'            => $page
         ]);
     }
 
