@@ -264,4 +264,13 @@ final class CloudSdk
     {
         return $this->client->get('templates');
     }
+
+    /**
+     * List networks available for server deployments.
+     * @return array<mixed>
+     */
+    public function listNetworks() : array
+    {
+        return $this->client->get('networks');
+    }
 }
