@@ -207,10 +207,10 @@ final class CloudSdk
     public function listOffers() : array
     {
         return $this->client->get("/products/offers", [
-            'filter.category' => 'compute_servers',
-            'include'         => 'categories',
-            'limit'           => 50,
-            'page'            => 1
+            'filter[category]'  => 'compute_servers',
+            'include'           => 'categories',
+            'limit'             => 50,
+            'page'              => 1
         ]);
     }
 
@@ -223,10 +223,10 @@ final class CloudSdk
     public function listServerOffers(int $limit = 50, int $page = 1) : array
     {
         return $this->client->get("/products/offers", [
-            'filter.category' => 'compute_servers',
-            'include'         => 'categories',
-            'limit'           => $limit,
-            'page'            => $page
+            'filter[category]'  => 'compute_servers',
+            'include'           => 'categories',
+            'limit'             => $limit,
+            'page'              => $page
         ]);
     }
 
@@ -239,10 +239,10 @@ final class CloudSdk
     public function listDiskOffers(int $limit = 50, int $page = 1) : array
     {
         return $this->client->get("/products/offers", [
-            'filter.category' => 'compute_disks',
-            'include'         => 'categories',
-            'limit'           => $limit,
-            'page'            => $page
+            'filter[category]'  => 'compute_disks',
+            'include'           => 'categories',
+            'limit'             => $limit,
+            'page'              => $page
         ]);
     }
 
