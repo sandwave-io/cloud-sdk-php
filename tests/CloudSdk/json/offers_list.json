@@ -1,0 +1,961 @@
+{
+  "data": [
+    {
+      "id": "ade61745-e399-401e-bdb4-b25487143e30",
+      "account_id": null,
+      "billing_period": 1,
+      "price": 500,
+      "type": "usage",
+      "sku": "compute_standard_1gb",
+      "name": "Standard 1GB server",
+      "description": "Standard 1GB server",
+      "show_in_store": true,
+      "specifications": {
+        "cpu": {
+          "value": "1",
+          "unit": "amount"
+        },
+        "memory": {
+          "value": "1",
+          "unit": "GB"
+        },
+        "storage": {
+          "value": "25",
+          "unit": "GB"
+        },
+        "storage_type": {
+          "value": "standard",
+          "unit": "type"
+        },
+        "legacy_prod": {
+          "value": "13",
+          "unit": "id"
+        },
+        "legacy_prodid": {
+          "value": "155",
+          "unit": "id"
+        },
+        "network_type": {
+          "value": "regular",
+          "unit": "type"
+        }
+      },
+      "created_at": "2019-09-09T08:58:05+00:00",
+      "updated_at": "2019-09-09T08:58:05+00:00",
+      "categories": {
+        "data": [
+          {
+            "id": "8cbfe407-1cbc-49ea-b7a2-c4e6fd147474",
+            "name": "Compute",
+            "sku": "compute",
+            "description": "Compute",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          },
+          {
+            "id": "333d0e24-dc36-4d54-a270-53b15c240e3a",
+            "name": "Compute server",
+            "sku": "compute_servers",
+            "description": "compute servers.",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "bb847760-41ab-4243-9a98-3723dde78b8d",
+      "account_id": null,
+      "billing_period": 1,
+      "price": 750,
+      "type": "usage",
+      "sku": "compute_ha_1gb",
+      "name": "HA 1GB server",
+      "description": "HA 1GB server",
+      "show_in_store": true,
+      "specifications": {
+        "cpu": {
+          "value": "1",
+          "unit": "amount"
+        },
+        "memory": {
+          "value": "1",
+          "unit": "GB"
+        },
+        "storage": {
+          "value": "25",
+          "unit": "GB"
+        },
+        "storage_type": {
+          "value": "ha",
+          "unit": "type"
+        },
+        "legacy_prod": {
+          "value": "13",
+          "unit": "id"
+        },
+        "legacy_prodid": {
+          "value": "156",
+          "unit": "id"
+        },
+        "network_type": {
+          "value": "regular",
+          "unit": "type"
+        }
+      },
+      "created_at": "2019-09-09T08:58:07+00:00",
+      "updated_at": "2019-09-09T08:58:07+00:00",
+      "categories": {
+        "data": [
+          {
+            "id": "8cbfe407-1cbc-49ea-b7a2-c4e6fd147474",
+            "name": "Compute",
+            "sku": "compute",
+            "description": "Compute",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          },
+          {
+            "id": "333d0e24-dc36-4d54-a270-53b15c240e3a",
+            "name": "Compute server",
+            "sku": "compute_servers",
+            "description": "compute servers.",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "626e60be-ae86-42d9-a643-b17a439fd4ef",
+      "account_id": null,
+      "billing_period": 1,
+      "price": 1000,
+      "type": "usage",
+      "sku": "compute_standard_2gb",
+      "name": "Standard 2GB server",
+      "description": "Standard 2GB server",
+      "show_in_store": true,
+      "specifications": {
+        "cpu": {
+          "value": "2",
+          "unit": "amount"
+        },
+        "memory": {
+          "value": "2",
+          "unit": "GB"
+        },
+        "storage": {
+          "value": "50",
+          "unit": "GB"
+        },
+        "storage_type": {
+          "value": "standard",
+          "unit": "type"
+        },
+        "legacy_prod": {
+          "value": "13",
+          "unit": "id"
+        },
+        "legacy_prodid": {
+          "value": "155",
+          "unit": "id"
+        },
+        "network_type": {
+          "value": "regular",
+          "unit": "type"
+        }
+      },
+      "created_at": "2019-09-09T08:58:06+00:00",
+      "updated_at": "2019-09-09T08:58:06+00:00",
+      "categories": {
+        "data": [
+          {
+            "id": "8cbfe407-1cbc-49ea-b7a2-c4e6fd147474",
+            "name": "Compute",
+            "sku": "compute",
+            "description": "Compute",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          },
+          {
+            "id": "333d0e24-dc36-4d54-a270-53b15c240e3a",
+            "name": "Compute server",
+            "sku": "compute_servers",
+            "description": "compute servers.",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fe1b3cb4-2041-40fa-9219-6ec3693a3bf0",
+      "account_id": null,
+      "billing_period": 1,
+      "price": 1500,
+      "type": "usage",
+      "sku": "compute_ha_2gb",
+      "name": "HA 2GB server",
+      "description": "HA 2GB server",
+      "show_in_store": true,
+      "specifications": {
+        "cpu": {
+          "value": "2",
+          "unit": "amount"
+        },
+        "memory": {
+          "value": "2",
+          "unit": "GB"
+        },
+        "storage": {
+          "value": "50",
+          "unit": "GB"
+        },
+        "storage_type": {
+          "value": "ha",
+          "unit": "type"
+        },
+        "legacy_prod": {
+          "value": "13",
+          "unit": "id"
+        },
+        "legacy_prodid": {
+          "value": "156",
+          "unit": "id"
+        },
+        "network_type": {
+          "value": "regular",
+          "unit": "type"
+        }
+      },
+      "created_at": "2019-09-09T08:58:07+00:00",
+      "updated_at": "2019-09-09T08:58:07+00:00",
+      "categories": {
+        "data": [
+          {
+            "id": "8cbfe407-1cbc-49ea-b7a2-c4e6fd147474",
+            "name": "Compute",
+            "sku": "compute",
+            "description": "Compute",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          },
+          {
+            "id": "333d0e24-dc36-4d54-a270-53b15c240e3a",
+            "name": "Compute server",
+            "sku": "compute_servers",
+            "description": "compute servers.",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "4e4998e2-2ccd-4e91-bd3d-b9e5c1e8343f",
+      "account_id": null,
+      "billing_period": 1,
+      "price": 2000,
+      "type": "usage",
+      "sku": "compute_standard_4gb",
+      "name": "Standard 4GB server",
+      "description": "Standard 4GB server",
+      "show_in_store": true,
+      "specifications": {
+        "cpu": {
+          "value": "4",
+          "unit": "amount"
+        },
+        "memory": {
+          "value": "4",
+          "unit": "GB"
+        },
+        "storage": {
+          "value": "100",
+          "unit": "GB"
+        },
+        "storage_type": {
+          "value": "standard",
+          "unit": "type"
+        },
+        "legacy_prod": {
+          "value": "13",
+          "unit": "id"
+        },
+        "legacy_prodid": {
+          "value": "155",
+          "unit": "id"
+        },
+        "network_type": {
+          "value": "regular",
+          "unit": "type"
+        }
+      },
+      "created_at": "2019-09-09T08:58:06+00:00",
+      "updated_at": "2019-09-09T08:58:06+00:00",
+      "categories": {
+        "data": [
+          {
+            "id": "8cbfe407-1cbc-49ea-b7a2-c4e6fd147474",
+            "name": "Compute",
+            "sku": "compute",
+            "description": "Compute",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          },
+          {
+            "id": "333d0e24-dc36-4d54-a270-53b15c240e3a",
+            "name": "Compute server",
+            "sku": "compute_servers",
+            "description": "compute servers.",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "c7d440a6-9a3b-4dce-a555-04121bc723a7",
+      "account_id": null,
+      "billing_period": 1,
+      "price": 3000,
+      "type": "usage",
+      "sku": "compute_ha_4gb",
+      "name": "HA 4GB server",
+      "description": "HA 4GB server",
+      "show_in_store": true,
+      "specifications": {
+        "cpu": {
+          "value": "4",
+          "unit": "amount"
+        },
+        "memory": {
+          "value": "4",
+          "unit": "GB"
+        },
+        "storage": {
+          "value": "100",
+          "unit": "GB"
+        },
+        "storage_type": {
+          "value": "ha",
+          "unit": "type"
+        },
+        "legacy_prod": {
+          "value": "13",
+          "unit": "id"
+        },
+        "legacy_prodid": {
+          "value": "156",
+          "unit": "id"
+        },
+        "network_type": {
+          "value": "regular",
+          "unit": "type"
+        }
+      },
+      "created_at": "2019-09-09T08:58:08+00:00",
+      "updated_at": "2019-09-09T08:58:08+00:00",
+      "categories": {
+        "data": [
+          {
+            "id": "8cbfe407-1cbc-49ea-b7a2-c4e6fd147474",
+            "name": "Compute",
+            "sku": "compute",
+            "description": "Compute",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          },
+          {
+            "id": "333d0e24-dc36-4d54-a270-53b15c240e3a",
+            "name": "Compute server",
+            "sku": "compute_servers",
+            "description": "compute servers.",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b4b1ad4c-6a54-4f14-9aba-de6fea51ab80",
+      "account_id": null,
+      "billing_period": 1,
+      "price": 4000,
+      "type": "usage",
+      "sku": "compute_standard_8gb",
+      "name": "Standard 8GB server",
+      "description": "Standard 8GB server",
+      "show_in_store": true,
+      "specifications": {
+        "cpu": {
+          "value": "6",
+          "unit": "amount"
+        },
+        "memory": {
+          "value": "8",
+          "unit": "GB"
+        },
+        "storage": {
+          "value": "160",
+          "unit": "GB"
+        },
+        "storage_type": {
+          "value": "standard",
+          "unit": "type"
+        },
+        "legacy_prod": {
+          "value": "13",
+          "unit": "id"
+        },
+        "legacy_prodid": {
+          "value": "155",
+          "unit": "id"
+        },
+        "network_type": {
+          "value": "regular",
+          "unit": "type"
+        }
+      },
+      "created_at": "2019-09-09T08:58:06+00:00",
+      "updated_at": "2019-09-09T08:58:06+00:00",
+      "categories": {
+        "data": [
+          {
+            "id": "8cbfe407-1cbc-49ea-b7a2-c4e6fd147474",
+            "name": "Compute",
+            "sku": "compute",
+            "description": "Compute",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          },
+          {
+            "id": "333d0e24-dc36-4d54-a270-53b15c240e3a",
+            "name": "Compute server",
+            "sku": "compute_servers",
+            "description": "compute servers.",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "3463d2b8-339a-479f-8fcf-c30273db7dcd",
+      "account_id": null,
+      "billing_period": 1,
+      "price": 6000,
+      "type": "usage",
+      "sku": "compute_ha_8gb",
+      "name": "HA 8GB server",
+      "description": "HA 8GB server",
+      "show_in_store": true,
+      "specifications": {
+        "cpu": {
+          "value": "6",
+          "unit": "amount"
+        },
+        "memory": {
+          "value": "8",
+          "unit": "GB"
+        },
+        "storage": {
+          "value": "160",
+          "unit": "GB"
+        },
+        "storage_type": {
+          "value": "ha",
+          "unit": "type"
+        },
+        "legacy_prod": {
+          "value": "13",
+          "unit": "id"
+        },
+        "legacy_prodid": {
+          "value": "156",
+          "unit": "id"
+        },
+        "network_type": {
+          "value": "regular",
+          "unit": "type"
+        }
+      },
+      "created_at": "2019-09-09T08:58:08+00:00",
+      "updated_at": "2019-09-09T08:58:08+00:00",
+      "categories": {
+        "data": [
+          {
+            "id": "8cbfe407-1cbc-49ea-b7a2-c4e6fd147474",
+            "name": "Compute",
+            "sku": "compute",
+            "description": "Compute",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          },
+          {
+            "id": "333d0e24-dc36-4d54-a270-53b15c240e3a",
+            "name": "Compute server",
+            "sku": "compute_servers",
+            "description": "compute servers.",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "acc73af0-deb5-4855-a20a-f7f80b773f45",
+      "account_id": null,
+      "billing_period": 1,
+      "price": 8000,
+      "type": "usage",
+      "sku": "compute_standard_16gb",
+      "name": "Standard 16GB server",
+      "description": "Standard 16GB server",
+      "show_in_store": true,
+      "specifications": {
+        "cpu": {
+          "value": "8",
+          "unit": "amount"
+        },
+        "memory": {
+          "value": "16",
+          "unit": "GB"
+        },
+        "storage": {
+          "value": "320",
+          "unit": "GB"
+        },
+        "storage_type": {
+          "value": "standard",
+          "unit": "type"
+        },
+        "legacy_prod": {
+          "value": "13",
+          "unit": "id"
+        },
+        "legacy_prodid": {
+          "value": "155",
+          "unit": "id"
+        },
+        "network_type": {
+          "value": "regular",
+          "unit": "type"
+        }
+      },
+      "created_at": "2019-09-09T08:58:06+00:00",
+      "updated_at": "2019-09-09T08:58:06+00:00",
+      "categories": {
+        "data": [
+          {
+            "id": "8cbfe407-1cbc-49ea-b7a2-c4e6fd147474",
+            "name": "Compute",
+            "sku": "compute",
+            "description": "Compute",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          },
+          {
+            "id": "333d0e24-dc36-4d54-a270-53b15c240e3a",
+            "name": "Compute server",
+            "sku": "compute_servers",
+            "description": "compute servers.",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "49a8154b-c4c4-4132-93d5-db6c28ed20f1",
+      "account_id": null,
+      "billing_period": 1,
+      "price": 12000,
+      "type": "usage",
+      "sku": "compute_standard_24gb",
+      "name": "Standard 24GB server",
+      "description": "Standard 24GB server",
+      "show_in_store": true,
+      "specifications": {
+        "cpu": {
+          "value": "10",
+          "unit": "amount"
+        },
+        "memory": {
+          "value": "24",
+          "unit": "GB"
+        },
+        "storage": {
+          "value": "480",
+          "unit": "GB"
+        },
+        "storage_type": {
+          "value": "standard",
+          "unit": "type"
+        },
+        "legacy_prod": {
+          "value": "13",
+          "unit": "id"
+        },
+        "legacy_prodid": {
+          "value": "155",
+          "unit": "id"
+        },
+        "network_type": {
+          "value": "regular",
+          "unit": "type"
+        }
+      },
+      "created_at": "2019-09-09T08:58:06+00:00",
+      "updated_at": "2019-09-09T08:58:06+00:00",
+      "categories": {
+        "data": [
+          {
+            "id": "8cbfe407-1cbc-49ea-b7a2-c4e6fd147474",
+            "name": "Compute",
+            "sku": "compute",
+            "description": "Compute",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          },
+          {
+            "id": "333d0e24-dc36-4d54-a270-53b15c240e3a",
+            "name": "Compute server",
+            "sku": "compute_servers",
+            "description": "compute servers.",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "3463d2b8-339a-479f-8fcf-c30773db7dcd",
+      "account_id": null,
+      "billing_period": 1,
+      "price": 12000,
+      "type": "usage",
+      "sku": "compute_ha_16gb",
+      "name": "HA 16GB server",
+      "description": "HA 16GB server",
+      "show_in_store": true,
+      "specifications": {
+        "cpu": {
+          "value": "8",
+          "unit": "amount"
+        },
+        "memory": {
+          "value": "16",
+          "unit": "GB"
+        },
+        "storage": {
+          "value": "320",
+          "unit": "GB"
+        },
+        "storage_type": {
+          "value": "ha",
+          "unit": "type"
+        },
+        "legacy_prod": {
+          "value": "13",
+          "unit": "id"
+        },
+        "legacy_prodid": {
+          "value": "156",
+          "unit": "id"
+        },
+        "network_type": {
+          "value": "regular",
+          "unit": "type"
+        }
+      },
+      "created_at": "2019-09-09T08:58:08+00:00",
+      "updated_at": "2019-09-09T08:58:08+00:00",
+      "categories": {
+        "data": [
+          {
+            "id": "8cbfe407-1cbc-49ea-b7a2-c4e6fd147474",
+            "name": "Compute",
+            "sku": "compute",
+            "description": "Compute",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          },
+          {
+            "id": "333d0e24-dc36-4d54-a270-53b15c240e3a",
+            "name": "Compute server",
+            "sku": "compute_servers",
+            "description": "compute servers.",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "e74ee46f-e153-4753-8a45-aab0027420c1",
+      "account_id": null,
+      "billing_period": 1,
+      "price": 16000,
+      "type": "usage",
+      "sku": "compute_standard_32gb",
+      "name": "Standard 32GB server",
+      "description": "Standard 32GB server",
+      "show_in_store": true,
+      "specifications": {
+        "cpu": {
+          "value": "12",
+          "unit": "amount"
+        },
+        "memory": {
+          "value": "32",
+          "unit": "GB"
+        },
+        "storage": {
+          "value": "640",
+          "unit": "GB"
+        },
+        "storage_type": {
+          "value": "standard",
+          "unit": "type"
+        },
+        "legacy_prod": {
+          "value": "13",
+          "unit": "id"
+        },
+        "legacy_prodid": {
+          "value": "155",
+          "unit": "id"
+        },
+        "network_type": {
+          "value": "regular",
+          "unit": "type"
+        }
+      },
+      "created_at": "2019-09-09T08:58:06+00:00",
+      "updated_at": "2019-09-09T08:58:06+00:00",
+      "categories": {
+        "data": [
+          {
+            "id": "8cbfe407-1cbc-49ea-b7a2-c4e6fd147474",
+            "name": "Compute",
+            "sku": "compute",
+            "description": "Compute",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          },
+          {
+            "id": "333d0e24-dc36-4d54-a270-53b15c240e3a",
+            "name": "Compute server",
+            "sku": "compute_servers",
+            "description": "compute servers.",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "867ad1e3-c332-4241-8904-f7d4ab150fa3",
+      "account_id": null,
+      "billing_period": 1,
+      "price": 18000,
+      "type": "usage",
+      "sku": "compute_ha_24gb",
+      "name": "HA 24GB server",
+      "description": "HA 24GB server",
+      "show_in_store": true,
+      "specifications": {
+        "cpu": {
+          "value": "10",
+          "unit": "amount"
+        },
+        "memory": {
+          "value": "24",
+          "unit": "GB"
+        },
+        "storage": {
+          "value": "480",
+          "unit": "GB"
+        },
+        "storage_type": {
+          "value": "ha",
+          "unit": "type"
+        },
+        "legacy_prod": {
+          "value": "13",
+          "unit": "id"
+        },
+        "legacy_prodid": {
+          "value": "156",
+          "unit": "id"
+        },
+        "network_type": {
+          "value": "regular",
+          "unit": "type"
+        }
+      },
+      "created_at": "2019-09-09T08:58:08+00:00",
+      "updated_at": "2019-09-09T08:58:08+00:00",
+      "categories": {
+        "data": [
+          {
+            "id": "8cbfe407-1cbc-49ea-b7a2-c4e6fd147474",
+            "name": "Compute",
+            "sku": "compute",
+            "description": "Compute",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          },
+          {
+            "id": "333d0e24-dc36-4d54-a270-53b15c240e3a",
+            "name": "Compute server",
+            "sku": "compute_servers",
+            "description": "compute servers.",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "06c7870b-a545-40a9-80d3-95f942b2c0a7",
+      "account_id": null,
+      "billing_period": 1,
+      "price": 24000,
+      "type": "usage",
+      "sku": "compute_standard_48gb",
+      "name": "Standard 48GB server",
+      "description": "Standard 48GB server",
+      "show_in_store": true,
+      "specifications": {
+        "cpu": {
+          "value": "14",
+          "unit": "amount"
+        },
+        "memory": {
+          "value": "48",
+          "unit": "GB"
+        },
+        "storage": {
+          "value": "960",
+          "unit": "GB"
+        },
+        "storage_type": {
+          "value": "standard",
+          "unit": "type"
+        },
+        "legacy_prod": {
+          "value": "13",
+          "unit": "id"
+        },
+        "legacy_prodid": {
+          "value": "155",
+          "unit": "id"
+        },
+        "network_type": {
+          "value": "regular",
+          "unit": "type"
+        }
+      },
+      "created_at": "2019-09-09T08:58:06+00:00",
+      "updated_at": "2019-09-09T08:58:06+00:00",
+      "categories": {
+        "data": [
+          {
+            "id": "8cbfe407-1cbc-49ea-b7a2-c4e6fd147474",
+            "name": "Compute",
+            "sku": "compute",
+            "description": "Compute",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          },
+          {
+            "id": "333d0e24-dc36-4d54-a270-53b15c240e3a",
+            "name": "Compute server",
+            "sku": "compute_servers",
+            "description": "compute servers.",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "a96bb19a-6289-4b26-a812-3d97d69e4ecb",
+      "account_id": null,
+      "billing_period": 1,
+      "price": 24000,
+      "type": "usage",
+      "sku": "compute_ha_32gb",
+      "name": "HA 32GB server",
+      "description": "HA 32GB server",
+      "show_in_store": true,
+      "specifications": {
+        "cpu": {
+          "value": "12",
+          "unit": "amount"
+        },
+        "memory": {
+          "value": "32",
+          "unit": "GB"
+        },
+        "storage": {
+          "value": "640",
+          "unit": "GB"
+        },
+        "storage_type": {
+          "value": "ha",
+          "unit": "type"
+        },
+        "legacy_prod": {
+          "value": "13",
+          "unit": "id"
+        },
+        "legacy_prodid": {
+          "value": "156",
+          "unit": "id"
+        },
+        "network_type": {
+          "value": "regular",
+          "unit": "type"
+        }
+      },
+      "created_at": "2019-09-09T08:58:08+00:00",
+      "updated_at": "2019-09-09T08:58:08+00:00",
+      "categories": {
+        "data": [
+          {
+            "id": "8cbfe407-1cbc-49ea-b7a2-c4e6fd147474",
+            "name": "Compute",
+            "sku": "compute",
+            "description": "Compute",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          },
+          {
+            "id": "333d0e24-dc36-4d54-a270-53b15c240e3a",
+            "name": "Compute server",
+            "sku": "compute_servers",
+            "description": "compute servers.",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          }
+        ]
+      }
+    }
+  ],
+  "meta": {
+    "pagination": {
+      "total": 22,
+      "count": 15,
+      "per_page": 15,
+      "current_page": 1,
+      "total_pages": 2,
+      "links": {
+        "next": "https://api.pcextreme.nl/products/offers?page=2"
+      }
+    }
+  }
+}

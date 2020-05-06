@@ -15,177 +15,214 @@ class ServerTest extends AbstractCloudSdkCase
     public function test_list_servers()
     {
         $sdk = $this->getSdkWithMockedClient(
-            'get',
             200,
-            '{"data": [{"foo":"bar"},{"foo":"baz"}]}'
+            'json/server_list.json',
+            'get',
+            'vms',
+            'include=offer%2Cdatacenter&limit=51&page=2&account_id=this-is-my-account-id'
         );
 
-        $json = $sdk->listServers();
+        $json = $sdk->listServers(51,2);
 
-        $this->assertIsArray($json);
-        $this->assertEquals(2, count($json));
-        $this->assertEquals(['foo' => 'bar'], $json[0]);
+        $this->assertTrue(is_array($json));
+        $this->assertNotEquals([], $json);
+        $this->assertArrayContains('status', 'Running', $json);
     }
 
     public function test_show_server()
     {
         $sdk = $this->getSdkWithMockedClient(
-            'get',
             200,
-            '{"data": [{"foo":"bar"}]}'
+            'json/server_show.json',
+            'get',
+            'vms/6a6256cc-e6ff-41d2-9894-95a066d2b7a4',
+            'include=offer%2Cdatacenter%2Cdisks.offer&account_id=this-is-my-account-id'
         );
 
-        $json = $sdk->showServer('eee-ooo-aaa');
+        $json = $sdk->showServer('6a6256cc-e6ff-41d2-9894-95a066d2b7a4');
 
-        $this->assertIsArray($json);
-        $this->assertEquals(1, count($json));
-        $this->assertEquals(['foo' => 'bar'], $json[0]);
+        $this->assertTrue(is_array($json));
+        $this->assertNotEquals([], $json);
+        $this->assertArrayContains('status', 'Running', $json);
     }
 
     public function test_console_server()
     {
         $sdk = $this->getSdkWithMockedClient(
-            'get',
             200,
-            '{"data": [{"url":"bar"}]}'
+            'json/server_console.json',
+            'get',
+            'vms/6a6256cc-e6ff-41d2-9894-95a066d2b7a4/console'
         );
 
-        $json = $sdk->getConsoleUrl('eee-ooo-aaa');
+        $json = $sdk->getConsoleUrl('6a6256cc-e6ff-41d2-9894-95a066d2b7a4');
 
-        $this->assertIsArray($json);
-        $this->assertEquals(1, count($json));
-        $this->assertEquals(['url' => 'bar'], $json[0]);
+        $this->assertTrue(is_array($json));
+        $this->assertNotEquals([], $json);
+        $this->assertArrayContains('url', 'https://console.auroracompute.eu/ams3?apikey=hidden&cmd=hidden&sessionkey=hidden&timestamp=nidden&userid=hidden&vm=hidden&signature=hidden%3D', $json);
     }
 
     public function test_details_server()
     {
         $sdk = $this->getSdkWithMockedClient(
-            'get',
             200,
-            '{"data": [{"foo":"bar"}]}'
+            'json/server_details.json',
+            'get',
+            'vms/6a6256cc-e6ff-41d2-9894-95a066d2b7a4/details'
         );
 
-        $json = $sdk->showDetails('eee-ooo-aaa');
+        $json = $sdk->showDetails('6a6256cc-e6ff-41d2-9894-95a066d2b7a4');
 
-        $this->assertIsArray($json);
-        $this->assertEquals(1, count($json));
-        $this->assertEquals(['foo' => 'bar'], $json[0]);
+        $this->assertTrue(is_array($json));
+        $this->assertNotEquals([], $json);
+        $this->assertArrayContains('ipaddress', '185.109.216.103', $json);
     }
 
     public function test_create_server()
     {
         $sdk = $this->getSdkWithMockedClient(
-            'post',
             201,
-            '{"data": {"id":"aaa-bbb-ccc-ddd"}}'
+            'json/server_create.json',
+            'post',
+            'vms'
         );
 
-        $json = $sdk->createServer('test.io', 'joee', '1', '1', '1', []);
+        $json = $sdk->createServer(
+            'test.example.com',
+            'Admin123',
+            '8cbfe407-1cbc-49ea-b7a2-c4e6fd147474',
+            '8b38ce30-485b-4610-bb85-1bf02299cbc5',
+            '36616598-8e93-4118-a03c-94f99e5e1169',
+            []
+        );
 
-        $this->assertIsArray($json);
+        $this->assertTrue(is_array($json));
+        $this->assertNotEquals([], $json);
+        $this->assertArrayContains('id', '2f811c1b-3bf5-4592-b7b5-00ff80f43968', $json);
     }
 
     public function test_create_server_negative()
     {
-        $this->expectException(CloudHttpException::class);
-        $guzzle = Mockery::mock(Client::class);
-        $client = new APIClient('a', 'b', $guzzle);
-        $sdk    = new CloudSdk('a', 'b', new UserDataFactory, $client);
-
-        $guzzle->shouldReceive('post')->once()->andReturn(new Response(422, [], '{}'));
-
-        $this->expectException(CloudHttpException::class);
-        $sdk->createServer('test.io', 'joee', 1, '1', '1', []);
-    }
-
-    public function test_detach_rescue_iso_server()
-    {
         $sdk = $this->getSdkWithMockedClient(
+            422,
+            'json/server_create.json',
             'post',
-            201,
-            '{"data": []}'
+            'vms'
         );
 
-        $json = $sdk->detachRescueIso('eeee-aaaa-uuuu');
-
-        $this->assertIsArray($json);
+        $this->expectException(CloudHttpException::class);
+        $json = $sdk->createServer(
+            'test.example.com',
+            'Admin123',
+            '8cbfe407-1cbc-49ea-b7a2-c4e6fd147474',
+            '8b38ce30-485b-4610-bb85-1bf02299cbc5',
+            '36616598-8e93-4118-a03c-94f99e5e1169',
+            []
+        );
     }
 
     public function test_attach_rescue_iso_server()
     {
         $sdk = $this->getSdkWithMockedClient(
+            204,
+            null,
             'post',
-            201,
-            '{"data": []}'
+            'vms/6a6256cc-e6ff-41d2-9894-95a066d2b7a4/attachRescue'
         );
 
-        $json = $sdk->attachRescueIso('eeee-aaaa-uuuu');
+        $json = $sdk->attachRescueIso('6a6256cc-e6ff-41d2-9894-95a066d2b7a4');
 
-        $this->assertIsArray($json);
+        $this->assertTrue(is_array($json));
+        $this->assertEquals([], $json);
+    }
+
+    public function test_detach_rescue_iso_server()
+    {
+        $sdk = $this->getSdkWithMockedClient(
+            204,
+            null,
+            'post',
+            'vms/6a6256cc-e6ff-41d2-9894-95a066d2b7a4/detachRescue'
+        );
+
+        $json = $sdk->detachRescueIso('6a6256cc-e6ff-41d2-9894-95a066d2b7a4');
+
+        $this->assertTrue(is_array($json));
+        $this->assertEquals([], $json);
     }
 
     public function test_reboot_server()
     {
         $sdk = $this->getSdkWithMockedClient(
-            'post',
             204,
-            '{"data": []}'
+            null,
+            'post',
+            'vms/6a6256cc-e6ff-41d2-9894-95a066d2b7a4/reboot'
         );
 
-        $json = $sdk->rebootServer('eeee-aaaa-uuuu');
+        $json = $sdk->rebootServer('6a6256cc-e6ff-41d2-9894-95a066d2b7a4');
 
-        $this->assertIsArray($json);
+        $this->assertTrue(is_array($json));
+        $this->assertEquals([], $json);
     }
 
     public function test_start_server()
     {
         $sdk = $this->getSdkWithMockedClient(
-            'post',
             204,
-            '{"data": []}'
+            null,
+            'post',
+            'vms/6a6256cc-e6ff-41d2-9894-95a066d2b7a4/start'
         );
 
-        $json = $sdk->startServer('eeee-aaaa-uuuu');
+        $json = $sdk->startServer('6a6256cc-e6ff-41d2-9894-95a066d2b7a4');
 
-        $this->assertIsArray($json);
+        $this->assertTrue(is_array($json));
+        $this->assertEquals([], $json);
     }
 
     public function test_stop_server()
     {
         $sdk = $this->getSdkWithMockedClient(
-            'post',
             204,
-            '{"data": []}'
+            null,
+            'post',
+            'vms/6a6256cc-e6ff-41d2-9894-95a066d2b7a4/stop'
         );
 
-        $json = $sdk->stopServer('eeee-aaaa-uuuu');
+        $json = $sdk->stopServer('6a6256cc-e6ff-41d2-9894-95a066d2b7a4');
 
-        $this->assertIsArray($json);
+        $this->assertTrue(is_array($json));
+        $this->assertEquals([], $json);
     }
 
     public function test_upgrade_server()
     {
         $sdk = $this->getSdkWithMockedClient(
-            'patch',
             204,
-            '{"data": []}'
+            null,
+            'patch',
+            'vms/6a6256cc-e6ff-41d2-9894-95a066d2b7a4'
         );
 
-        $json = $sdk->upgradeServer('eeee-aaaa-bbbb', '33');
+        $json = $sdk->upgradeServer('6a6256cc-e6ff-41d2-9894-95a066d2b7a4', 'a96bb19a-6289-4b26-a812-3d97d69e4ecb');
 
-        $this->assertIsArray($json);
+        $this->assertTrue(is_array($json));
+        $this->assertEquals([], $json);
     }
 
     public function test_delete_server()
     {
         $sdk = $this->getSdkWithMockedClient(
-            'delete',
             204,
-            '{"data": []}'
+            null,
+            'delete',
+            'vms/6a6256cc-e6ff-41d2-9894-95a066d2b7a4'
         );
 
-        $json = $sdk->deleteServer('eeee-aaaa-bbbb');
+        $json = $sdk->deleteServer('6a6256cc-e6ff-41d2-9894-95a066d2b7a4');
 
-        $this->assertIsArray($json);
+        $this->assertTrue(is_array($json));
+        $this->assertEquals([], $json);
     }
 }

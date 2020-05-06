@@ -131,7 +131,7 @@ final class CloudSdk
      */
     public function detachRescueIso(string $id) : array
     {
-        return $this->client->post("vms/{$id}/detachRescue");
+        return $this->client->post("vms/{$id}/detachRescue", [], [], 204);
     }
 
     /**
@@ -140,7 +140,7 @@ final class CloudSdk
      */
     public function attachRescueIso(string $id) : array
     {
-        return $this->client->post("vms/{$id}/attachRescue");
+        return $this->client->post("vms/{$id}/attachRescue", [], [], 204);
     }
 
     /**
@@ -149,7 +149,7 @@ final class CloudSdk
      */
     public function rebootServer(string $id) : array
     {
-        return $this->client->post("vms/{$id}/start", [], [], 204);
+        return $this->client->post("vms/{$id}/reboot", [], [], 204);
     }
 
     /**
@@ -181,6 +181,7 @@ final class CloudSdk
 
 
     /**
+     * @deprecated Some data from this endpoint will be added to the showServer endpoint.
      * @param string $id UUID of server.
      * @return array<mixed>
      */

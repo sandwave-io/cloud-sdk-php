@@ -1,0 +1,54 @@
+{
+  "data": [
+    {
+      "id": "5427178b-fc9b-4561-8a8b-fb45353fdb37",
+      "name": "ams01",
+      "description": "Tele 2",
+      "city": "Amsterdam",
+      "country": "NL",
+      "timezone": "Europe/Amsterdam",
+      "standard_enabled": false,
+      "ha_enabled": false
+    },
+    {
+      "id": "5427178b-fc9b-4561-8a8b-fb45353f1337",
+      "name": "hag01",
+      "description": "Den Haag",
+      "city": "The Hague",
+      "country": "NL",
+      "timezone": "Europe/Amsterdam",
+      "standard_enabled": false,
+      "ha_enabled": false
+    },
+    {
+      "id": "db772a17-9a62-4d9c-baba-b6a1a734bfa5",
+      "name": "bcn01",
+      "description": "Barcelona",
+      "city": "Barcelona",
+      "country": "ES",
+      "timezone": "Europe/Madrid",
+      "standard_enabled": false,
+      "ha_enabled": false
+    },
+    {
+      "id": "c41aeba7-14ed-42c2-b1f5-ec2378c76756",
+      "name": "haa01",
+      "description": "Iron Mountain",
+      "city": "Haarlem",
+      "country": "NL",
+      "timezone": "Europe/Amsterdam",
+      "standard_enabled": false,
+      "ha_enabled": false
+    },
+    {
+      "id": "36616598-8e93-4118-a03c-94f99e5e1169",
+      "name": "ams02",
+      "description": "Gyrocenter DC2",
+      "city": "Amsterdam",
+      "country": "NL",
+      "timezone": "Europe/Amsterdam",
+      "standard_enabled": true,
+      "ha_enabled": true
+    }
+  ]
+}

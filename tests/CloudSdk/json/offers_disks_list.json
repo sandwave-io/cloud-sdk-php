@@ -1,0 +1,371 @@
+{
+  "data": [
+    {
+      "id": "a524a76f-6009-4782-984f-398b10c99aed",
+      "account_id": null,
+      "billing_period": 1,
+      "price": 2000,
+      "type": "usage",
+      "sku": "compute_ssd_100gb",
+      "name": "SSD 100GB disk",
+      "description": "SSD 100GB disk",
+      "show_in_store": true,
+      "specifications": {
+        "storage": {
+          "value": "Ceph SSD",
+          "unit": "type"
+        },
+        "capacity": {
+          "value": "100",
+          "unit": "GB"
+        },
+        "legacy_prod": {
+          "value": "13",
+          "unit": "id"
+        },
+        "legacy_prodid": {
+          "value": "157",
+          "unit": "id"
+        }
+      },
+      "created_at": "2019-09-09T08:58:09+00:00",
+      "updated_at": "2019-09-09T08:58:09+00:00",
+      "categories": {
+        "data": [
+          {
+            "id": "8cbfe407-1cbc-49ea-b7a2-c4e6fd147474",
+            "name": "Compute",
+            "sku": "compute",
+            "description": "Compute",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          },
+          {
+            "id": "6fa53906-cffe-4105-bb4f-6892f5a3b315",
+            "name": "Compute disks",
+            "sku": "compute_disks",
+            "description": "compute disk.",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "175e7781-a186-47ed-91a7-b24e94b8e5c2",
+      "account_id": null,
+      "billing_period": 1,
+      "price": 5000,
+      "type": "usage",
+      "sku": "compute_ssd_250gb",
+      "name": "SSD 250GB disk",
+      "description": "SSD 250GB disk",
+      "show_in_store": true,
+      "specifications": {
+        "storage": {
+          "value": "Ceph SSD",
+          "unit": "type"
+        },
+        "capacity": {
+          "value": "250",
+          "unit": "GB"
+        },
+        "legacy_prod": {
+          "value": "13",
+          "unit": "id"
+        },
+        "legacy_prodid": {
+          "value": "157",
+          "unit": "id"
+        }
+      },
+      "created_at": "2019-09-09T08:58:09+00:00",
+      "updated_at": "2019-09-09T08:58:09+00:00",
+      "categories": {
+        "data": [
+          {
+            "id": "8cbfe407-1cbc-49ea-b7a2-c4e6fd147474",
+            "name": "Compute",
+            "sku": "compute",
+            "description": "Compute",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          },
+          {
+            "id": "6fa53906-cffe-4105-bb4f-6892f5a3b315",
+            "name": "Compute disks",
+            "sku": "compute_disks",
+            "description": "compute disk.",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "f6dd048f-ae9d-47bf-9560-aafbaead05dc",
+      "account_id": null,
+      "billing_period": 1,
+      "price": 10000,
+      "type": "usage",
+      "sku": "compute_ssd_500gb",
+      "name": "SSD 500GB disk",
+      "description": "SSD 500GB disk",
+      "show_in_store": true,
+      "specifications": {
+        "storage": {
+          "value": "Ceph SSD",
+          "unit": "type"
+        },
+        "capacity": {
+          "value": "500",
+          "unit": "GB"
+        },
+        "legacy_prod": {
+          "value": "13",
+          "unit": "id"
+        },
+        "legacy_prodid": {
+          "value": "157",
+          "unit": "id"
+        }
+      },
+      "created_at": "2019-09-09T08:58:09+00:00",
+      "updated_at": "2019-09-09T08:58:09+00:00",
+      "categories": {
+        "data": [
+          {
+            "id": "8cbfe407-1cbc-49ea-b7a2-c4e6fd147474",
+            "name": "Compute",
+            "sku": "compute",
+            "description": "Compute",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          },
+          {
+            "id": "6fa53906-cffe-4105-bb4f-6892f5a3b315",
+            "name": "Compute disks",
+            "sku": "compute_disks",
+            "description": "compute disk.",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "3d0b97f7-d507-422d-8df8-0d555d6e7276",
+      "account_id": null,
+      "billing_period": 1,
+      "price": 20000,
+      "type": "usage",
+      "sku": "compute_ssd_1000gb",
+      "name": "SSD 1000GB disk",
+      "description": "SSD 1000GB disk",
+      "show_in_store": true,
+      "specifications": {
+        "storage": {
+          "value": "Ceph SSD",
+          "unit": "type"
+        },
+        "capacity": {
+          "value": "1000",
+          "unit": "GB"
+        },
+        "legacy_prod": {
+          "value": "13",
+          "unit": "id"
+        },
+        "legacy_prodid": {
+          "value": "157",
+          "unit": "id"
+        }
+      },
+      "created_at": "2019-09-09T08:58:10+00:00",
+      "updated_at": "2019-09-09T08:58:10+00:00",
+      "categories": {
+        "data": [
+          {
+            "id": "8cbfe407-1cbc-49ea-b7a2-c4e6fd147474",
+            "name": "Compute",
+            "sku": "compute",
+            "description": "Compute",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          },
+          {
+            "id": "6fa53906-cffe-4105-bb4f-6892f5a3b315",
+            "name": "Compute disks",
+            "sku": "compute_disks",
+            "description": "compute disk.",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "3942b4f6-789e-4d94-b92e-446b656bcce0",
+      "account_id": null,
+      "billing_period": 1,
+      "price": 40000,
+      "type": "usage",
+      "sku": "compute_ssd_2000gb",
+      "name": "SSD 2000GB disk",
+      "description": "SSD 2000GB disk",
+      "show_in_store": true,
+      "specifications": {
+        "storage": {
+          "value": "Ceph SSD",
+          "unit": "type"
+        },
+        "capacity": {
+          "value": "2000",
+          "unit": "GB"
+        },
+        "legacy_prod": {
+          "value": "13",
+          "unit": "id"
+        },
+        "legacy_prodid": {
+          "value": "157",
+          "unit": "id"
+        }
+      },
+      "created_at": "2019-09-09T08:58:10+00:00",
+      "updated_at": "2019-09-09T08:58:10+00:00",
+      "categories": {
+        "data": [
+          {
+            "id": "8cbfe407-1cbc-49ea-b7a2-c4e6fd147474",
+            "name": "Compute",
+            "sku": "compute",
+            "description": "Compute",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          },
+          {
+            "id": "6fa53906-cffe-4105-bb4f-6892f5a3b315",
+            "name": "Compute disks",
+            "sku": "compute_disks",
+            "description": "compute disk.",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "90f490e3-5f76-4b25-ae4d-9b1715aea802",
+      "account_id": null,
+      "billing_period": 1,
+      "price": 80000,
+      "type": "usage",
+      "sku": "compute_ssd_4000gb",
+      "name": "SSD 4000GB disk",
+      "description": "SSD 4000GB disk",
+      "show_in_store": true,
+      "specifications": {
+        "storage": {
+          "value": "Ceph SSD",
+          "unit": "type"
+        },
+        "capacity": {
+          "value": "4000",
+          "unit": "GB"
+        },
+        "legacy_prod": {
+          "value": "13",
+          "unit": "id"
+        },
+        "legacy_prodid": {
+          "value": "157",
+          "unit": "id"
+        }
+      },
+      "created_at": "2019-09-09T08:58:10+00:00",
+      "updated_at": "2019-09-09T08:58:10+00:00",
+      "categories": {
+        "data": [
+          {
+            "id": "8cbfe407-1cbc-49ea-b7a2-c4e6fd147474",
+            "name": "Compute",
+            "sku": "compute",
+            "description": "Compute",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          },
+          {
+            "id": "6fa53906-cffe-4105-bb4f-6892f5a3b315",
+            "name": "Compute disks",
+            "sku": "compute_disks",
+            "description": "compute disk.",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "c0c30c96-8709-4199-97e8-477fa2c87e66",
+      "account_id": null,
+      "billing_period": 1,
+      "price": 160000,
+      "type": "usage",
+      "sku": "compute_ssd_8000gb",
+      "name": "SSD 8000GB disk",
+      "description": "SSD 8000GB disk",
+      "show_in_store": true,
+      "specifications": {
+        "storage": {
+          "value": "Ceph SSD",
+          "unit": "type"
+        },
+        "capacity": {
+          "value": "8000",
+          "unit": "GB"
+        },
+        "legacy_prod": {
+          "value": "13",
+          "unit": "id"
+        },
+        "legacy_prodid": {
+          "value": "157",
+          "unit": "id"
+        }
+      },
+      "created_at": "2019-09-09T08:58:10+00:00",
+      "updated_at": "2019-09-09T08:58:10+00:00",
+      "categories": {
+        "data": [
+          {
+            "id": "8cbfe407-1cbc-49ea-b7a2-c4e6fd147474",
+            "name": "Compute",
+            "sku": "compute",
+            "description": "Compute",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          },
+          {
+            "id": "6fa53906-cffe-4105-bb4f-6892f5a3b315",
+            "name": "Compute disks",
+            "sku": "compute_disks",
+            "description": "compute disk.",
+            "created_at": "2019-09-09T08:58:05+00:00",
+            "updated_at": "2019-09-09T08:58:05+00:00"
+          }
+        ]
+      }
+    }
+  ],
+  "meta": {
+    "pagination": {
+      "total": 7,
+      "count": 7,
+      "per_page": 15,
+      "current_page": 1,
+      "total_pages": 1,
+      "links": {}
+    }
+  }
+}
