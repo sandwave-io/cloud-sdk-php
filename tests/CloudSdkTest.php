@@ -4,13 +4,15 @@
 namespace SandwaveIo\CloudSdkPhp\Tests;
 
 use PHPUnit\Framework\TestCase;
+use Ramsey\Uuid\Uuid;
 use SandwaveIo\CloudSdkPhp\CloudSdk;
+use SandwaveIo\CloudSdkPhp\Domain\AccountId;
 
 class CloudSdkTest extends TestCase
 {
     public function test_sdk_constructor()
     {
-        $sdk = new CloudSdk('this-is-my-api-key', 'this-is-my-account-id');
+        $sdk = new CloudSdk('this-is-my-api-key', AccountId::fromString(Uuid::NIL));
         $this->assertNotNull($sdk);
     }
 }

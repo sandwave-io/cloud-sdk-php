@@ -4,6 +4,18 @@ namespace SandwaveIo\CloudSdkPhp;
 
 use GuzzleHttp\Client;
 use SandwaveIo\CloudSdkPhp\Client\APIClient;
+use SandwaveIo\CloudSdkPhp\Domain\AccountId;
+use SandwaveIo\CloudSdkPhp\Domain\DataCenterCollection;
+use SandwaveIo\CloudSdkPhp\Domain\DatacenterId;
+use SandwaveIo\CloudSdkPhp\Domain\DiskOfferCollection;
+use SandwaveIo\CloudSdkPhp\Domain\OfferCollection;
+use SandwaveIo\CloudSdkPhp\Domain\OfferId;
+use SandwaveIo\CloudSdkPhp\Domain\Server;
+use SandwaveIo\CloudSdkPhp\Domain\ServerCollection;
+use SandwaveIo\CloudSdkPhp\Domain\ServerId;
+use SandwaveIo\CloudSdkPhp\Domain\ServerOfferCollection;
+use SandwaveIo\CloudSdkPhp\Domain\TemplateCollection;
+use SandwaveIo\CloudSdkPhp\Domain\TemplateId;
 use SandwaveIo\CloudSdkPhp\Support\UserDataFactory;
 
 final class CloudSdk
@@ -18,93 +30,82 @@ final class CloudSdk
      */
     private $userDataFactory;
 
-    /**
-     * CloudSdk constructor.
-     * @param string $apiKey
-     * @param string $accountId
-     * @param UserDataFactory|null $userDataFactory
-     * @param APIClient|null $client
-     */
-    public function __construct(string $apiKey, string $accountId, ?UserDataFactory $userDataFactory= null, ?APIClient $client = null)
-    {
+    public function __construct(
+        string $apiKey,
+        AccountId $accountId,
+        ?UserDataFactory $userDataFactory = null,
+        ?APIClient $client = null
+    ) {
         $this->userDataFactory = $userDataFactory ?? new UserDataFactory;
 
-        $this->client = $client ?? new APIClient(
+        $this->client = $client ??
+            new APIClient(
                 $apiKey,
                 $accountId,
-                new Client([
-                    'base_uri' => 'https://api.pcextreme.nl/v2/compute/'
-                ])
+                new Client(
+                    [
+                        'base_uri' => 'https://api.pcextreme.nl/v2/compute/'
+                    ]
+                )
             );
     }
 
     /**
-     * @param string $hostname
-     * @param string $password
-     * @param string $offerId
-     * @param string $templateId
-     * @param string $datacenterId
      * @param array<string> $sshKeys
-     * @return array<mixed>
      */
     public function createServer(
         string $hostname,
         string $password,
-        string $offerId,
-        string $templateId,
-        string $datacenterId,
+        OfferId $offerId,
+        TemplateId $templateId,
+        DatacenterId $datacenterId,
         array $sshKeys
-    ) : array
-    {
-        return $this->client->post(
+    ): ServerId {
+        $data = $this->client->post(
             'vms',
             [
-                'display_name'  => $hostname,
-                'offer_id'      => $offerId,
-                'datacenter_id' => $datacenterId,
-                'template_id'   => $templateId,
-                'user_data'     => $this->userDataFactory->generateUserData($hostname, $password, $sshKeys),
+                'display_name' => $hostname,
+                'offer_id' => (string) $offerId,
+                'datacenter_id' => (string) $datacenterId,
+                'template_id' => (string) $templateId,
+                'user_data' => $this->userDataFactory->generateUserData($hostname, $password, $sshKeys),
             ]
         );
+
+        return ServerId::fromString($data['id']);
     }
 
-    /**
-     * @param int $limit
-     * @param int $page
-     * @return array<mixed>
-     */
-    public function listServers(int $limit = 50, int $page = 1) : array
+    public function listServers(int $limit = 50, int $page = 1): ServerCollection
     {
-        return $this->client->get(
-            'vms',
-            [
-                'include' => 'offer,datacenter',
-                'limit'           => $limit,
-                'page'            => $page
-            ]
+        return ServerCollection::fromArray(
+            $this->client->get(
+                'vms',
+                [
+                    'include' => 'offer,datacenter',
+                    'limit' => $limit,
+                    'page' => $page
+                ]
+            )
         );
     }
 
-    /**
-     * @param string $id UUID of server.
-     * @return array<mixed>
-     */
-    public function showServer(string $id) : array
+    public function showServer(ServerId $id): Server
     {
-        return $this->client->get(
-            "vms/{$id}",
-            [
-                'include' => 'offer,datacenter,disks.offer'
-            ]
+        return Server::fromArray(
+            $this->client->get(
+                "vms/{$id}",
+                [
+                    'include' => 'offer,datacenter,disks.offer'
+                ]
+            )
         );
     }
 
     /**
-     * @param string $id UUID of server.
-     * @param string $offerId UUID of offer, use listOffers to acquire.
+     * use listOffers to acquire.
      * @return array<mixed>
      */
-    public function upgradeServer(string $id, string $offerId) : array
+    public function upgradeServer(ServerId $id, OfferId $offerId): array
     {
         return $this->client->patch(
             "vms/{$id}",
@@ -115,10 +116,9 @@ final class CloudSdk
     }
 
     /**
-     * @param string $id UUID of server.
      * @return array<mixed>
      */
-    public function getConsoleUrl(string $id) : array
+    public function getConsoleUrl(ServerId $id): array
     {
         return $this->client->get(
             "vms/{$id}/console"
@@ -126,55 +126,49 @@ final class CloudSdk
     }
 
     /**
-     * @param string $id UUID of server.
      * @return array<mixed>
      */
-    public function detachRescueIso(string $id) : array
+    public function detachRescueIso(ServerId $id): array
     {
         return $this->client->post("vms/{$id}/detachRescue", [], [], 204);
     }
 
     /**
-     * @param string $id UUID of server.
      * @return array<mixed>
      */
-    public function attachRescueIso(string $id) : array
+    public function attachRescueIso(ServerId $id): array
     {
         return $this->client->post("vms/{$id}/attachRescue", [], [], 204);
     }
 
     /**
-     * @param string $id UUID of server.
      * @return array<mixed>
      */
-    public function rebootServer(string $id) : array
+    public function rebootServer(ServerId $id): array
     {
         return $this->client->post("vms/{$id}/reboot", [], [], 204);
     }
 
     /**
-     * @param string $id UUID of server.
      * @return array<mixed>
      */
-    public function stopServer(string $id) : array
+    public function stopServer(ServerId $id): array
     {
         return $this->client->post("vms/{$id}/stop", [], [], 204);
     }
 
     /**
-     * @param string $id UUID of server.
      * @return array<mixed>
      */
-    public function startServer(string $id) : array
+    public function startServer(ServerId $id): array
     {
         return $this->client->post("vms/{$id}/start", [], [], 204);
     }
 
     /**
-     * @param string $id UUID of server.
      * @return array<mixed>
      */
-    public function deleteServer(string $id) : array
+    public function deleteServer(ServerId $id): array
     {
         return $this->client->delete("vms/{$id}", [], 204);
     }
@@ -182,10 +176,9 @@ final class CloudSdk
 
     /**
      * @deprecated Some data from this endpoint will be added to the showServer endpoint.
-     * @param string $id UUID of server.
      * @return array<mixed>
      */
-    public function showDetails(string $id) : array
+    public function showDetails(ServerId $id): array
     {
         return $this->client->get("vms/{$id}/details");
     }
@@ -203,66 +196,74 @@ final class CloudSdk
     /**
      * List offers available for server deployments.
      * @deprecated Use listServerOffers or listDiskOffers instead.
-     * @return array<mixed>
      */
-    public function listOffers() : array
+    public function listOffers(): OfferCollection
     {
-        return $this->client->get("/products/offers", [
-            'filter[category]'  => 'compute_servers',
-            'include'           => 'categories',
-            'limit'             => 50,
-            'page'              => 1
-        ]);
+        return OfferCollection::fromArray(
+            $this->client->get(
+                '/products/offers',
+                [
+                    'filter[category]' => 'compute_servers',
+                    'include' => 'categories',
+                    'limit' => 50,
+                    'page' => 1
+                ]
+            )
+        );
     }
 
     /**
      * List offers available for server deployments.
      * @param int $limit
      * @param int $page
-     * @return array<mixed>
      */
-    public function listServerOffers(int $limit = 50, int $page = 1) : array
+    public function listServerOffers(int $limit = 50, int $page = 1): OfferCollection
     {
-        return $this->client->get("/products/offers", [
-            'filter[category]'  => 'compute_servers',
-            'include'           => 'categories',
-            'limit'             => $limit,
-            'page'              => $page
-        ]);
+        return OfferCollection::fromArray(
+            $this->client->get(
+                '/products/offers',
+                [
+                    'filter[category]' => 'compute_servers',
+                    'include' => 'categories',
+                    'limit' => $limit,
+                    'page' => $page
+                ]
+            )
+        );
     }
 
     /**
      * List offers available for disk deployments.
      * @param int $limit
      * @param int $page
-     * @return array<mixed>
      */
-    public function listDiskOffers(int $limit = 50, int $page = 1) : array
+    public function listDiskOffers(int $limit = 50, int $page = 1): OfferCollection
     {
-        return $this->client->get("/products/offers", [
-            'filter[category]'  => 'compute_disks',
-            'include'           => 'categories',
-            'limit'             => $limit,
-            'page'              => $page
-        ]);
+        return OfferCollection::fromArray(
+            $this->client->get(
+                '/products/offers',
+                [
+                    'filter[category]' => 'compute_disks',
+                    'include' => 'categories',
+                    'limit' => $limit,
+                    'page' => $page
+                ]
+            )
+        );
     }
 
-    /**
-     * List datacenters available for server deployments.
-     * @return array<mixed>
-     */
-    public function listDatacenters() : array
+    public function listDatacenters() : DataCenterCollection
     {
-        return $this->client->get('datacenters');
+        return DataCenterCollection::fromArray(
+            $this->client->get('datacenters')
+        );
     }
 
-    /**
-     * List templates available for server deployments.
-     * @return array<mixed>
-     */
-    public function listTemplates() : array
+    public function listTemplates() : TemplateCollection
     {
-        return $this->client->get('templates');
+        return TemplateCollection::fromArray(
+            $this->client->get('templates')
+        );
     }
 
     /**

@@ -10,6 +10,7 @@ use Mockery;
 use Psr\Http\Message\RequestInterface;
 use SandwaveIo\CloudSdkPhp\CloudSdk;
 use SandwaveIo\CloudSdkPhp\Client\APIClient;
+use SandwaveIo\CloudSdkPhp\Domain\AccountId;
 use SandwaveIo\CloudSdkPhp\Support\UserDataFactory;
 use PHPUnit\Framework\TestCase;
 
@@ -33,8 +34,8 @@ class AbstractCloudSdkCase extends TestCase
                 return $handler($request, $options);
             };
         });
-        $client = new APIClient('this-is-my-api-key', 'this-is-my-account-id', new Client(['handler' => $handlerStack]));
-        return new CloudSdk('a', 'b', new UserDataFactory, $client);
+        $client = new APIClient('this-is-my-api-key', AccountId::fromString('this-is-my-account-id'), new Client(['handler' => $handlerStack]));
+        return new CloudSdk('a', AccountId::fromString('b'), new UserDataFactory, $client);
     }
 
     protected function assertArrayContains(string $expectedKey, $expectedValue, array $array, string $message = 'Failed asserting that array contains value.') : void
