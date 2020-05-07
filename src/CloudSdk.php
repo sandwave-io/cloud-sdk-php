@@ -82,7 +82,7 @@ final class CloudSdk
                 'vms',
                 [
                     'include' => 'offer,datacenter',
-                    'limit' => $limit,
+                    'per_page' => $limit,
                     'page' => $page
                 ]
             )
@@ -205,7 +205,7 @@ final class CloudSdk
                 [
                     'filter[category]' => 'compute_servers',
                     'include' => 'categories',
-                    'limit' => 50,
+                    'per_page' => 50,
                     'page' => 1
                 ]
             )
@@ -225,7 +225,7 @@ final class CloudSdk
                 [
                     'filter[category]' => 'compute_servers',
                     'include' => 'categories',
-                    'limit' => $limit,
+                    'per_page' => $limit,
                     'page' => $page
                 ]
             )
@@ -245,7 +245,7 @@ final class CloudSdk
                 [
                     'filter[category]' => 'compute_disks',
                     'include' => 'categories',
-                    'limit' => $limit,
+                    'per_page' => $limit,
                     'page' => $page
                 ]
             )
