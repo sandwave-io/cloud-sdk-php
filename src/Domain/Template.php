@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace SandwaveIo\CloudSdkPhp\Domain;
 
+use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
 use InvalidArgumentException;
@@ -56,12 +57,12 @@ final class Template
             throw new InvalidArgumentException('Could not instantiate id', 0, $e);
         }
 
-        $createdAt = DateTimeImmutable::createFromFormat(DateTimeInterface::W3C, $data['created_at']);
+        $createdAt = DateTimeImmutable::createFromFormat(DateTime::W3C, $data['created_at']);
         if (!$createdAt instanceof DateTimeImmutable) {
             throw new InvalidArgumentException('Could not instantiate createdAt');
         }
 
-        $updatedAt = DateTimeImmutable::createFromFormat(DateTimeInterface::W3C, $data['updated_at']);
+        $updatedAt = DateTimeImmutable::createFromFormat(DateTime::W3C, $data['updated_at']);
         if (!$updatedAt instanceof DateTimeImmutable) {
             throw new InvalidArgumentException('Could not instantiate updatedAt');
         }
