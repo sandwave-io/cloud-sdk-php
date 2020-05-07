@@ -2,9 +2,6 @@
 
 namespace SandwaveIo\CloudSdkPhp\Tests\CloudSdk;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Response;
-use Mockery;
 use SandwaveIo\CloudSdkPhp\Domain\DatacenterId;
 use SandwaveIo\CloudSdkPhp\Domain\OfferId;
 use SandwaveIo\CloudSdkPhp\Domain\Server;
@@ -12,9 +9,6 @@ use SandwaveIo\CloudSdkPhp\Domain\ServerCollection;
 use SandwaveIo\CloudSdkPhp\Domain\ServerId;
 use SandwaveIo\CloudSdkPhp\Domain\TemplateId;
 use SandwaveIo\CloudSdkPhp\Exceptions\CloudHttpException;
-use SandwaveIo\CloudSdkPhp\CloudSdk;
-use SandwaveIo\CloudSdkPhp\Client\APIClient;
-use SandwaveIo\CloudSdkPhp\Support\UserDataFactory;
 
 class ServerTest extends AbstractCloudSdkCase
 {
@@ -25,7 +19,7 @@ class ServerTest extends AbstractCloudSdkCase
             'json/server_list.json',
             'get',
             'vms',
-            'include=offer%2Cdatacenter&limit=51&page=2&account_id=00000000-0000-0000-0000-000000000000'
+            'include=offer%2Cdatacenter&per_page=51&page=2&account_id=00000000-0000-0000-0000-000000000000'
         );
 
         $serverlist = $sdk->listServers(51,2);
