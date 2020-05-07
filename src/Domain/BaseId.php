@@ -9,13 +9,13 @@ use Ramsey\Uuid\UuidInterface;
 
 abstract class BaseId
 {
-    /** @var string */
+    /** @var UuidInterface */
     private $value;
 
     /** * @throws InvalidUuidStringException */
     protected function __construct(string $value)
     {
-        $this->value = $value;
+        $this->value = Uuid::fromString($value);
     }
 
     /**
@@ -26,6 +26,6 @@ abstract class BaseId
 
     public function __toString(): string
     {
-        return $this->value;
+        return $this->value->toString();
     }
 }

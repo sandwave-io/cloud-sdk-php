@@ -6,17 +6,17 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
-use Mockery;
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
-use SandwaveIo\CloudSdkPhp\CloudSdk;
+use Ramsey\Uuid\Uuid;
 use SandwaveIo\CloudSdkPhp\Client\APIClient;
+use SandwaveIo\CloudSdkPhp\CloudSdk;
 use SandwaveIo\CloudSdkPhp\Domain\AccountId;
 use SandwaveIo\CloudSdkPhp\Support\UserDataFactory;
-use PHPUnit\Framework\TestCase;
 
 class AbstractCloudSdkCase extends TestCase
 {
-    protected function getSdkWithMockedClient(int $responseCode, ?string $responsePath, string $assertMethod, string $assertPath, string $assertQuery = 'account_id=this-is-my-account-id') : CloudSdk
+    protected function getSdkWithMockedClient(int $responseCode, ?string $responsePath, string $assertMethod, string $assertPath, string $assertQuery = 'account_id=00000000-0000-0000-0000-000000000000') : CloudSdk
     {
         $response = ($responsePath) ? file_get_contents(__DIR__.'/'.$responsePath) : '';
         $handlerStack = HandlerStack::create(new MockHandler([
@@ -34,8 +34,8 @@ class AbstractCloudSdkCase extends TestCase
                 return $handler($request, $options);
             };
         });
-        $client = new APIClient('this-is-my-api-key', AccountId::fromString('this-is-my-account-id'), new Client(['handler' => $handlerStack]));
-        return new CloudSdk('a', AccountId::fromString('b'), new UserDataFactory, $client);
+        $client = new APIClient('this-is-my-api-key', AccountId::fromString(Uuid::NIL), new Client(['handler' => $handlerStack]));
+        return new CloudSdk('a', AccountId::fromString(AccountId::fromString(Uuid::NIL)), new UserDataFactory, $client);
     }
 
     protected function assertArrayContains(string $expectedKey, $expectedValue, array $array, string $message = 'Failed asserting that array contains value.') : void

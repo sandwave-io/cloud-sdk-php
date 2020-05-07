@@ -25,7 +25,7 @@ class ServerTest extends AbstractCloudSdkCase
             'json/server_list.json',
             'get',
             'vms',
-            'include=offer%2Cdatacenter&limit=51&page=2&account_id=this-is-my-account-id'
+            'include=offer%2Cdatacenter&limit=51&page=2&account_id=00000000-0000-0000-0000-000000000000'
         );
 
         $serverlist = $sdk->listServers(51,2);
@@ -42,7 +42,7 @@ class ServerTest extends AbstractCloudSdkCase
             'json/server_show.json',
             'get',
             'vms/6a6256cc-e6ff-41d2-9894-95a066d2b7a4',
-            'include=offer%2Cdatacenter%2Cdisks.offer&account_id=this-is-my-account-id'
+            'include=offer%2Cdatacenter%2Cdisks.offer&account_id=00000000-0000-0000-0000-000000000000'
         );
 
         $server = $sdk->showServer(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));

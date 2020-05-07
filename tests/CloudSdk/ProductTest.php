@@ -36,7 +36,7 @@ class ProductTest extends AbstractCloudSdkCase
             'json/offers_list.json',
             'get',
             '/products/offers',
-            'filter%5Bcategory%5D=compute_servers&include=categories&limit=50&page=1&account_id=this-is-my-account-id'
+            'filter%5Bcategory%5D=compute_servers&include=categories&limit=50&page=1&account_id=00000000-0000-0000-0000-000000000000'
         );
 
         $listOffers = $sdk->listOffers();
@@ -58,7 +58,7 @@ class ProductTest extends AbstractCloudSdkCase
             'json/offers_servers_list.json',
             'get',
             '/products/offers',
-            'filter%5Bcategory%5D=compute_servers&include=categories&limit=51&page=2&account_id=this-is-my-account-id'
+            'filter%5Bcategory%5D=compute_servers&include=categories&limit=51&page=2&account_id=00000000-0000-0000-0000-000000000000'
         );
 
         $serverOffers = $sdk->listServerOffers(51, 2);
@@ -80,7 +80,7 @@ class ProductTest extends AbstractCloudSdkCase
             'json/offers_disks_list.json',
             'get',
             '/products/offers',
-            'filter%5Bcategory%5D=compute_disks&include=categories&limit=51&page=2&account_id=this-is-my-account-id'
+            'filter%5Bcategory%5D=compute_disks&include=categories&limit=51&page=2&account_id=00000000-0000-0000-0000-000000000000'
         );
 
         $diskOfferCollection = $sdk->listDiskOffers(51, 2);
