@@ -21,6 +21,11 @@ use SandwaveIo\CloudSdkPhp\Support\UserDataFactory;
 final class CloudSdk
 {
     /**
+     * @var string
+     */
+    private $baseUrl = 'https://api.pcextreme.nl/v2/compute/';
+
+    /**
      * @var APIClient
      */
     private $client;
@@ -44,7 +49,7 @@ final class CloudSdk
                 $accountId,
                 new Client(
                     [
-                        'base_uri' => 'https://api.pcextreme.nl/v2/compute/'
+                        'base_uri' => $this->baseUrl,
                     ]
                 )
             );
