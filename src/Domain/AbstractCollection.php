@@ -26,7 +26,10 @@ abstract class AbstractCollection implements Iterator, Countable
         $this->items->next();
     }
 
-    /** @return mixed */
+    /**
+     * @codeCoverageIgnore
+     * @return mixed
+     */
     public function key()
     {
         return $this->items->key();

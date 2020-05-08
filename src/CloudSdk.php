@@ -7,15 +7,16 @@ use SandwaveIo\CloudSdkPhp\Client\APIClient;
 use SandwaveIo\CloudSdkPhp\Domain\AccountId;
 use SandwaveIo\CloudSdkPhp\Domain\DataCenterCollection;
 use SandwaveIo\CloudSdkPhp\Domain\DatacenterId;
-use SandwaveIo\CloudSdkPhp\Domain\DiskOfferCollection;
+use SandwaveIo\CloudSdkPhp\Domain\NetworkCollection;
+use SandwaveIo\CloudSdkPhp\Domain\NetworkId;
 use SandwaveIo\CloudSdkPhp\Domain\OfferCollection;
 use SandwaveIo\CloudSdkPhp\Domain\OfferId;
 use SandwaveIo\CloudSdkPhp\Domain\Server;
 use SandwaveIo\CloudSdkPhp\Domain\ServerCollection;
 use SandwaveIo\CloudSdkPhp\Domain\ServerId;
-use SandwaveIo\CloudSdkPhp\Domain\ServerOfferCollection;
 use SandwaveIo\CloudSdkPhp\Domain\TemplateCollection;
 use SandwaveIo\CloudSdkPhp\Domain\TemplateId;
+use SandwaveIo\CloudSdkPhp\Domain\Usage;
 use SandwaveIo\CloudSdkPhp\Support\UserDataFactory;
 
 final class CloudSdk
@@ -59,18 +60,22 @@ final class CloudSdk
         OfferId $offerId,
         TemplateId $templateId,
         DatacenterId $datacenterId,
+        ?NetworkId $networkId,
         array $sshKeys
     ): ServerId {
-        $data = $this->client->post(
-            'vms',
-            [
-                'display_name' => $hostname,
-                'offer_id' => (string) $offerId,
-                'datacenter_id' => (string) $datacenterId,
-                'template_id' => (string) $templateId,
-                'user_data' => $this->userDataFactory->generateUserData($hostname, $password, $sshKeys),
-            ]
-        );
+        $postData = [
+            'display_name' => $hostname,
+            'offer_id' => (string) $offerId,
+            'datacenter_id' => (string) $datacenterId,
+            'template_id' => (string) $templateId,
+            'user_data' => $this->userDataFactory->generateUserData($hostname, $password, $sshKeys),
+        ];
+
+        if ($networkId instanceof NetworkId) {
+            $postData['network_id'] = (string) $networkId;
+        }
+
+        $data = $this->client->post('vms', $postData);
 
         return ServerId::fromString($data['id']);
     }
@@ -110,7 +115,7 @@ final class CloudSdk
         return $this->client->patch(
             "vms/{$id}",
             [
-                'offer_id' => $offerId
+                'offer_id' => (string) $offerId
             ]
         );
     }
@@ -186,11 +191,12 @@ final class CloudSdk
 
     /**
      * Retrieve current resource usage of the account.
-     * @return array<mixed>
      */
-    public function getUsage()
+    public function getUsage(): Usage
     {
-        return $this->client->get("usage");
+        return Usage::fromArray(
+            $this->client->get("usage")
+        );
     }
 
     /**
@@ -214,8 +220,6 @@ final class CloudSdk
 
     /**
      * List offers available for server deployments.
-     * @param int $limit
-     * @param int $page
      */
     public function listServerOffers(int $limit = 50, int $page = 1): OfferCollection
     {
@@ -234,8 +238,6 @@ final class CloudSdk
 
     /**
      * List offers available for disk deployments.
-     * @param int $limit
-     * @param int $page
      */
     public function listDiskOffers(int $limit = 50, int $page = 1): OfferCollection
     {
@@ -266,12 +268,10 @@ final class CloudSdk
         );
     }
 
-    /**
-     * List networks available for server deployments.
-     * @return array<mixed>
-     */
-    public function listNetworks() : array
+    public function listNetworks() : NetworkCollection
     {
-        return $this->client->get('networks');
+        return NetworkCollection::fromArray(
+            $this->client->get('networks')
+        );
     }
 }

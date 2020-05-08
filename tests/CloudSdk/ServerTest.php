@@ -3,6 +3,7 @@
 namespace SandwaveIo\CloudSdkPhp\Tests\CloudSdk;
 
 use SandwaveIo\CloudSdkPhp\Domain\DatacenterId;
+use SandwaveIo\CloudSdkPhp\Domain\NetworkId;
 use SandwaveIo\CloudSdkPhp\Domain\OfferId;
 use SandwaveIo\CloudSdkPhp\Domain\Server;
 use SandwaveIo\CloudSdkPhp\Domain\ServerCollection;
@@ -92,6 +93,7 @@ class ServerTest extends AbstractCloudSdkCase
             OfferId::fromString('8cbfe407-1cbc-49ea-b7a2-c4e6fd147474'),
             TemplateId::fromString('8b38ce30-485b-4610-bb85-1bf02299cbc5'),
             DatacenterId::fromString('36616598-8e93-4118-a03c-94f99e5e1169'),
+            NetworkId::fromString('36616598-8e93-4118-a03c-94f99e5e1169'),
             []
         );
 
@@ -115,6 +117,7 @@ class ServerTest extends AbstractCloudSdkCase
             OfferId::fromString('8cbfe407-1cbc-49ea-b7a2-c4e6fd147474'),
             TemplateId::fromString('8b38ce30-485b-4610-bb85-1bf02299cbc5'),
             DatacenterId::fromString('36616598-8e93-4118-a03c-94f99e5e1169'),
+            NetworkId::fromString('36616598-8e93-4118-a03c-94f99e5e1169'),
             []
         );
     }

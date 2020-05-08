@@ -5,11 +5,11 @@ namespace SandwaveIo\CloudSdkPhp\Domain;
 
 use Ramsey\Uuid\Exception\InvalidUuidStringException;
 
-final class DatacenterId extends AbstractId
+final class NetworkId extends AbstractId
 {
     /** @throws InvalidUuidStringException */
-    public static function fromString(string $value): DatacenterId
+    public static function fromString(string $value): NetworkId
     {
-        return new DatacenterId($value);
+        return new NetworkId($value);
     }
 }

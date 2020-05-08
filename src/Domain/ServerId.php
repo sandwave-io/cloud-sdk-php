@@ -5,7 +5,7 @@ namespace SandwaveIo\CloudSdkPhp\Domain;
 
 use Ramsey\Uuid\Exception\InvalidUuidStringException;
 
-final class ServerId extends BaseId
+final class ServerId extends AbstractId
 {
     /** @throws InvalidUuidStringException */
     public static function fromString(string $value): ServerId

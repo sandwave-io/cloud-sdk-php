@@ -32,6 +32,9 @@ final class Server
     /** @var DateTimeInterface */
     private $updatedAt;
 
+    /** @var ?DiskCollection */
+    private $disks = null;
+
     /** @var ?Offer */
     private $offer = null;
 
@@ -47,7 +50,8 @@ final class Server
         DateTimeInterface $createdAt,
         DateTimeInterface $updatedAt,
         ?Offer $offer,
-        ?DataCenter $dataCenter
+        ?DataCenter $dataCenter,
+        ?DiskCollection $disks
     ) {
         $this->id = $id;
         $this->displayName = $displayName;
@@ -58,6 +62,7 @@ final class Server
         $this->updatedAt = $updatedAt;
         $this->offer = $offer;
         $this->dataCenter = $dataCenter;
+        $this->disks = $disks;
     }
 
     /**
@@ -79,6 +84,7 @@ final class Server
 
         $offer = isset($data['offer']['data']) ? Offer::fromArray($data['offer']['data']) : null;
         $dataCenter = isset($data['datacenter']['data']) ? DataCenter::fromArray($data['datacenter']['data']) : null;
+        $disks = isset($data['disks']['data']) ? DiskCollection::fromArray($data['disks']['data']): null;
 
         return new Server(
             ServerId::fromString($data['id']),
@@ -89,7 +95,8 @@ final class Server
             $createdAt,
             $updatedAt,
             $offer,
-            $dataCenter
+            $dataCenter,
+            $disks
         );
     }
 
