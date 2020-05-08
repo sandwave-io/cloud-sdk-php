@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace SandwaveIo\CloudSdkPhp\Domain;
 
+use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
 use InvalidArgumentException;
@@ -80,39 +81,21 @@ final class Offer
      */
     public static function fromArray(array $data): Offer
     {
-        try {
-            $id = OfferId::fromString($data['id']);
-        } catch (InvalidUuidStringException $e) {
-            throw new InvalidArgumentException('Cannot instantiate id', 0, $e);
-        }
-
-        try {
-            $accountId = is_null($data['account_id']) ? null : AccountId::fromString($data['account_id']);
-        } catch (InvalidUuidStringException $e) {
-            throw new InvalidArgumentException('Cannot instantiate accountId');
-        }
-
-        try {
-            $price = Money::fromCents($data['price']);
-        } catch (InvalidArgumentException $e) {
-            throw new InvalidArgumentException('Cannot instantiate price', 0, $e);
-        }
-
-        $createdAt = DateTimeImmutable::createFromFormat(DateTimeInterface::W3C, $data['created_at']);
+        $createdAt = DateTimeImmutable::createFromFormat(DateTime::W3C, $data['created_at']);
         if (!$createdAt instanceof DateTimeImmutable) {
             throw new InvalidArgumentException('Cannot instantiate createdAt');
         }
 
-        $updatedAt = DateTimeImmutable::createFromFormat(DateTimeInterface::W3C, $data['updated_at']);
+        $updatedAt = DateTimeImmutable::createFromFormat(DateTime::W3C, $data['updated_at']);
         if (!$updatedAt instanceof DateTimeImmutable) {
             throw new InvalidArgumentException('Cannot instantiate updatedAt');
         }
 
         return new Offer(
-            $id,
-            $accountId,
+            OfferId::fromString($data['id']),
+            is_null($data['account_id']) ? null : AccountId::fromString($data['account_id']),
             $data['billing_period'],
-            $price,
+            Money::fromCents($data['price']),
             $data['type'],
             $data['sku'],
             $data['name'],

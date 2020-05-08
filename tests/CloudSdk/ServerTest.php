@@ -2,19 +2,14 @@
 
 namespace SandwaveIo\CloudSdkPhp\Tests\CloudSdk;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Response;
-use Mockery;
 use SandwaveIo\CloudSdkPhp\Domain\DatacenterId;
+use SandwaveIo\CloudSdkPhp\Domain\NetworkId;
 use SandwaveIo\CloudSdkPhp\Domain\OfferId;
 use SandwaveIo\CloudSdkPhp\Domain\Server;
 use SandwaveIo\CloudSdkPhp\Domain\ServerCollection;
 use SandwaveIo\CloudSdkPhp\Domain\ServerId;
 use SandwaveIo\CloudSdkPhp\Domain\TemplateId;
 use SandwaveIo\CloudSdkPhp\Exceptions\CloudHttpException;
-use SandwaveIo\CloudSdkPhp\CloudSdk;
-use SandwaveIo\CloudSdkPhp\Client\APIClient;
-use SandwaveIo\CloudSdkPhp\Support\UserDataFactory;
 
 class ServerTest extends AbstractCloudSdkCase
 {
@@ -25,7 +20,7 @@ class ServerTest extends AbstractCloudSdkCase
             'json/server_list.json',
             'get',
             'vms',
-            'include=offer%2Cdatacenter&limit=51&page=2&account_id=00000000-0000-0000-0000-000000000000'
+            'include=offer%2Cdatacenter&per_page=51&page=2&account_id=00000000-0000-0000-0000-000000000000'
         );
 
         $serverlist = $sdk->listServers(51,2);
@@ -98,6 +93,7 @@ class ServerTest extends AbstractCloudSdkCase
             OfferId::fromString('8cbfe407-1cbc-49ea-b7a2-c4e6fd147474'),
             TemplateId::fromString('8b38ce30-485b-4610-bb85-1bf02299cbc5'),
             DatacenterId::fromString('36616598-8e93-4118-a03c-94f99e5e1169'),
+            NetworkId::fromString('36616598-8e93-4118-a03c-94f99e5e1169'),
             []
         );
 
@@ -121,6 +117,7 @@ class ServerTest extends AbstractCloudSdkCase
             OfferId::fromString('8cbfe407-1cbc-49ea-b7a2-c4e6fd147474'),
             TemplateId::fromString('8b38ce30-485b-4610-bb85-1bf02299cbc5'),
             DatacenterId::fromString('36616598-8e93-4118-a03c-94f99e5e1169'),
+            NetworkId::fromString('36616598-8e93-4118-a03c-94f99e5e1169'),
             []
         );
     }

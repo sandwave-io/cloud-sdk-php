@@ -20,8 +20,8 @@ final class SpecificationCollection extends AbstractCollection
     {
         $specifications = [];
 
-        foreach ($data as $specification) {
-            $specifications[] = Specification::fromArray($specification);
+        foreach ($data as $title => $valueUnitPair) {
+            $specifications[] = new Specification($title, $valueUnitPair['value'], $valueUnitPair['unit']);
         }
 
         return new SpecificationCollection(...$specifications);

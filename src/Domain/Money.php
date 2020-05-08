@@ -20,6 +20,6 @@ final class Money
 
     public function __toString(): string
     {
-        return sprintf("%2f", $this->valueInCents / 100);
+        return sprintf("%.2f", $this->valueInCents / 100);
     }
 }

@@ -5,6 +5,7 @@ namespace SandwaveIo\CloudSdkPhp\Tests\CloudSdk;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use Mockery;
+use SandwaveIo\CloudSdkPhp\Domain\NetworkCollection;
 use SandwaveIo\CloudSdkPhp\Exceptions\CloudHttpException;
 use SandwaveIo\CloudSdkPhp\CloudSdk;
 use SandwaveIo\CloudSdkPhp\Client\APIClient;
@@ -21,10 +22,11 @@ class NetworksTest extends AbstractCloudSdkCase
             'networks'
         );
 
-        $json = $sdk->listNetworks();
+        $networks = $sdk->listNetworks();
 
-        $this->assertTrue(is_array($json));
-        $this->assertNotEquals([], $json);
-        $this->assertArrayContains('manager', 'man.zone03.ams02.cldin.net', $json);
+        $this->assertInstanceOf(NetworkCollection::class, $networks);
+        $this->assertNotEquals(0, $networks->count());
+
+        $this->assertEquals('man.zone03.ams02.cldin.net', $networks->current()->getManager());
     }
 }

@@ -30,6 +30,16 @@ final class ServerStatus
         $this->value = $value;
     }
 
+    public static function running(): ServerStatus
+    {
+        return new ServerStatus(ServerStatus::STATUS_RUNNING);
+    }
+
+    public function equals(ServerStatus $other): bool
+    {
+        return $this->value === $other->value;
+    }
+
     /** @throws InvalidArgumentException */
     public static function fromString(string $value): ServerStatus
     {

@@ -57,14 +57,8 @@ final class DataCenter
      */
     public static function fromArray(array $data): DataCenter
     {
-        try {
-            $id = DatacenterId::fromString($data['id']);
-        } catch (\InvalidArgumentException $e) {
-            throw new InvalidArgumentException('Cannot instantiate id', 0, $e);
-        }
-
         return new DataCenter(
-            $id,
+            DatacenterId::fromString($data['id']),
             $data['name'],
             $data['description'],
             $data['city'],

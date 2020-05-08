@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace SandwaveIo\CloudSdkPhp\Domain;
 
+use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
 use InvalidArgumentException;
@@ -31,6 +32,9 @@ final class Server
     /** @var DateTimeInterface */
     private $updatedAt;
 
+    /** @var ?DiskCollection */
+    private $disks = null;
+
     /** @var ?Offer */
     private $offer = null;
 
@@ -46,7 +50,8 @@ final class Server
         DateTimeInterface $createdAt,
         DateTimeInterface $updatedAt,
         ?Offer $offer,
-        ?DataCenter $dataCenter
+        ?DataCenter $dataCenter,
+        ?DiskCollection $disks
     ) {
         $this->id = $id;
         $this->displayName = $displayName;
@@ -57,6 +62,7 @@ final class Server
         $this->updatedAt = $updatedAt;
         $this->offer = $offer;
         $this->dataCenter = $dataCenter;
+        $this->disks = $disks;
     }
 
     /**
@@ -66,18 +72,19 @@ final class Server
      */
     public static function fromArray(array $data): Server
     {
-        $createdAt = DateTimeImmutable::createFromFormat(DateTimeInterface::W3C, $data['created_at']);
+        $createdAt = DateTimeImmutable::createFromFormat(DateTime::W3C, $data['created_at']);
         if (!$createdAt instanceof DateTimeImmutable) {
             throw new InvalidArgumentException('Cannot instantiate createdAt');
         }
 
-        $updatedAt = DateTimeImmutable::createFromFormat(DateTimeInterface::W3C, $data['updated_at']);
+        $updatedAt = DateTimeImmutable::createFromFormat(DateTime::W3C, $data['updated_at']);
         if (!$updatedAt instanceof DateTimeImmutable) {
             throw new InvalidArgumentException('Cannot instantiate updatedAt');
         }
 
         $offer = isset($data['offer']['data']) ? Offer::fromArray($data['offer']['data']) : null;
         $dataCenter = isset($data['datacenter']['data']) ? DataCenter::fromArray($data['datacenter']['data']) : null;
+        $disks = isset($data['disks']['data']) ? DiskCollection::fromArray($data['disks']['data']): null;
 
         return new Server(
             ServerId::fromString($data['id']),
@@ -88,7 +95,8 @@ final class Server
             $createdAt,
             $updatedAt,
             $offer,
-            $dataCenter
+            $dataCenter,
+            $disks
         );
     }
 

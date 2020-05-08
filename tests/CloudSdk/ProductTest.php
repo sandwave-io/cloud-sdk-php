@@ -2,14 +2,8 @@
 
 namespace SandwaveIo\CloudSdkPhp\Tests\CloudSdk;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Response;
-use Mockery;
 use SandwaveIo\CloudSdkPhp\Domain\OfferCollection;
-use SandwaveIo\CloudSdkPhp\Exceptions\CloudHttpException;
-use SandwaveIo\CloudSdkPhp\CloudSdk;
-use SandwaveIo\CloudSdkPhp\Client\APIClient;
-use SandwaveIo\CloudSdkPhp\Support\UserDataFactory;
+use SandwaveIo\CloudSdkPhp\Domain\Usage;
 
 class ProductTest extends AbstractCloudSdkCase
 {
@@ -22,11 +16,10 @@ class ProductTest extends AbstractCloudSdkCase
             'usage'
         );
 
-        $json = $sdk->getUsage();
+        $usage = $sdk->getUsage();
 
-        $this->assertTrue(is_array($json));
-        $this->assertNotEquals([], $json);
-        $this->assertArrayContains('ram', 58, $json);
+        $this->assertInstanceOf(Usage::class, $usage);
+        $this->assertEquals(58, $usage->getRamInGbs());
     }
 
     public function test_list_offers()
@@ -36,7 +29,7 @@ class ProductTest extends AbstractCloudSdkCase
             'json/offers_list.json',
             'get',
             '/products/offers',
-            'filter%5Bcategory%5D=compute_servers&include=categories&limit=50&page=1&account_id=00000000-0000-0000-0000-000000000000'
+            'filter%5Bcategory%5D=compute_servers&include=categories&per_page=50&page=1&account_id=00000000-0000-0000-0000-000000000000'
         );
 
         $listOffers = $sdk->listOffers();
@@ -58,7 +51,7 @@ class ProductTest extends AbstractCloudSdkCase
             'json/offers_servers_list.json',
             'get',
             '/products/offers',
-            'filter%5Bcategory%5D=compute_servers&include=categories&limit=51&page=2&account_id=00000000-0000-0000-0000-000000000000'
+            'filter%5Bcategory%5D=compute_servers&include=categories&per_page=51&page=2&account_id=00000000-0000-0000-0000-000000000000'
         );
 
         $serverOffers = $sdk->listServerOffers(51, 2);
@@ -80,7 +73,7 @@ class ProductTest extends AbstractCloudSdkCase
             'json/offers_disks_list.json',
             'get',
             '/products/offers',
-            'filter%5Bcategory%5D=compute_disks&include=categories&limit=51&page=2&account_id=00000000-0000-0000-0000-000000000000'
+            'filter%5Bcategory%5D=compute_disks&include=categories&per_page=51&page=2&account_id=00000000-0000-0000-0000-000000000000'
         );
 
         $diskOfferCollection = $sdk->listDiskOffers(51, 2);

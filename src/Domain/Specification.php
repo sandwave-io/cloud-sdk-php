@@ -5,14 +5,19 @@ namespace SandwaveIo\CloudSdkPhp\Domain;
 
 final class Specification
 {
+    /** @var string */
+    private $title;
 
-    private function __construct()
-    {
-    }
+    /** @var string */
+    private $value;
 
-    /** @param array<mixed> $data */
-    public static function fromArray(array $data): Specification
+    /** @var string */
+    private $unit;
+
+    public function __construct(string $title, string $value, string $unit)
     {
-        return new Specification();
+        $this->title = $title;
+        $this->value = $value;
+        $this->unit = $unit;
     }
 }

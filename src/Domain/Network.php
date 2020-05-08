@@ -7,21 +7,26 @@ use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
 use InvalidArgumentException;
-use Ramsey\Uuid\Exception\InvalidUuidStringException;
 
-final class Template
+final class Network
 {
-    /** @var TemplateId */
+    /** @var NetworkId */
     private $id;
 
     /** @var string */
     private $displayName;
 
-    /** @var string */
-    private $operatingSystem;
+    /** @var DatacenterId */
+    private $datacenterId;
 
     /** @var string */
-    private $version;
+    private $manager;
+
+    /** @var string */
+    private $cidrIpv4;
+
+    /** @var string */
+    private $cidrIpv6;
 
     /** @var DateTimeInterface */
     private $createdAt;
@@ -30,54 +35,53 @@ final class Template
     private $updatedAt;
 
     private function __construct(
-        TemplateId $id,
+        NetworkId $id,
         string $displayName,
-        string $operatingSystem,
-        string $version,
+        DatacenterId $datacenterId,
+        string $manager,
+        string $cidrIpv4,
+        string $cidrIpv6,
         DateTimeInterface $createdAt,
         DateTimeInterface $updatedAt
     ) {
         $this->id = $id;
         $this->displayName = $displayName;
-        $this->operatingSystem = $operatingSystem;
-        $this->version = $version;
+        $this->datacenterId = $datacenterId;
+        $this->manager = $manager;
+        $this->cidrIpv4 = $cidrIpv4;
+        $this->cidrIpv6 = $cidrIpv6;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
     }
 
     /**
      * @param array<mixed> $data
-     * @throws InvalidArgumentException
      */
-    public static function fromArray(array $data): Template
+    public static function fromArray(array $data): Network
     {
-        try {
-            $id = TemplateId::fromString($data['id']);
-        } catch (InvalidUuidStringException $e) {
-            throw new InvalidArgumentException('Could not instantiate id', 0, $e);
-        }
-
         $createdAt = DateTimeImmutable::createFromFormat(DateTime::W3C, $data['created_at']);
         if (!$createdAt instanceof DateTimeImmutable) {
-            throw new InvalidArgumentException('Could not instantiate createdAt');
+            throw new InvalidArgumentException('Cannot instantiate createdAt');
         }
 
         $updatedAt = DateTimeImmutable::createFromFormat(DateTime::W3C, $data['updated_at']);
         if (!$updatedAt instanceof DateTimeImmutable) {
-            throw new InvalidArgumentException('Could not instantiate updatedAt');
+            throw new InvalidArgumentException('Cannot instantiate updatedAt');
         }
 
-        return new Template(
-            $id,
+        return new Network(
+            NetworkId::fromString($data['id']),
             $data['display_name'],
-            $data['os'],
-            $data['version'],
+            DatacenterId::fromString($data['datacenter_id']),
+            $data['manager'],
+            $data['cidr_ipv4'],
+            $data['cidr_ipv6'],
             $createdAt,
             $updatedAt
         );
     }
 
-    public function getId(): TemplateId
+    public function getId(): NetworkId
     {
         return $this->id;
     }
@@ -87,14 +91,24 @@ final class Template
         return $this->displayName;
     }
 
-    public function getOperatingSystem(): string
+    public function getDatacenterId(): DatacenterId
     {
-        return $this->operatingSystem;
+        return $this->datacenterId;
     }
 
-    public function getVersion(): string
+    public function getManager(): string
     {
-        return $this->version;
+        return $this->manager;
+    }
+
+    public function getCidrIpv4(): string
+    {
+        return $this->cidrIpv4;
+    }
+
+    public function getCidrIpv6(): string
+    {
+        return $this->cidrIpv6;
     }
 
     public function getCreatedAt(): DateTimeInterface
