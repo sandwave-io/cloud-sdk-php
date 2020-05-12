@@ -2,4 +2,6 @@
 
 namespace SandwaveIo\CloudSdkPhp\Exceptions;
 
-class CloudNotFoundException extends CloudHttpException {}
+class CloudNotFoundException extends CloudHttpException
+{
+}

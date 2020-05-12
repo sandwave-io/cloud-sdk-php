@@ -170,7 +170,7 @@ final class APIClient
     private function queryParameters(array $parameters): string
     {
         return "?" . http_build_query(
-                array_merge($parameters, ['account_id' => $this->accountId])
-            );
+            array_merge($parameters, ['account_id' => $this->accountId])
+        );
     }
 }

@@ -30,12 +30,12 @@ final class CloudSdk
         $this->userDataFactory = $userDataFactory ?? new UserDataFactory;
 
         $this->client = $client ?? new APIClient(
-                $apiKey,
-                $accountId,
-                new Client([
+            $apiKey,
+            $accountId,
+            new Client([
                     'base_uri' => 'https://api.pcextreme.nl/v2/compute/'
                 ])
-            );
+        );
     }
 
     /**
@@ -54,8 +54,7 @@ final class CloudSdk
         string $templateId,
         string $datacenterId,
         array $sshKeys
-    ) : array
-    {
+    ) : array {
         return $this->client->post(
             'vms',
             [
