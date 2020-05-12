@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace SandwaveIo\CloudSdkPhp\Client;
 
@@ -141,7 +141,8 @@ final class APIClient
             return [];
         }
 
-        $json = json_decode($response->getBody(), true);
+        $responseText = (string) $response->getBody();
+        $json = json_decode($responseText, true);
 
         if (json_last_error()) {
             throw new CloudHttpException("Could not parse JSON reponse body:\n" . $response->getBody());
