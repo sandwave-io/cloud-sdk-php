@@ -22,7 +22,7 @@ class ServerTest extends AbstractCloudSdkCase
             'include=offer%2Cdatacenter&limit=51&page=2&account_id=this-is-my-account-id'
         );
 
-        $json = $sdk->listServers(51,2);
+        $json = $sdk->listServers(51, 2);
 
         $this->assertTrue(is_array($json));
         $this->assertNotEquals([], $json);

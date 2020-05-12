@@ -2,4 +2,6 @@
 
 namespace SandwaveIo\CloudSdkPhp\Exceptions;
 
-class CloudHttpException extends \RuntimeException {}
+class CloudHttpException extends \RuntimeException
+{
+}
