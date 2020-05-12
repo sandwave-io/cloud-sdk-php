@@ -23,7 +23,7 @@ class ServerTest extends AbstractCloudSdkCase
             'include=offer%2Cdatacenter&per_page=51&page=2&account_id=00000000-0000-0000-0000-000000000000'
         );
 
-        $serverlist = $sdk->listServers(51,2);
+        $serverlist = $sdk->listServers(51, 2);
 
         $this->assertInstanceOf(ServerCollection::class, $serverlist);
         $this->assertEquals(2, $serverlist->count());

@@ -5,5 +5,4 @@ namespace SandwaveIo\CloudSdkPhp\Tests\Domain;
 
 final class TemplateTest
 {
-
 }
