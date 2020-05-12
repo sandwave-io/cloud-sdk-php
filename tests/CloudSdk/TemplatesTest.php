@@ -1,14 +1,6 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace SandwaveIo\CloudSdkPhp\Tests\CloudSdk;
-
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Response;
-use Mockery;
-use SandwaveIo\CloudSdkPhp\Exceptions\CloudHttpException;
-use SandwaveIo\CloudSdkPhp\CloudSdk;
-use SandwaveIo\CloudSdkPhp\Client\APIClient;
-use SandwaveIo\CloudSdkPhp\Support\UserDataFactory;
 
 class TemplatesTest extends AbstractCloudSdkCase
 {
@@ -24,7 +16,7 @@ class TemplatesTest extends AbstractCloudSdkCase
         $json = $sdk->listTemplates();
 
         $this->assertTrue(is_array($json));
-        $this->assertNotEquals([], $json);
+        $this->assertNotSame([], $json);
         $this->assertArrayContains('display_name', 'CentOS 8.1', $json);
     }
 }

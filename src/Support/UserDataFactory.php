@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace SandwaveIo\CloudSdkPhp\Support;
 
@@ -7,21 +7,22 @@ use Symfony\Component\Yaml\Yaml;
 class UserDataFactory
 {
     /**
-     * @param string $hostname
-     * @param string $password
+     * @param string        $hostname
+     * @param string        $password
      * @param array<string> $sshKeys
+     *
      * @return string
      */
     public function generateUserData(string $hostname, string $password, array $sshKeys = []) : string
     {
         $dump = Yaml::dump(
             [
-                "manage_etc_hosts" => true,
-                "fqdn" => $hostname,
-                "hostname" => explode(".", $hostname)[0],
-                "timezone" => 'Europe/Amsterdam',
-                "password" => $password,
-                "ssh_pwauth" => true,
+                'manage_etc_hosts' => true,
+                'fqdn' => $hostname,
+                'hostname' => explode('.', $hostname)[0],
+                'timezone' => 'Europe/Amsterdam',
+                'password' => $password,
+                'ssh_pwauth' => true,
             ]
         );
 
@@ -33,7 +34,7 @@ class UserDataFactory
 
         if (! empty($sshKeys)) {
             $dump .= "\n" . Yaml::dump([
-                'ssh_authorized_keys' => $sshKeys
+                'ssh_authorized_keys' => $sshKeys,
             ]);
         }
 

@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace SandwaveIo\CloudSdkPhp\Tests\CloudSdk;
 
@@ -16,7 +16,7 @@ class DatacenterTest extends AbstractCloudSdkCase
         $json = $sdk->listDatacenters();
 
         $this->assertTrue(is_array($json));
-        $this->assertNotEquals([], $json);
+        $this->assertNotSame([], $json);
         $this->assertArrayContains('name', 'ams01', $json);
     }
 }
