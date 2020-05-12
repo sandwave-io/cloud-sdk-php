@@ -10,6 +10,7 @@ final class ServerStatus
     private const STATUS_RUNNING = 'Running';
     private const STATUS_STOPPED = 'Stopped';
     private const STATUS_STARTING = 'starting';
+    private const STATUS_REBOOTING = 'rebooting';
 
     /** @var string  */
     private $value;
@@ -22,7 +23,8 @@ final class ServerStatus
         $options = [
             ServerStatus::STATUS_RUNNING,
             ServerStatus::STATUS_STOPPED,
-            ServerStatus::STATUS_STARTING
+            ServerStatus::STATUS_STARTING,
+            ServerStatus::STATUS_REBOOTING
         ];
 
         if (!in_array($value, $options)) {
@@ -47,6 +49,11 @@ final class ServerStatus
     public static function starting(): ServerStatus
     {
         return new ServerStatus(ServerStatus::STATUS_STARTING);
+    }
+
+    public static function rebooting(): ServerStatus
+    {
+        return new ServerStatus(ServerStatus::STATUS_REBOOTING);
     }
 
     public function equals(ServerStatus $other): bool
