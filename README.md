@@ -1,4 +1,4 @@
-# pcextreme/cloud-sdk-php
+# sandwave-io/cloud-sdk-php
 
 PHP package to to deploy and configure virtual servers on the [PCextreme](https://pcextreme.com) infrastructure.
 
