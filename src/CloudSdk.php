@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace SandwaveIo\CloudSdkPhp;
 
@@ -183,7 +183,6 @@ final class CloudSdk
         return $this->client->delete("vms/{$id}", [], 204);
     }
 
-
     /**
      * @deprecated Some data from this endpoint will be added to the showServer endpoint.
      * @return array<mixed>
@@ -192,7 +191,6 @@ final class CloudSdk
     {
         return $this->client->get("vms/{$id}/details");
     }
-
 
     /**
      * Retrieve current resource usage of the account.
@@ -206,6 +204,7 @@ final class CloudSdk
 
     /**
      * List offers available for server deployments.
+     *
      * @deprecated Use listServerOffers or listDiskOffers instead.
      */
     public function listOffers(): OfferCollection

@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace SandwaveIo\CloudSdkPhp\Client;
 
@@ -30,14 +30,15 @@ final class APIClient
         $this->apiKey = $apiKey;
         $this->accountId = $accountId;
         $this->client = $client ?? new Client([
-            'base_uri' => 'https://api.pcextreme.nl/v2/'
+            'base_uri' => 'https://api.pcextreme.nl/v2/',
         ]);
     }
 
     /**
-     * @param string $endpoint
+     * @param string                   $endpoint
      * @param array<string,string|int> $queryParameters
-     * @param int $expectedResponse
+     * @param int                      $expectedResponse
+     *
      * @return array<mixed>
      */
     public function get(string $endpoint, array $queryParameters = [], int $expectedResponse = 200) : array
@@ -50,10 +51,11 @@ final class APIClient
     }
 
     /**
-     * @param string $endpoint
-     * @param array<string,string> $body
+     * @param string                   $endpoint
+     * @param array<string,string>     $body
      * @param array<string,string|int> $queryParameters
-     * @param int $expectedResponse
+     * @param int                      $expectedResponse
+     *
      * @return array<mixed>
      */
     public function post(
@@ -71,10 +73,11 @@ final class APIClient
     }
 
     /**
-     * @param string $endpoint
-     * @param array<string,string> $body
+     * @param string                   $endpoint
+     * @param array<string,string>     $body
      * @param array<string,string|int> $queryParameters
-     * @param int $expectedResponse
+     * @param int                      $expectedResponse
+     *
      * @return array<mixed>
      */
     public function patch(
@@ -92,10 +95,11 @@ final class APIClient
     }
 
     /**
-     * @param string $endpoint
-     * @param array<string,string> $body
+     * @param string                   $endpoint
+     * @param array<string,string>     $body
      * @param array<string,string|int> $queryParameters
-     * @param int $expectedResponse
+     * @param int                      $expectedResponse
+     *
      * @return array<mixed>
      */
     public function put(
@@ -113,9 +117,10 @@ final class APIClient
     }
 
     /**
-     * @param string $endpoint
+     * @param string                   $endpoint
      * @param array<string,string|int> $queryParameters
-     * @param int $expectedResponse
+     * @param int                      $expectedResponse
+     *
      * @return array<mixed>
      */
     public function delete(string $endpoint, array $queryParameters = [], int $expectedResponse = 204) : array
@@ -129,8 +134,10 @@ final class APIClient
 
     /**
      * Check for status code and parse JSON.
+     *
      * @param ResponseInterface $response
-     * @param int $expectedResponse
+     * @param int               $expectedResponse
+     *
      * @return array<mixed>
      */
     private function handleResponse(ResponseInterface $response, int $expectedResponse = 200) : array
@@ -168,9 +175,10 @@ final class APIClient
 
     /**
      * Render header array for use in guzzle client.
+     *
      * @return array<string,string>
      */
-    private function buildHeaders(): array
+    private function buildHeaders() : array
     {
         return [
             'Authorization' => 'Bearer ' . $this->apiKey,
@@ -179,11 +187,13 @@ final class APIClient
 
     /**
      * Includes account_id parameter.
-     * Returns a string like so: "?account_id=xxx-yyy-zzz&foo=bar"
+     * Returns a string like so: "?account_id=xxx-yyy-zzz&foo=bar".
+     *
      * @param array<string,string|int> $parameters
+     *
      * @return string
      */
-    private function queryParameters(array $parameters): string
+    private function queryParameters(array $parameters) : string
     {
         return "?" .
             http_build_query(
