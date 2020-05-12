@@ -9,7 +9,7 @@ PHP package to to deploy and configure virtual servers on the [PCextreme](https:
 Run PHP-CS-Fixer:
 
 ```
-vendor/bin/php-cs-fixer fix
+vendor/bin/php-cs-fixer fix --allow-risky=yes
 ```
 
 The config can be found in `.php_cs.dist`
