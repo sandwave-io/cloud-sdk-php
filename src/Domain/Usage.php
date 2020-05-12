@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace SandwaveIo\CloudSdkPhp\Domain;
 
@@ -16,14 +16,14 @@ final class Usage
     /**
      * @param array<mixed> $data
      */
-    public static function fromArray(array $data): Usage
+    public static function fromArray(array $data) : Usage
     {
         return new Usage(
             $data['ram']
         );
     }
 
-    public function getRamInGbs(): int
+    public function getRamInGbs() : int
     {
         return $this->ramInGbs;
     }

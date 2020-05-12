@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace SandwaveIo\CloudSdkPhp\Domain;
 
@@ -47,9 +47,10 @@ final class Template
 
     /**
      * @param array<mixed> $data
+     *
      * @throws InvalidArgumentException
      */
-    public static function fromArray(array $data): Template
+    public static function fromArray(array $data) : Template
     {
         try {
             $id = TemplateId::fromString($data['id']);
@@ -58,12 +59,12 @@ final class Template
         }
 
         $createdAt = DateTimeImmutable::createFromFormat(DateTime::W3C, $data['created_at']);
-        if (!$createdAt instanceof DateTimeImmutable) {
+        if (! $createdAt instanceof DateTimeImmutable) {
             throw new InvalidArgumentException('Could not instantiate createdAt');
         }
 
         $updatedAt = DateTimeImmutable::createFromFormat(DateTime::W3C, $data['updated_at']);
-        if (!$updatedAt instanceof DateTimeImmutable) {
+        if (! $updatedAt instanceof DateTimeImmutable) {
             throw new InvalidArgumentException('Could not instantiate updatedAt');
         }
 
@@ -77,32 +78,32 @@ final class Template
         );
     }
 
-    public function getId(): TemplateId
+    public function getId() : TemplateId
     {
         return $this->id;
     }
 
-    public function getDisplayName(): string
+    public function getDisplayName() : string
     {
         return $this->displayName;
     }
 
-    public function getOperatingSystem(): string
+    public function getOperatingSystem() : string
     {
         return $this->operatingSystem;
     }
 
-    public function getVersion(): string
+    public function getVersion() : string
     {
         return $this->version;
     }
 
-    public function getCreatedAt(): DateTimeInterface
+    public function getCreatedAt() : DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function getUpdatedAt(): DateTimeInterface
+    public function getUpdatedAt() : DateTimeInterface
     {
         return $this->updatedAt;
     }

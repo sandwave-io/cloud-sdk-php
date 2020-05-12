@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace SandwaveIo\CloudSdkPhp\Domain;
 
@@ -7,7 +7,6 @@ use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
 use InvalidArgumentException;
-use Ramsey\Uuid\Exception\InvalidUuidStringException;
 
 final class Offer
 {
@@ -77,17 +76,18 @@ final class Offer
 
     /**
      * @param array<mixed> $data
+     *
      * @throws InvalidArgumentException
      */
-    public static function fromArray(array $data): Offer
+    public static function fromArray(array $data) : Offer
     {
         $createdAt = DateTimeImmutable::createFromFormat(DateTime::W3C, $data['created_at']);
-        if (!$createdAt instanceof DateTimeImmutable) {
+        if (! $createdAt instanceof DateTimeImmutable) {
             throw new InvalidArgumentException('Cannot instantiate createdAt');
         }
 
         $updatedAt = DateTimeImmutable::createFromFormat(DateTime::W3C, $data['updated_at']);
-        if (!$updatedAt instanceof DateTimeImmutable) {
+        if (! $updatedAt instanceof DateTimeImmutable) {
             throw new InvalidArgumentException('Cannot instantiate updatedAt');
         }
 
@@ -107,67 +107,67 @@ final class Offer
         );
     }
 
-    public function isCustomOffering(): bool
+    public function isCustomOffering() : bool
     {
         return $this->accountId instanceof AccountId;
     }
 
-    public function getId(): OfferId
+    public function getId() : OfferId
     {
         return $this->id;
     }
 
-    public function getAccountId(): ?AccountId
+    public function getAccountId() : ?AccountId
     {
         return $this->accountId;
     }
 
-    public function getBillingPeriodInMonths(): int
+    public function getBillingPeriodInMonths() : int
     {
         return $this->billingPeriodInMonths;
     }
 
-    public function getPrice(): Money
+    public function getPrice() : Money
     {
         return $this->price;
     }
 
-    public function getType(): string
+    public function getType() : string
     {
         return $this->type;
     }
 
-    public function getName(): string
+    public function getName() : string
     {
         return $this->name;
     }
 
-    public function getDescription(): string
+    public function getDescription() : string
     {
         return $this->description;
     }
 
-    public function isShowInStore(): bool
+    public function isShowInStore() : bool
     {
         return $this->showInStore;
     }
 
-    public function getSpecifications(): SpecificationCollection
+    public function getSpecifications() : SpecificationCollection
     {
         return $this->specifications;
     }
 
-    public function getCreatedAt(): DateTimeInterface
+    public function getCreatedAt() : DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function getUpdatedAt(): DateTimeInterface
+    public function getUpdatedAt() : DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    public function getSku(): string
+    public function getSku() : string
     {
         return $this->sku;
     }

@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace SandwaveIo\CloudSdkPhp\Domain;
 
@@ -10,12 +10,12 @@ final class NetworkCollection extends AbstractCollection
         parent::__construct(...$items);
     }
 
-    public function current(): ?Network
+    public function current() : ?Network
     {
         return $this->items->current();
     }
 
-    public static function fromArray(array $data): NetworkCollection
+    public static function fromArray(array $data) : NetworkCollection
     {
         $networks = [];
 

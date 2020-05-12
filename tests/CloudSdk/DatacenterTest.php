@@ -18,8 +18,8 @@ class DatacenterTest extends AbstractCloudSdkCase
         $datacenters = $sdk->listDatacenters();
 
         $this->assertInstanceOf(DataCenterCollection::class, $datacenters);
-        $this->assertNotEquals(0, $datacenters->count());
+        $this->assertNotSame(0, $datacenters->count());
 
-        $this->assertEquals('ams01', $datacenters->current()->getName());
+        $this->assertSame('ams01', $datacenters->current()->getName());
     }
 }

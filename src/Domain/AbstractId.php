@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace SandwaveIo\CloudSdkPhp\Domain;
 
@@ -18,14 +18,15 @@ abstract class AbstractId
         $this->value = Uuid::fromString($value);
     }
 
-    /**
-     * @throws InvalidUuidStringException
-     * @return mixed
-     */
-    abstract public static function fromString(string $value);
-
-    public function __toString(): string
+    public function __toString() : string
     {
         return $this->value->toString();
     }
+
+    /**
+     * @throws InvalidUuidStringException
+     *
+     * @return mixed
+     */
+    abstract public static function fromString(string $value);
 }

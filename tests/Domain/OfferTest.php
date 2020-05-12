@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace SandwaveIo\CloudSdkPhp\Tests\Domain;
 
@@ -10,7 +10,7 @@ use SandwaveIo\CloudSdkPhp\Domain\Offer;
 
 final class OfferTest extends TestCase
 {
-    public function test_constructor(): void
+    public function test_constructor() : void
     {
         $offer = Offer::fromArray(
             json_decode(
@@ -19,10 +19,10 @@ final class OfferTest extends TestCase
             )
         );
 
-        $this->assertEquals('ade61745-e399-401e-bdb4-b25487143e30', (string) $offer->getId());
+        $this->assertSame('ade61745-e399-401e-bdb4-b25487143e30', (string) $offer->getId());
     }
 
-    public function testConstructorThrowsExceptionForInvalidCreatedAt(): void
+    public function testConstructorThrowsExceptionForInvalidCreatedAt() : void
     {
         $this->expectException(InvalidArgumentException::class);
         $network = Network::fromArray(
@@ -33,7 +33,7 @@ final class OfferTest extends TestCase
         );
     }
 
-    public function testConstructorThrowsExceptionForInvalidUpdatedAt(): void
+    public function testConstructorThrowsExceptionForInvalidUpdatedAt() : void
     {
         $this->expectException(InvalidArgumentException::class);
         $network = Network::fromArray(

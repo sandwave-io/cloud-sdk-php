@@ -19,7 +19,7 @@ class ProductTest extends AbstractCloudSdkCase
         $usage = $sdk->getUsage();
 
         $this->assertInstanceOf(Usage::class, $usage);
-        $this->assertEquals(58, $usage->getRamInGbs());
+        $this->assertSame(58, $usage->getRamInGbs());
     }
 
     public function test_list_offers()
@@ -35,13 +35,13 @@ class ProductTest extends AbstractCloudSdkCase
         $listOffers = $sdk->listOffers();
 
         $this->assertInstanceOf(OfferCollection::class, $listOffers);
-        $this->assertNotEquals(0, $listOffers->count());
+        $this->assertNotSame(0, $listOffers->count());
 
         $skus = [];
         foreach ($listOffers as $listOffer) {
             $skus[] = $listOffer->getSku();
         }
-        $this->assertEquals($skus[14], 'compute_ha_32gb');
+        $this->assertSame($skus[14], 'compute_ha_32gb');
     }
 
     public function test_list_server_offers()
@@ -57,13 +57,13 @@ class ProductTest extends AbstractCloudSdkCase
         $serverOffers = $sdk->listServerOffers(51, 2);
 
         $this->assertInstanceOf(OfferCollection::class, $serverOffers);
-        $this->assertNotEquals(0, $serverOffers->count());
+        $this->assertNotSame(0, $serverOffers->count());
 
         $skus = [];
         foreach ($serverOffers as $serverOffer) {
             $skus[] = $serverOffer->getSku();
         }
-        $this->assertEquals('compute_ha_32gb', $skus[14]);
+        $this->assertSame('compute_ha_32gb', $skus[14]);
     }
 
     public function test_list_disk_offers()
@@ -79,12 +79,12 @@ class ProductTest extends AbstractCloudSdkCase
         $diskOfferCollection = $sdk->listDiskOffers(51, 2);
 
         $this->assertInstanceOf(OfferCollection::class, $diskOfferCollection);
-        $this->assertNotEquals(0, $diskOfferCollection->count());
+        $this->assertNotSame(0, $diskOfferCollection->count());
 
         $skus = [];
         foreach ($diskOfferCollection as $diskOffer) {
             $skus[] = $diskOffer->getSku();
         }
-        $this->assertEquals('compute_ssd_250gb', $skus[1]);
+        $this->assertSame('compute_ssd_250gb', $skus[1]);
     }
 }

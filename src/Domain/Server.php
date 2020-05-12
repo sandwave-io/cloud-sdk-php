@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace SandwaveIo\CloudSdkPhp\Domain;
 
@@ -33,13 +33,13 @@ final class Server
     private $updatedAt;
 
     /** @var ?DiskCollection */
-    private $disks = null;
+    private $disks;
 
     /** @var ?Offer */
-    private $offer = null;
+    private $offer;
 
     /** @var ?DataCenter */
-    private $dataCenter = null;
+    private $dataCenter;
 
     private function __construct(
         ServerId $id,
@@ -67,24 +67,25 @@ final class Server
 
     /**
      * @param array<mixed> $data
+     *
      * @throws InvalidArgumentException
      * @throws InvalidUuidStringException
      */
-    public static function fromArray(array $data): Server
+    public static function fromArray(array $data) : Server
     {
         $createdAt = DateTimeImmutable::createFromFormat(DateTime::W3C, $data['created_at']);
-        if (!$createdAt instanceof DateTimeImmutable) {
+        if (! $createdAt instanceof DateTimeImmutable) {
             throw new InvalidArgumentException('Cannot instantiate createdAt');
         }
 
         $updatedAt = DateTimeImmutable::createFromFormat(DateTime::W3C, $data['updated_at']);
-        if (!$updatedAt instanceof DateTimeImmutable) {
+        if (! $updatedAt instanceof DateTimeImmutable) {
             throw new InvalidArgumentException('Cannot instantiate updatedAt');
         }
 
         $offer = isset($data['offer']['data']) ? Offer::fromArray($data['offer']['data']) : null;
         $dataCenter = isset($data['datacenter']['data']) ? DataCenter::fromArray($data['datacenter']['data']) : null;
-        $disks = isset($data['disks']['data']) ? DiskCollection::fromArray($data['disks']['data']): null;
+        $disks = isset($data['disks']['data']) ? DiskCollection::fromArray($data['disks']['data']) : null;
 
         return new Server(
             ServerId::fromString($data['id']),
@@ -100,47 +101,47 @@ final class Server
         );
     }
 
-    public function getId(): ServerId
+    public function getId() : ServerId
     {
         return $this->id;
     }
 
-    public function getDisplayName(): string
+    public function getDisplayName() : string
     {
         return $this->displayName;
     }
 
-    public function getStatus(): ServerStatus
+    public function getStatus() : ServerStatus
     {
         return $this->status;
     }
 
-    public function isRescueIsoAttached(): bool
+    public function isRescueIsoAttached() : bool
     {
         return $this->rescueIsoAttached;
     }
 
-    public function isHasSecurityGroup(): bool
+    public function isHasSecurityGroup() : bool
     {
         return $this->hasSecurityGroup;
     }
 
-    public function getCreatedAt(): DateTimeInterface
+    public function getCreatedAt() : DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function getUpdatedAt(): DateTimeInterface
+    public function getUpdatedAt() : DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    public function getOffer(): ?Offer
+    public function getOffer() : ?Offer
     {
         return $this->offer;
     }
 
-    public function getDataCenter(): ?DataCenter
+    public function getDataCenter() : ?DataCenter
     {
         return $this->dataCenter;
     }

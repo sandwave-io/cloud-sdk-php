@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace SandwaveIo\CloudSdkPhp\Domain;
 
@@ -12,7 +12,7 @@ final class Disk
     /**
      * @param array<mixed> $data
      */
-    public static function fromArray(array $data): Disk
+    public static function fromArray(array $data) : Disk
     {
         return new Disk();
     }

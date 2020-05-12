@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace SandwaveIo\CloudSdkPhp\Domain;
 
@@ -53,9 +53,10 @@ final class DataCenter
 
     /**
      * @param array<mixed> $data
+     *
      * @throws InvalidArgumentException
      */
-    public static function fromArray(array $data): DataCenter
+    public static function fromArray(array $data) : DataCenter
     {
         return new DataCenter(
             DatacenterId::fromString($data['id']),
@@ -69,42 +70,42 @@ final class DataCenter
         );
     }
 
-    public function getId(): DatacenterId
+    public function getId() : DatacenterId
     {
         return $this->id;
     }
 
-    public function getName(): string
+    public function getName() : string
     {
         return $this->name;
     }
 
-    public function getDescription(): string
+    public function getDescription() : string
     {
         return $this->description;
     }
 
-    public function getCity(): string
+    public function getCity() : string
     {
         return $this->city;
     }
 
-    public function getCountry(): string
+    public function getCountry() : string
     {
         return $this->country;
     }
 
-    public function getTimezone(): string
+    public function getTimezone() : string
     {
         return $this->timezone;
     }
 
-    public function isStandardEnabled(): bool
+    public function isStandardEnabled() : bool
     {
         return $this->standardEnabled;
     }
 
-    public function isHaEnabled(): bool
+    public function isHaEnabled() : bool
     {
         return $this->haEnabled;
     }

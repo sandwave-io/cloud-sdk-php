@@ -26,8 +26,8 @@ class ServerTest extends AbstractCloudSdkCase
         $serverlist = $sdk->listServers(51, 2);
 
         $this->assertInstanceOf(ServerCollection::class, $serverlist);
-        $this->assertEquals(2, $serverlist->count());
-        $this->assertEquals('Running', (string) $serverlist->current()->getStatus());
+        $this->assertSame(2, $serverlist->count());
+        $this->assertSame('Running', (string) $serverlist->current()->getStatus());
     }
 
     public function test_show_server()
@@ -43,7 +43,7 @@ class ServerTest extends AbstractCloudSdkCase
         $server = $sdk->showServer(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
 
         $this->assertInstanceOf(Server::class, $server);
-        $this->assertEquals('Running', (string) $server->getStatus());
+        $this->assertSame('Running', (string) $server->getStatus());
     }
 
     public function test_console_server()
@@ -98,7 +98,7 @@ class ServerTest extends AbstractCloudSdkCase
         );
 
         $this->assertInstanceOf(ServerId::class, $serverId);
-        $this->assertEquals(ServerId::fromString('2f811c1b-3bf5-4592-b7b5-00ff80f43968'), $serverId);
+        $this->assertSame(ServerId::fromString('2f811c1b-3bf5-4592-b7b5-00ff80f43968'), $serverId);
     }
 
     public function test_create_server_negative()

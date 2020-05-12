@@ -195,12 +195,12 @@ final class APIClient
      */
     private function queryParameters(array $parameters) : string
     {
-        return "?" .
+        return '?' .
             http_build_query(
                 array_merge(
                     $parameters,
                     [
-                        'account_id' => (string) $this->accountId
+                        'account_id' => (string) $this->accountId,
                     ]
                 )
             );
