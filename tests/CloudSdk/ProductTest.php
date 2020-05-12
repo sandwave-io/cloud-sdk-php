@@ -1,14 +1,6 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace SandwaveIo\CloudSdkPhp\Tests\CloudSdk;
-
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Response;
-use Mockery;
-use SandwaveIo\CloudSdkPhp\Exceptions\CloudHttpException;
-use SandwaveIo\CloudSdkPhp\CloudSdk;
-use SandwaveIo\CloudSdkPhp\Client\APIClient;
-use SandwaveIo\CloudSdkPhp\Support\UserDataFactory;
 
 class ProductTest extends AbstractCloudSdkCase
 {
@@ -24,7 +16,7 @@ class ProductTest extends AbstractCloudSdkCase
         $json = $sdk->getUsage();
 
         $this->assertTrue(is_array($json));
-        $this->assertNotEquals([], $json);
+        $this->assertNotSame([], $json);
         $this->assertArrayContains('ram', 58, $json);
     }
 
@@ -41,7 +33,7 @@ class ProductTest extends AbstractCloudSdkCase
         $json = $sdk->listOffers();
 
         $this->assertTrue(is_array($json));
-        $this->assertNotEquals([], $json);
+        $this->assertNotSame([], $json);
         $this->assertArrayContains('sku', 'compute_ha_32gb', $json);
     }
 
@@ -58,7 +50,7 @@ class ProductTest extends AbstractCloudSdkCase
         $json = $sdk->listServerOffers(51, 2);
 
         $this->assertTrue(is_array($json));
-        $this->assertNotEquals([], $json);
+        $this->assertNotSame([], $json);
         $this->assertArrayContains('sku', 'compute_ha_32gb', $json);
     }
 
@@ -75,7 +67,7 @@ class ProductTest extends AbstractCloudSdkCase
         $json = $sdk->listDiskOffers(51, 2);
 
         $this->assertTrue(is_array($json));
-        $this->assertNotEquals([], $json);
+        $this->assertNotSame([], $json);
 
         $this->assertArrayContains('sku', 'compute_ssd_250gb', $json);
     }

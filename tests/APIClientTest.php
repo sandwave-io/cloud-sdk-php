@@ -1,10 +1,8 @@
-<?php declare(strict_types=1);
-
+<?php declare(strict_types = 1);
 
 namespace SandwaveIo\CloudSdkPhp\Tests;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
@@ -24,18 +22,18 @@ class APIClientTest extends TestCase
     public function test_get_request_success()
     {
         $handlerStack = HandlerStack::create(new MockHandler([
-            new Response(200, [], '{"data": {"foo": "bar"}}')
+            new Response(200, [], '{"data": {"foo": "bar"}}'),
         ]));
         $client = new APIClient('this-is-my-api-key', 'this-is-my-account-id', new Client(['handler' => $handlerStack]));
 
         $response = $client->get('/test');
-        $this->assertEquals(['foo' => 'bar'], $response);
+        $this->assertSame(['foo' => 'bar'], $response);
     }
 
     public function test_get_request_404()
     {
         $handlerStack = HandlerStack::create(new MockHandler([
-            new Response(404, [], '{"data": null}')
+            new Response(404, [], '{"data": null}'),
         ]));
         $client = new APIClient('this-is-my-api-key', 'this-is-my-account-id', new Client(['handler' => $handlerStack]));
 
@@ -46,7 +44,7 @@ class APIClientTest extends TestCase
     public function test_get_request_bad_json()
     {
         $handlerStack = HandlerStack::create(new MockHandler([
-            new Response(200, [], '{"data": dit is geen valide json 123 😂}')
+            new Response(200, [], '{"data": dit is geen valide json 123 😂}'),
         ]));
         $client = new APIClient('this-is-my-api-key', 'this-is-my-account-id', new Client(['handler' => $handlerStack]));
 
@@ -57,55 +55,55 @@ class APIClientTest extends TestCase
     public function test_get_request_empty_body()
     {
         $handlerStack = HandlerStack::create(new MockHandler([
-            new Response(200, ['Content-Length' => 0], "")
+            new Response(200, ['Content-Length' => 0], ''),
         ]));
         $client = new APIClient('this-is-my-api-key', 'this-is-my-account-id', new Client(['handler' => $handlerStack]));
 
         $response = $client->get('/test');
-        $this->assertEquals([], $response);
+        $this->assertSame([], $response);
     }
 
     public function test_post_request_success()
     {
         $handlerStack = HandlerStack::create(new MockHandler([
-            new Response(201, [], '{"data": {"foo": "bar"}}')
+            new Response(201, [], '{"data": {"foo": "bar"}}'),
         ]));
         $client = new APIClient('this-is-my-api-key', 'this-is-my-account-id', new Client(['handler' => $handlerStack]));
 
         $response = $client->post('/test');
-        $this->assertEquals(['foo' => 'bar'], $response);
+        $this->assertSame(['foo' => 'bar'], $response);
     }
 
     public function test_put_request_success()
     {
         $handlerStack = HandlerStack::create(new MockHandler([
-            new Response(204, [], '{"data": {"foo": "bar"}}')
+            new Response(204, [], '{"data": {"foo": "bar"}}'),
         ]));
         $client = new APIClient('this-is-my-api-key', 'this-is-my-account-id', new Client(['handler' => $handlerStack]));
 
         $response = $client->put('/test');
-        $this->assertEquals(['foo' => 'bar'], $response);
+        $this->assertSame(['foo' => 'bar'], $response);
     }
 
     public function test_delete_request_success()
     {
         $handlerStack = HandlerStack::create(new MockHandler([
-            new Response(204, [], '{"data": {"foo": "bar"}}')
+            new Response(204, [], '{"data": {"foo": "bar"}}'),
         ]));
         $client = new APIClient('this-is-my-api-key', 'this-is-my-account-id', new Client(['handler' => $handlerStack]));
 
         $response = $client->delete('/test');
-        $this->assertEquals(['foo' => 'bar'], $response);
+        $this->assertSame(['foo' => 'bar'], $response);
     }
 
     public function test_patch_request_success()
     {
         $handlerStack = HandlerStack::create(new MockHandler([
-            new Response(204, [], '{"data": {"foo": "bar"}}')
+            new Response(204, [], '{"data": {"foo": "bar"}}'),
         ]));
         $client = new APIClient('this-is-my-api-key', 'this-is-my-account-id', new Client(['handler' => $handlerStack]));
 
         $response = $client->patch('/test');
-        $this->assertEquals(['foo' => 'bar'], $response);
+        $this->assertSame(['foo' => 'bar'], $response);
     }
 }
