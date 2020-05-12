@@ -41,7 +41,7 @@ class AbstractCloudSdkCase extends TestCase
     protected function assertArrayContains(string $expectedKey, $expectedValue, array $array, string $message = 'Failed asserting that array contains value.') : void
     {
         $found = false;
-        array_walk_recursive($array, function($value, $key) use (&$found, $expectedKey, $expectedValue) {
+        array_walk_recursive($array, function ($value, $key) use (&$found, $expectedKey, $expectedValue) {
             if ($key === $expectedKey && $value === $expectedValue) {
                 $found = true;
                 return;

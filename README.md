@@ -4,6 +4,16 @@ PHP package to to deploy and configure virtual servers on the [PCextreme](https:
 
 ## Contributing
 
+### PHP-CS-Fixer
+
+Run PHP-CS-Fixer:
+
+```
+vendor/bin/php-cs-fixer fix
+```
+
+The config can be found in `.php_cs.dist`
+
 ### Unit testing
 
 Run PHPUnit:
@@ -11,6 +21,8 @@ Run PHPUnit:
 ```
 vendor/bin/phpunit
 ```
+
+The config can be found in `phpunit.xml`
 
 ### PHPStan
 
@@ -20,6 +32,7 @@ You can run PHPStan like so:
 vendor/bin/phpstan analyze src --level=8
 ```
 
+The config can be found in `phpstan.neon`
 
 ## Usage
 
