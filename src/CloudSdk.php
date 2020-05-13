@@ -8,6 +8,7 @@ use SandwaveIo\CloudSdkPhp\Client\APIClient;
 use SandwaveIo\CloudSdkPhp\Domain\AccountId;
 use SandwaveIo\CloudSdkPhp\Domain\DataCenterCollection;
 use SandwaveIo\CloudSdkPhp\Domain\DatacenterId;
+use SandwaveIo\CloudSdkPhp\Domain\DiskCollection;
 use SandwaveIo\CloudSdkPhp\Domain\DiskId;
 use SandwaveIo\CloudSdkPhp\Domain\NetworkCollection;
 use SandwaveIo\CloudSdkPhp\Domain\NetworkId;
@@ -165,14 +166,11 @@ final class CloudSdk
         return DiskId::fromString($data['id']);
     }
 
-    /**
-     * @param ServerId $serverId UUID of server.
-     *
-     * @return array<mixed>
-     */
-    public function listDisks(ServerId $serverId) : array
+    public function listDisks(ServerId $serverId) : DiskCollection
     {
-        return $this->client->get("vms/{$serverId}/disks");
+        return DiskCollection::fromArray(
+            $this->client->get("vms/{$serverId}/disks")
+        );
     }
 
     public function deleteDisk(ServerId $serverId, DiskId $diskId) : void

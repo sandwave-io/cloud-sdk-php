@@ -2,6 +2,7 @@
 
 namespace SandwaveIo\CloudSdkPhp\Tests\CloudSdk;
 
+use SandwaveIo\CloudSdkPhp\Domain\DiskCollection;
 use SandwaveIo\CloudSdkPhp\Domain\DiskId;
 use SandwaveIo\CloudSdkPhp\Domain\OfferId;
 use SandwaveIo\CloudSdkPhp\Domain\ServerId;
@@ -17,11 +18,11 @@ class DiskTest extends AbstractCloudSdkCase
             'vms/6a6256cc-e6ff-41d2-9894-95a066d2b7a4/disks'
         );
 
-        $json = $sdk->listDisks(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
+        $diskList = $sdk->listDisks(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
 
-        $this->assertTrue(is_array($json));
-        $this->assertNotSame([], $json);
-        $this->assertArrayContains('display_name', 'test', $json);
+        $this->assertInstanceOf(DiskCollection::class, $diskList);
+        $this->assertSame(1, $diskList->count());
+        $this->assertSame('test', (string) $diskList->current()->getDisplayName());
     }
 
     public function test_create_disk()

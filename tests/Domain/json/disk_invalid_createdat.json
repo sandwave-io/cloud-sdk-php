@@ -1,0 +1,40 @@
+{
+  "id": "4031dfb0-a9a1-499b-8707-7f126bfcbda6",
+  "display_name": "test",
+  "status": "Allocated",
+  "created_at": "2020-05-13T09:32:29+00:00",
+  "updated_at": "2020-05-13T09:32:35+00:00",
+  "offer": {
+    "data": {
+      "id": "175e7781-a186-47ed-91a7-b24e94b8e5c2",
+      "account_id": null,
+      "billing_period": 1,
+      "price": 5000,
+      "type": "usage",
+      "sku": "compute_ssd_250gb",
+      "name": "SSD 250GB disk",
+      "description": "SSD 250GB disk",
+      "show_in_store": true,
+      "specifications": {
+        "storage": {
+          "value": "Ceph SSD",
+          "unit": "type"
+        },
+        "capacity": {
+          "value": "250",
+          "unit": "GB"
+        },
+        "legacy_prod": {
+          "value": "13",
+          "unit": "id"
+        },
+        "legacy_prodid": {
+          "value": "157",
+          "unit": "id"
+        }
+      },
+      "created_at": "2019-09-09 08:58:09+00:00",
+      "updated_at": "2019-09-09T08:58:09+00:00"
+    }
+  }
+}
