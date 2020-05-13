@@ -4,7 +4,7 @@ namespace SandwaveIo\CloudSdkPhp\Tests\CloudSdk;
 
 use SandwaveIo\CloudSdkPhp\Domain\TemplateCollection;
 
-class TemplatesTest extends AbstractCloudSdkCase
+class TemplateTest extends AbstractCloudSdkCase
 {
     public function test_list_templates()
     {

@@ -1,5 +1,6 @@
 {
   "data": {
-    "ram": 58
+    "memory": 58,
+    "storage": 511
   }
 }

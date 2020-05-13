@@ -4,7 +4,7 @@ namespace SandwaveIo\CloudSdkPhp\Tests\CloudSdk;
 
 use SandwaveIo\CloudSdkPhp\Domain\NetworkCollection;
 
-class NetworksTest extends AbstractCloudSdkCase
+class NetworkTest extends AbstractCloudSdkCase
 {
     public function test_list_templates()
     {
@@ -23,3 +23,4 @@ class NetworksTest extends AbstractCloudSdkCase
         $this->assertSame('man.zone03.ams02.cldin.net', $networks->current()->getManager());
     }
 }
+

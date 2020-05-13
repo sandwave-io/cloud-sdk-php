@@ -17,6 +17,7 @@ use SandwaveIo\CloudSdkPhp\Domain\ServerId;
 use SandwaveIo\CloudSdkPhp\Domain\TemplateCollection;
 use SandwaveIo\CloudSdkPhp\Domain\TemplateId;
 use SandwaveIo\CloudSdkPhp\Domain\Usage;
+use SandwaveIo\CloudSdkPhp\Exceptions\CloudHttpException;
 use SandwaveIo\CloudSdkPhp\Support\UserDataFactory;
 
 final class CloudSdk
@@ -153,6 +154,47 @@ final class CloudSdk
     }
 
     /**
+     * @param string $serverId    Server UUID.
+     * @param string $offerId     UUID of disk offer.
+     * @param string $displayName A friendly name for the disk.
+     *
+     * @return array<mixed>
+     */
+    public function createDisk(string $serverId, string $offerId, string $displayName) : array
+    {
+        return $this->client->post(
+            "vms/{$serverId}/disks",
+            [
+                'offer_id' => $offerId,
+                'display_name' => $displayName,
+            ],
+            [],
+            201
+        );
+    }
+
+    /**
+     * @param string $serverId UUID of server.
+     *
+     * @return array<mixed>
+     */
+    public function listDisks(string $serverId) : array
+    {
+        return $this->client->get("vms/{$serverId}/disks");
+    }
+
+    /**
+     * @param string $serverId UUID of server.
+     * @param string $diskId   UUID of disk.
+     *
+     * @return array<mixed>
+     */
+    public function deleteDisk(string $serverId, string $diskId) : array
+    {
+        return $this->client->delete("vms/{$serverId}/disks/{$diskId}", [], 204);
+    }
+
+    /**
      * @return array<mixed>
      */
     public function rebootServer(ServerId $id) : array
@@ -200,8 +242,25 @@ final class CloudSdk
     public function getUsage() : Usage
     {
         return Usage::fromArray(
-            $this->client->get('usage')
+            $this->client->get('limits/current_usage')
         );
+    }
+
+    /**
+     * Check if an offer can be deployed under the account.
+     *
+     * @param string $offerId
+     *
+     * @return bool
+     */
+    public function canDeployOffer(string $offerId) : bool
+    {
+        try {
+            $this->client->get('limits/can_deploy', [], 204);
+            return true;
+        } catch (CloudHttpException $e) {
+            return false;
+        }
     }
 
     /**
