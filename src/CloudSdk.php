@@ -1,4 +1,5 @@
-<?php declare(strict_types = 1);
+<?php /** @noinspection ALL */
+declare(strict_types = 1);
 
 namespace SandwaveIo\CloudSdkPhp;
 
@@ -7,6 +8,7 @@ use SandwaveIo\CloudSdkPhp\Client\APIClient;
 use SandwaveIo\CloudSdkPhp\Domain\AccountId;
 use SandwaveIo\CloudSdkPhp\Domain\DataCenterCollection;
 use SandwaveIo\CloudSdkPhp\Domain\DatacenterId;
+use SandwaveIo\CloudSdkPhp\Domain\DiskId;
 use SandwaveIo\CloudSdkPhp\Domain\NetworkCollection;
 use SandwaveIo\CloudSdkPhp\Domain\NetworkId;
 use SandwaveIo\CloudSdkPhp\Domain\OfferCollection;
@@ -22,11 +24,6 @@ use SandwaveIo\CloudSdkPhp\Support\UserDataFactory;
 
 final class CloudSdk
 {
-    /**
-     * @var string
-     */
-    private $baseUrl = 'https://api.pcextreme.nl/v2/compute/';
-
     /**
      * @var APIClient
      */
@@ -51,7 +48,7 @@ final class CloudSdk
                 $accountId,
                 new Client(
                     [
-                        'base_uri' => $this->baseUrl,
+                        'base_uri' => APIClient::BASE_URL,
                     ]
                 )
             );
@@ -83,6 +80,10 @@ final class CloudSdk
 
         $data = $this->client->post('vms', $postData);
 
+        if (! array_key_exists('id', $data)) {
+            throw new CloudHttpException('Could not resolve ID of created server.');
+        }
+
         return ServerId::fromString($data['id']);
     }
 
@@ -112,14 +113,9 @@ final class CloudSdk
         );
     }
 
-    /**
-     * use listOffers to acquire.
-     *
-     * @return array<mixed>
-     */
-    public function upgradeServer(ServerId $id, OfferId $offerId) : array
+    public function upgradeServer(ServerId $id, OfferId $offerId) : void
     {
-        return $this->client->patch(
+        $this->client->patch(
             "vms/{$id}",
             [
                 'offer_id' => (string) $offerId,
@@ -127,103 +123,81 @@ final class CloudSdk
         );
     }
 
-    /**
-     * @return array<mixed>
-     */
-    public function getConsoleUrl(ServerId $id) : array
+    public function getConsoleUrl(ServerId $id) : string
     {
-        return $this->client->get(
+        $data = $this->client->get(
             "vms/{$id}/console"
         );
+
+        if (! array_key_exists('url', $data)) {
+            throw new CloudHttpException('Could not console URL.');
+        }
+
+        return $data['url'];
     }
 
-    /**
-     * @return array<mixed>
-     */
-    public function detachRescueIso(ServerId $id) : array
+    public function detachRescueIso(ServerId $id) : void
     {
-        return $this->client->post("vms/{$id}/detachRescue", [], [], 204);
+        $this->client->post("vms/{$id}/detachRescue", [], [], 204);
     }
 
-    /**
-     * @return array<mixed>
-     */
-    public function attachRescueIso(ServerId $id) : array
+    public function attachRescueIso(ServerId $id) : void
     {
-        return $this->client->post("vms/{$id}/attachRescue", [], [], 204);
+        $this->client->post("vms/{$id}/attachRescue", [], [], 204);
     }
 
-    /**
-     * @param string $serverId    Server UUID.
-     * @param string $offerId     UUID of disk offer.
-     * @param string $displayName A friendly name for the disk.
-     *
-     * @return array<mixed>
-     */
-    public function createDisk(string $serverId, string $offerId, string $displayName) : array
+    public function createDisk(ServerId $serverId, OfferId $offerId, string $displayName) : DiskId
     {
-        return $this->client->post(
+        $data = $this->client->post(
             "vms/{$serverId}/disks",
             [
-                'offer_id' => $offerId,
+                'offer_id' => (string) $offerId,
                 'display_name' => $displayName,
             ],
             [],
             201
         );
+
+        if (! array_key_exists('id', $data)) {
+            throw new CloudHttpException('Could not resolve ID of created disk.');
+        }
+
+        return DiskId::fromString($data['id']);
     }
 
     /**
-     * @param string $serverId UUID of server.
+     * @param ServerId $serverId UUID of server.
      *
      * @return array<mixed>
      */
-    public function listDisks(string $serverId) : array
+    public function listDisks(ServerId $serverId) : array
     {
         return $this->client->get("vms/{$serverId}/disks");
     }
 
-    /**
-     * @param string $serverId UUID of server.
-     * @param string $diskId   UUID of disk.
-     *
-     * @return array<mixed>
-     */
-    public function deleteDisk(string $serverId, string $diskId) : array
+    public function deleteDisk(ServerId $serverId, DiskId $diskId) : void
     {
-        return $this->client->delete("vms/{$serverId}/disks/{$diskId}", [], 204);
+        $this->client->delete("vms/{$serverId}/disks/{$diskId}", [], 204);
     }
 
-    /**
-     * @return array<mixed>
-     */
-    public function rebootServer(ServerId $id) : array
+    public function rebootServer(ServerId $id) : void
     {
-        return $this->client->post("vms/{$id}/reboot", [], [], 204);
+        $this->client->post("vms/{$id}/reboot", [], [], 204);
     }
 
-    /**
-     * @return array<mixed>
-     */
-    public function stopServer(ServerId $id) : array
+    public function stopServer(ServerId $id) : void
     {
-        return $this->client->post("vms/{$id}/stop", [], [], 204);
+        $this->client->post("vms/{$id}/stop", [], [], 204);
     }
 
-    /**
-     * @return array<mixed>
-     */
-    public function startServer(ServerId $id) : array
+    public function startServer(ServerId $id) : void
     {
-        return $this->client->post("vms/{$id}/start", [], [], 204);
+        $this->client->post("vms/{$id}/start", [], [], 204);
     }
 
-    /**
-     * @return array<mixed>
-     */
-    public function deleteServer(ServerId $id) : array
+    public function deleteServer(ServerId $id) : void
     {
-        return $this->client->delete("vms/{$id}", [], 204);
+        $this->client->delete("vms/{$id}", [], 204);
     }
 
     /**
@@ -248,15 +222,18 @@ final class CloudSdk
 
     /**
      * Check if an offer can be deployed under the account.
-     *
-     * @param string $offerId
-     *
-     * @return bool
      */
-    public function canDeployOffer(string $offerId) : bool
+    public function canDeployOffer(OfferId $offerId) : bool
     {
         try {
-            $this->client->get('limits/can_deploy', [], 204);
+            $this->client->get(
+                'limits/can_deploy',
+                [
+                    'offer_id' => (string) $offerId,
+                ],
+                204
+            );
+
             return true;
         } catch (CloudHttpException $e) {
             return false;

@@ -6,11 +6,15 @@ namespace SandwaveIo\CloudSdkPhp\Domain;
 final class Usage
 {
     /** @var int */
-    private $ramInGbs;
+    private $memoryInGbs;
 
-    private function __construct(int $ramInGbs)
+    /** @var int */
+    private $storageInGbs;
+
+    private function __construct(int $memoryInGbs, int $storageInGbs)
     {
-        $this->ramInGbs = $ramInGbs;
+        $this->memoryInGbs = $memoryInGbs;
+        $this->storageInGbs = $storageInGbs;
     }
 
     /**
@@ -19,12 +23,18 @@ final class Usage
     public static function fromArray(array $data) : Usage
     {
         return new Usage(
-            $data['ram']
+            $data['memory'],
+            $data['storage']
         );
     }
 
-    public function getRamInGbs() : int
+    public function getMemoryInGbs() : int
     {
-        return $this->ramInGbs;
+        return $this->memoryInGbs;
+    }
+
+    public function getStorageInGbs() : int
+    {
+        return $this->storageInGbs;
     }
 }

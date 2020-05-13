@@ -2,6 +2,9 @@
 
 namespace SandwaveIo\CloudSdkPhp\Tests\CloudSdk;
 
+use SandwaveIo\CloudSdkPhp\Domain\OfferId;
+use SandwaveIo\CloudSdkPhp\Domain\Usage;
+
 class LimitTest extends AbstractCloudSdkCase
 {
     public function test_usage()
@@ -13,11 +16,10 @@ class LimitTest extends AbstractCloudSdkCase
             'limits/current_usage'
         );
 
-        $json = $sdk->getUsage();
+        $usage = $sdk->getUsage();
 
-        $this->assertTrue(is_array($json));
-        $this->assertNotSame([], $json);
-        $this->assertArrayContains('memory', 58, $json);
+        $this->assertInstanceOf(Usage::class, $usage);
+        $this->assertSame(58, $usage->getMemoryInGbs());
     }
 
     public function test_can_deploy_positive()
@@ -26,10 +28,11 @@ class LimitTest extends AbstractCloudSdkCase
             204,
             null,
             'get',
-            'limits/can_deploy'
+            'limits/can_deploy',
+            'offer_id=175e7781-a186-47ed-91a7-b24e94b8e5c2&account_id=00000000-0000-0000-0000-000000000000'
         );
 
-        $canDeploy = $sdk->canDeployOffer('175e7781-a186-47ed-91a7-b24e94b8e5c2');
+        $canDeploy = $sdk->canDeployOffer(OfferId::fromString('175e7781-a186-47ed-91a7-b24e94b8e5c2'));
 
         $this->assertTrue($canDeploy);
     }
@@ -40,10 +43,11 @@ class LimitTest extends AbstractCloudSdkCase
             403,
             null,
             'get',
-            'limits/can_deploy'
+            'limits/can_deploy',
+            'offer_id=175e7781-a186-47ed-91a7-b24e94b8e5c2&account_id=00000000-0000-0000-0000-000000000000'
         );
 
-        $canDeploy = $sdk->canDeployOffer('175e7781-a186-47ed-91a7-b24e94b8e5c2');
+        $canDeploy = $sdk->canDeployOffer(OfferId::fromString('175e7781-a186-47ed-91a7-b24e94b8e5c2'));
 
         $this->assertFalse($canDeploy);
     }

@@ -10,6 +10,8 @@ use SandwaveIo\CloudSdkPhp\Exceptions\CloudNotFoundException;
 
 final class APIClient
 {
+    const BASE_URL = 'https://api.pcextreme.nl/v2/compute/';
+
     /**
      * @var string
      */
@@ -30,7 +32,7 @@ final class APIClient
         $this->apiKey = $apiKey;
         $this->accountId = $accountId;
         $this->client = $client ?? new Client([
-            'base_uri' => 'https://api.pcextreme.nl/v2/',
+            'base_uri' => self::BASE_URL,
         ]);
     }
 

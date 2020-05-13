@@ -55,11 +55,12 @@ class ServerTest extends AbstractCloudSdkCase
             'vms/6a6256cc-e6ff-41d2-9894-95a066d2b7a4/console'
         );
 
-        $json = $sdk->getConsoleUrl(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
+        $url = $sdk->getConsoleUrl(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
 
-        $this->assertTrue(is_array($json));
-        $this->assertNotSame([], $json);
-        $this->assertArrayContains('url', 'https://console.auroracompute.eu/ams3?apikey=hidden&cmd=hidden&sessionkey=hidden&timestamp=nidden&userid=hidden&vm=hidden&signature=hidden%3D', $json);
+        $this->assertSame(
+            'https://console.auroracompute.eu/ams3?apikey=hidden&cmd=hidden&sessionkey=hidden&timestamp=nidden&userid=hidden&vm=hidden&signature=hidden%3D',
+            $url
+        );
     }
 
     public function test_details_server()
@@ -99,7 +100,7 @@ class ServerTest extends AbstractCloudSdkCase
 
         $this->assertInstanceOf(ServerId::class, $serverId);
         $this->assertSame(
-            (string) ServerId::fromString('2f811c1b-3bf5-4592-b7b5-00ff80f43968'),
+            '2f811c1b-3bf5-4592-b7b5-00ff80f43968',
             (string) $serverId
         );
     }
@@ -134,10 +135,7 @@ class ServerTest extends AbstractCloudSdkCase
             'vms/6a6256cc-e6ff-41d2-9894-95a066d2b7a4/attachRescue'
         );
 
-        $json = $sdk->attachRescueIso(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
-
-        $this->assertTrue(is_array($json));
-        $this->assertSame([], $json);
+        $sdk->attachRescueIso(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
     }
 
     public function test_detach_rescue_iso_server()
@@ -149,10 +147,7 @@ class ServerTest extends AbstractCloudSdkCase
             'vms/6a6256cc-e6ff-41d2-9894-95a066d2b7a4/detachRescue'
         );
 
-        $json = $sdk->detachRescueIso(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
-
-        $this->assertTrue(is_array($json));
-        $this->assertSame([], $json);
+        $sdk->detachRescueIso(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
     }
 
     public function test_reboot_server()
@@ -164,10 +159,7 @@ class ServerTest extends AbstractCloudSdkCase
             'vms/6a6256cc-e6ff-41d2-9894-95a066d2b7a4/reboot'
         );
 
-        $json = $sdk->rebootServer(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
-
-        $this->assertTrue(is_array($json));
-        $this->assertSame([], $json);
+        $sdk->rebootServer(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
     }
 
     public function test_start_server()
@@ -179,10 +171,7 @@ class ServerTest extends AbstractCloudSdkCase
             'vms/6a6256cc-e6ff-41d2-9894-95a066d2b7a4/start'
         );
 
-        $json = $sdk->startServer(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
-
-        $this->assertTrue(is_array($json));
-        $this->assertSame([], $json);
+        $sdk->startServer(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
     }
 
     public function test_stop_server()
@@ -194,10 +183,7 @@ class ServerTest extends AbstractCloudSdkCase
             'vms/6a6256cc-e6ff-41d2-9894-95a066d2b7a4/stop'
         );
 
-        $json = $sdk->stopServer(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
-
-        $this->assertTrue(is_array($json));
-        $this->assertSame([], $json);
+        $sdk->stopServer(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
     }
 
     public function test_upgrade_server()
@@ -209,13 +195,10 @@ class ServerTest extends AbstractCloudSdkCase
             'vms/6a6256cc-e6ff-41d2-9894-95a066d2b7a4'
         );
 
-        $json = $sdk->upgradeServer(
+        $sdk->upgradeServer(
             ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'),
             OfferId::fromString('a96bb19a-6289-4b26-a812-3d97d69e4ecb')
         );
-
-        $this->assertTrue(is_array($json));
-        $this->assertSame([], $json);
     }
 
     public function test_delete_server()
@@ -227,9 +210,6 @@ class ServerTest extends AbstractCloudSdkCase
             'vms/6a6256cc-e6ff-41d2-9894-95a066d2b7a4'
         );
 
-        $json = $sdk->deleteServer(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
-
-        $this->assertTrue(is_array($json));
-        $this->assertSame([], $json);
+        $sdk->deleteServer(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
     }
 }

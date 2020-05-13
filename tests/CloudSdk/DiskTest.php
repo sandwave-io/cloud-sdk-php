@@ -2,6 +2,10 @@
 
 namespace SandwaveIo\CloudSdkPhp\Tests\CloudSdk;
 
+use SandwaveIo\CloudSdkPhp\Domain\DiskId;
+use SandwaveIo\CloudSdkPhp\Domain\OfferId;
+use SandwaveIo\CloudSdkPhp\Domain\ServerId;
+
 class DiskTest extends AbstractCloudSdkCase
 {
     public function test_list_disks()
@@ -13,7 +17,7 @@ class DiskTest extends AbstractCloudSdkCase
             'vms/6a6256cc-e6ff-41d2-9894-95a066d2b7a4/disks'
         );
 
-        $json = $sdk->listDisks('6a6256cc-e6ff-41d2-9894-95a066d2b7a4');
+        $json = $sdk->listDisks(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
 
         $this->assertTrue(is_array($json));
         $this->assertNotSame([], $json);
@@ -29,15 +33,17 @@ class DiskTest extends AbstractCloudSdkCase
             'vms/6a6256cc-e6ff-41d2-9894-95a066d2b7a4/disks'
         );
 
-        $json = $sdk->createDisk(
-            '6a6256cc-e6ff-41d2-9894-95a066d2b7a4',
-            '175e7781-a186-47ed-91a7-b24e94b8e5c2',
+        $id = $sdk->createDisk(
+            ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'),
+            OfferId::fromString('175e7781-a186-47ed-91a7-b24e94b8e5c2'),
             'test'
         );
 
-        $this->assertTrue(is_array($json));
-        $this->assertNotSame([], $json);
-        $this->assertArrayContains('id', '4031dfb0-a9a1-499b-8707-7f126bfcbda6', $json);
+        $this->assertInstanceOf(DiskId::class, $id);
+        $this->assertSame(
+            '4031dfb0-a9a1-499b-8707-7f126bfcbda6',
+            (string) $id
+        );
     }
 
     public function test_delete_disk()
@@ -49,9 +55,6 @@ class DiskTest extends AbstractCloudSdkCase
             'vms/6a6256cc-e6ff-41d2-9894-95a066d2b7a4/disks/4031dfb0-a9a1-499b-8707-7f126bfcbda6'
         );
 
-        $json = $sdk->deleteDisk('6a6256cc-e6ff-41d2-9894-95a066d2b7a4', '4031dfb0-a9a1-499b-8707-7f126bfcbda6');
-
-        $this->assertTrue(is_array($json));
-        $this->assertSame([], $json);
+        $sdk->deleteDisk(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'), DiskId::fromString('4031dfb0-a9a1-499b-8707-7f126bfcbda6'));
     }
 }

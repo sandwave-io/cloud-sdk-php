@@ -23,4 +23,3 @@ class NetworkTest extends AbstractCloudSdkCase
         $this->assertSame('man.zone03.ams02.cldin.net', $networks->current()->getManager());
     }
 }
-
