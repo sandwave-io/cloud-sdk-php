@@ -4,22 +4,6 @@ namespace SandwaveIo\CloudSdkPhp\Tests\CloudSdk;
 
 class ProductTest extends AbstractCloudSdkCase
 {
-    public function test_usage()
-    {
-        $sdk = $this->getSdkWithMockedClient(
-            200,
-            'json/usage.json',
-            'get',
-            'usage'
-        );
-
-        $json = $sdk->getUsage();
-
-        $this->assertTrue(is_array($json));
-        $this->assertNotSame([], $json);
-        $this->assertArrayContains('ram', 58, $json);
-    }
-
     public function test_list_offers()
     {
         $sdk = $this->getSdkWithMockedClient(
