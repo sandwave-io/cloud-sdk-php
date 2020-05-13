@@ -2,21 +2,21 @@
 
 namespace SandwaveIo\CloudSdkPhp\Tests\CloudSdk;
 
-class NetworksTest extends AbstractCloudSdkCase
+class TemplateTest extends AbstractCloudSdkCase
 {
     public function test_list_templates()
     {
         $sdk = $this->getSdkWithMockedClient(
             200,
-            'json/network_list.json',
+            'json/template_list.json',
             'get',
-            'networks'
+            'templates'
         );
 
-        $json = $sdk->listNetworks();
+        $json = $sdk->listTemplates();
 
         $this->assertTrue(is_array($json));
         $this->assertNotSame([], $json);
-        $this->assertArrayContains('manager', 'man.zone03.ams02.cldin.net', $json);
+        $this->assertArrayContains('display_name', 'CentOS 8.1', $json);
     }
 }
