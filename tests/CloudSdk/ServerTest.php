@@ -98,7 +98,10 @@ class ServerTest extends AbstractCloudSdkCase
         );
 
         $this->assertInstanceOf(ServerId::class, $serverId);
-        $this->assertSame(ServerId::fromString('2f811c1b-3bf5-4592-b7b5-00ff80f43968'), $serverId);
+        $this->assertSame(
+            (string) ServerId::fromString('2f811c1b-3bf5-4592-b7b5-00ff80f43968'),
+            (string) $serverId
+        );
     }
 
     public function test_create_server_negative()

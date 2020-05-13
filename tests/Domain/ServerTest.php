@@ -21,7 +21,10 @@ final class ServerTest extends TestCase
             )
         );
 
-        $this->assertSame(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'), $server->getId());
+        $this->assertSame(
+            (string) ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'),
+            (string) $server->getId()
+        );
         $this->assertSame('web01.seasidehosting.nl', $server->getDisplayName());
         $this->assertTrue($server->getStatus()->equals(ServerStatus::running()));
         $this->assertSame(false, $server->isRescueIsoAttached());
@@ -51,7 +54,10 @@ final class ServerTest extends TestCase
             )
         );
 
-        $this->assertSame(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'), $server->getId());
+        $this->assertSame(
+            (string) ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'),
+            (string) $server->getId()
+        );
         $this->assertSame('web01.seasidehosting.nl', $server->getDisplayName());
         $this->assertTrue($server->getStatus()->equals(ServerStatus::running()));
         $this->assertSame(false, $server->isRescueIsoAttached());
