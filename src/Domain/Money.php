@@ -22,4 +22,9 @@ final class Money
     {
         return new self($cents);
     }
+
+    public function toCents(): int
+    {
+        return $this->valueInCents;
+    }
 }
