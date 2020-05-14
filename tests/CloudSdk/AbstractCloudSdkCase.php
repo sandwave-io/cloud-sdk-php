@@ -35,7 +35,7 @@ class AbstractCloudSdkCase extends TestCase
             };
         });
         $client = new APIClient('this-is-my-api-key', AccountId::fromString(Uuid::NIL), new Client(['handler' => $handlerStack]));
-        return new CloudSdk('a', AccountId::fromString(AccountId::fromString(Uuid::NIL)), new UserDataFactory, $client);
+        return new CloudSdk('a', AccountId::fromString(Uuid::NIL), new UserDataFactory(), $client);
     }
 
     protected function assertArrayContains(string $expectedKey, $expectedValue, array $array, string $message = 'Failed asserting that array contains value.') : void

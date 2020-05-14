@@ -26,8 +26,8 @@ class ServerTest extends AbstractCloudSdkCase
         $serverlist = $sdk->listServers(51, 2);
 
         $this->assertInstanceOf(ServerCollection::class, $serverlist);
-        $this->assertEquals(2, $serverlist->count());
-        $this->assertEquals('Running', (string) $serverlist->current()->getStatus());
+        $this->assertSame(2, $serverlist->count());
+        $this->assertSame('Running', (string) $serverlist->current()->getStatus());
     }
 
     public function test_show_server()
@@ -43,7 +43,7 @@ class ServerTest extends AbstractCloudSdkCase
         $server = $sdk->showServer(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
 
         $this->assertInstanceOf(Server::class, $server);
-        $this->assertEquals('Running', (string) $server->getStatus());
+        $this->assertSame('Running', (string) $server->getStatus());
     }
 
     public function test_console_server()
@@ -55,11 +55,12 @@ class ServerTest extends AbstractCloudSdkCase
             'vms/6a6256cc-e6ff-41d2-9894-95a066d2b7a4/console'
         );
 
-        $json = $sdk->getConsoleUrl(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
+        $url = $sdk->getConsoleUrl(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
 
-        $this->assertTrue(is_array($json));
-        $this->assertNotSame([], $json);
-        $this->assertArrayContains('url', 'https://console.auroracompute.eu/ams3?apikey=hidden&cmd=hidden&sessionkey=hidden&timestamp=nidden&userid=hidden&vm=hidden&signature=hidden%3D', $json);
+        $this->assertSame(
+            'https://console.auroracompute.eu/ams3?apikey=hidden&cmd=hidden&sessionkey=hidden&timestamp=nidden&userid=hidden&vm=hidden&signature=hidden%3D',
+            $url
+        );
     }
 
     public function test_details_server()
@@ -99,6 +100,10 @@ class ServerTest extends AbstractCloudSdkCase
 
         $this->assertInstanceOf(ServerId::class, $serverId);
         $this->assertEquals(ServerId::fromString('2f811c1b-3bf5-4592-b7b5-00ff80f43968'), $serverId);
+        $this->assertSame(
+            '2f811c1b-3bf5-4592-b7b5-00ff80f43968',
+            (string) $serverId
+        );
     }
 
     public function test_create_server_negative()
