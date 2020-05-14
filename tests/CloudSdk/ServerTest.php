@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace SandwaveIo\CloudSdkPhp\Tests\CloudSdk;
 
@@ -24,7 +23,7 @@ class ServerTest extends AbstractCloudSdkCase
             'include=offer%2Cdatacenter&per_page=51&page=2&account_id=00000000-0000-0000-0000-000000000000'
         );
 
-        $serverlist = $sdk->listServers(51,2);
+        $serverlist = $sdk->listServers(51, 2);
 
         $this->assertInstanceOf(ServerCollection::class, $serverlist);
         $this->assertEquals(2, $serverlist->count());
@@ -59,7 +58,7 @@ class ServerTest extends AbstractCloudSdkCase
         $json = $sdk->getConsoleUrl(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
 
         $this->assertTrue(is_array($json));
-        $this->assertNotEquals([], $json);
+        $this->assertNotSame([], $json);
         $this->assertArrayContains('url', 'https://console.auroracompute.eu/ams3?apikey=hidden&cmd=hidden&sessionkey=hidden&timestamp=nidden&userid=hidden&vm=hidden&signature=hidden%3D', $json);
     }
 
@@ -75,7 +74,7 @@ class ServerTest extends AbstractCloudSdkCase
         $json = $sdk->showDetails(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
 
         $this->assertTrue(is_array($json));
-        $this->assertNotEquals([], $json);
+        $this->assertNotSame([], $json);
         $this->assertArrayContains('ipaddress', '185.109.216.103', $json);
     }
 
@@ -135,7 +134,7 @@ class ServerTest extends AbstractCloudSdkCase
         $json = $sdk->attachRescueIso(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
 
         $this->assertTrue(is_array($json));
-        $this->assertEquals([], $json);
+        $this->assertSame([], $json);
     }
 
     public function test_detach_rescue_iso_server()
@@ -150,7 +149,7 @@ class ServerTest extends AbstractCloudSdkCase
         $json = $sdk->detachRescueIso(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
 
         $this->assertTrue(is_array($json));
-        $this->assertEquals([], $json);
+        $this->assertSame([], $json);
     }
 
     public function test_reboot_server()
@@ -165,7 +164,7 @@ class ServerTest extends AbstractCloudSdkCase
         $json = $sdk->rebootServer(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
 
         $this->assertTrue(is_array($json));
-        $this->assertEquals([], $json);
+        $this->assertSame([], $json);
     }
 
     public function test_start_server()
@@ -180,7 +179,7 @@ class ServerTest extends AbstractCloudSdkCase
         $json = $sdk->startServer(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
 
         $this->assertTrue(is_array($json));
-        $this->assertEquals([], $json);
+        $this->assertSame([], $json);
     }
 
     public function test_stop_server()
@@ -195,7 +194,7 @@ class ServerTest extends AbstractCloudSdkCase
         $json = $sdk->stopServer(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
 
         $this->assertTrue(is_array($json));
-        $this->assertEquals([], $json);
+        $this->assertSame([], $json);
     }
 
     public function test_upgrade_server()
@@ -213,7 +212,7 @@ class ServerTest extends AbstractCloudSdkCase
         );
 
         $this->assertTrue(is_array($json));
-        $this->assertEquals([], $json);
+        $this->assertSame([], $json);
     }
 
     public function test_delete_server()
@@ -228,6 +227,6 @@ class ServerTest extends AbstractCloudSdkCase
         $json = $sdk->deleteServer(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
 
         $this->assertTrue(is_array($json));
-        $this->assertEquals([], $json);
+        $this->assertSame([], $json);
     }
 }

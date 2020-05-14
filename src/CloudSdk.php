@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace SandwaveIo\CloudSdkPhp;
 
@@ -23,11 +22,6 @@ use SandwaveIo\CloudSdkPhp\Support\UserDataFactory;
 final class CloudSdk
 {
     /**
-     * @var string
-     */
-    private $baseUrl = 'https://api.pcextreme.nl/v2/compute/';
-
-    /**
      * @var APIClient
      */
     private $client;
@@ -37,6 +31,14 @@ final class CloudSdk
      */
     private $userDataFactory;
 
+    /**
+     * CloudSdk constructor.
+     *
+     * @param string               $apiKey
+     * @param AccountId            $accountId
+     * @param UserDataFactory|null $userDataFactory
+     * @param APIClient|null       $client
+     */
     public function __construct(
         string $apiKey,
         AccountId $accountId,
@@ -58,7 +60,15 @@ final class CloudSdk
     }
 
     /**
-     * @param array<string> $sshKeys
+     * @param string         $hostname
+     * @param string         $password
+     * @param OfferId        $offerId
+     * @param TemplateId     $templateId
+     * @param DatacenterId   $datacenterId
+     * @param NetworkId|null $networkId
+     * @param array<string>  $sshKeys
+     *
+     * @return array<mixed>
      */
     public function createServer(
         string $hostname,
@@ -86,6 +96,12 @@ final class CloudSdk
         return ServerId::fromString($data['id']);
     }
 
+    /**
+     * @param int $limit
+     * @param int $page
+     *
+     * @return ServerCollection
+     */
     public function listServers(int $limit = 50, int $page = 1): ServerCollection
     {
         return ServerCollection::fromArray(
@@ -100,6 +116,11 @@ final class CloudSdk
         );
     }
 
+    /**
+     * @param ServerId $id
+     *
+     * @return Server
+     */
     public function showServer(ServerId $id): Server
     {
         return Server::fromArray(
@@ -113,7 +134,9 @@ final class CloudSdk
     }
 
     /**
-     * use listOffers to acquire.
+     * @param ServerId $id
+     * @param OfferId  $offerId
+     *
      * @return array<mixed>
      */
     public function upgradeServer(ServerId $id, OfferId $offerId): array
@@ -127,6 +150,8 @@ final class CloudSdk
     }
 
     /**
+     * @param ServerId $id
+     *
      * @return array<mixed>
      */
     public function getConsoleUrl(ServerId $id): array
@@ -137,6 +162,8 @@ final class CloudSdk
     }
 
     /**
+     * @param ServerId $id
+     *
      * @return array<mixed>
      */
     public function detachRescueIso(ServerId $id): array
@@ -145,6 +172,8 @@ final class CloudSdk
     }
 
     /**
+     * @param ServerId $id
+     *
      * @return array<mixed>
      */
     public function attachRescueIso(ServerId $id): array
@@ -153,6 +182,49 @@ final class CloudSdk
     }
 
     /**
+     * @param string $serverId    Server UUID.
+     * @param string $offerId     UUID of disk offer.
+     * @param string $displayName A friendly name for the disk.
+     *
+     * @return array<mixed>
+     */
+    public function createDisk(string $serverId, string $offerId, string $displayName) : array
+    {
+        return $this->client->post(
+            "vms/{$serverId}/disks",
+            [
+                'offer_id' => $offerId,
+                'display_name' => $displayName,
+            ],
+            [],
+            201
+        );
+    }
+
+    /**
+     * @param string $serverId UUID of server.
+     *
+     * @return array<mixed>
+     */
+    public function listDisks(string $serverId) : array
+    {
+        return $this->client->get("vms/{$serverId}/disks");
+    }
+
+    /**
+     * @param string $serverId UUID of server.
+     * @param string $diskId   UUID of disk.
+     *
+     * @return array<mixed>
+     */
+    public function deleteDisk(string $serverId, string $diskId) : array
+    {
+        return $this->client->delete("vms/{$serverId}/disks/{$diskId}", [], 204);
+    }
+
+    /**
+     * @param ServerId $id
+     *
      * @return array<mixed>
      */
     public function rebootServer(ServerId $id): array
@@ -161,6 +233,8 @@ final class CloudSdk
     }
 
     /**
+     * @param ServerId $id
+     *
      * @return array<mixed>
      */
     public function stopServer(ServerId $id): array
@@ -169,6 +243,8 @@ final class CloudSdk
     }
 
     /**
+     * @param ServerId $id
+     *
      * @return array<mixed>
      */
     public function startServer(ServerId $id): array
@@ -177,6 +253,8 @@ final class CloudSdk
     }
 
     /**
+     * @param ServerId $id
+     *
      * @return array<mixed>
      */
     public function deleteServer(ServerId $id): array
@@ -184,9 +262,11 @@ final class CloudSdk
         return $this->client->delete("vms/{$id}", [], 204);
     }
 
-
     /**
      * @deprecated Some data from this endpoint will be added to the showServer endpoint.
+     *
+     * @param ServerId $id
+     *
      * @return array<mixed>
      */
     public function showDetails(ServerId $id): array
@@ -197,17 +277,22 @@ final class CloudSdk
 
     /**
      * Retrieve current resource usage of the account.
+     *
+     * @return Usage
      */
     public function getUsage(): Usage
     {
         return Usage::fromArray(
-            $this->client->get("usage")
+            $this->client->get('limits/current_usage')
         );
     }
 
     /**
      * List offers available for server deployments.
+     *
      * @deprecated Use listServerOffers or listDiskOffers instead.
+     *
+     * @return OfferCollection
      */
     public function listOffers(): OfferCollection
     {
@@ -226,6 +311,11 @@ final class CloudSdk
 
     /**
      * List offers available for server deployments.
+     *
+     * @param int $limit
+     * @param int $page
+     *
+     * @return OfferCollection
      */
     public function listServerOffers(int $limit = 50, int $page = 1): OfferCollection
     {
@@ -244,6 +334,10 @@ final class CloudSdk
 
     /**
      * List offers available for disk deployments.
+     * @param int $limit
+     * @param int $page
+     *
+     * @return OfferCollection
      */
     public function listDiskOffers(int $limit = 50, int $page = 1): OfferCollection
     {
@@ -260,6 +354,11 @@ final class CloudSdk
         );
     }
 
+    /**
+     * List datacenters available for server deployments.
+     *
+     * @return DataCenterCollection
+     */
     public function listDatacenters() : DataCenterCollection
     {
         return DataCenterCollection::fromArray(
@@ -267,6 +366,11 @@ final class CloudSdk
         );
     }
 
+    /**
+     * List templates available for server deployments.
+     *
+     * @return TemplateCollection
+     */
     public function listTemplates() : TemplateCollection
     {
         return TemplateCollection::fromArray(
@@ -274,6 +378,11 @@ final class CloudSdk
         );
     }
 
+    /**
+     * List networks available for server deployments.
+     *
+     * @return NetworkCollection
+     */
     public function listNetworks() : NetworkCollection
     {
         return NetworkCollection::fromArray(
