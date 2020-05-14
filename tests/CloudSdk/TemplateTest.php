@@ -2,14 +2,7 @@
 
 namespace SandwaveIo\CloudSdkPhp\Tests\CloudSdk;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Response;
-use Mockery;
 use SandwaveIo\CloudSdkPhp\Domain\TemplateCollection;
-use SandwaveIo\CloudSdkPhp\Exceptions\CloudHttpException;
-use SandwaveIo\CloudSdkPhp\CloudSdk;
-use SandwaveIo\CloudSdkPhp\Client\APIClient;
-use SandwaveIo\CloudSdkPhp\Support\UserDataFactory;
 
 class TemplatesTest extends AbstractCloudSdkCase
 {
@@ -31,6 +24,6 @@ class TemplatesTest extends AbstractCloudSdkCase
         foreach ($templates as $template) {
             $displayNames[] = $template->getDisplayName();
         }
-        $this->assertEquals('CentOS 8.1', $displayNames[5]);
+        $this->assertSame('CentOS 8.1', $displayNames[5]);
     }
 }
