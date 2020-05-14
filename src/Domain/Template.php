@@ -52,11 +52,7 @@ final class Template
      */
     public static function fromArray(array $data) : Template
     {
-        try {
-            $id = TemplateId::fromString($data['id']);
-        } catch (InvalidUuidStringException $e) {
-            throw new InvalidArgumentException('Could not instantiate id', 0, $e);
-        }
+        $id = TemplateId::fromString($data['id']);
 
         $createdAt = DateTimeImmutable::createFromFormat(DateTime::W3C, $data['created_at']);
         if (! $createdAt instanceof DateTimeImmutable) {
