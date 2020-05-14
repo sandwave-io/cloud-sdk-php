@@ -46,6 +46,8 @@ final class Disk
 
     /**
      * @param array<mixed> $data
+     *
+     * @throws InvalidArgumentException
      */
     public static function fromArray(array $data) : Disk
     {
