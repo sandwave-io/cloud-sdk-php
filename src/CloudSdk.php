@@ -45,7 +45,7 @@ final class CloudSdk
         ?UserDataFactory $userDataFactory = null,
         ?APIClient $client = null
     ) {
-        $this->userDataFactory = $userDataFactory ?? new UserDataFactory;
+        $this->userDataFactory = $userDataFactory ?? new UserDataFactory();
 
         $this->client = $client ??
             new APIClient(
@@ -53,7 +53,7 @@ final class CloudSdk
                 $accountId,
                 new Client(
                     [
-                        'base_uri' => $this->baseUrl,
+                        'base_uri' => APIClient::BASE_URL,
                     ]
                 )
             );
@@ -78,7 +78,7 @@ final class CloudSdk
         DatacenterId $datacenterId,
         ?NetworkId $networkId,
         array $sshKeys
-    ): ServerId {
+    ) : ServerId {
         $postData = [
             'display_name' => $hostname,
             'offer_id' => (string) $offerId,
@@ -102,7 +102,7 @@ final class CloudSdk
      *
      * @return ServerCollection
      */
-    public function listServers(int $limit = 50, int $page = 1): ServerCollection
+    public function listServers(int $limit = 50, int $page = 1) : ServerCollection
     {
         return ServerCollection::fromArray(
             $this->client->get(
@@ -110,7 +110,7 @@ final class CloudSdk
                 [
                     'include' => 'offer,datacenter',
                     'per_page' => $limit,
-                    'page' => $page
+                    'page' => $page,
                 ]
             )
         );
@@ -121,13 +121,13 @@ final class CloudSdk
      *
      * @return Server
      */
-    public function showServer(ServerId $id): Server
+    public function showServer(ServerId $id) : Server
     {
         return Server::fromArray(
             $this->client->get(
                 "vms/{$id}",
                 [
-                    'include' => 'offer,datacenter,disks.offer'
+                    'include' => 'offer,datacenter,disks.offer',
                 ]
             )
         );
@@ -139,12 +139,12 @@ final class CloudSdk
      *
      * @return array<mixed>
      */
-    public function upgradeServer(ServerId $id, OfferId $offerId): array
+    public function upgradeServer(ServerId $id, OfferId $offerId) : array
     {
         return $this->client->patch(
             "vms/{$id}",
             [
-                'offer_id' => (string) $offerId
+                'offer_id' => (string) $offerId,
             ]
         );
     }
@@ -154,7 +154,7 @@ final class CloudSdk
      *
      * @return array<mixed>
      */
-    public function getConsoleUrl(ServerId $id): array
+    public function getConsoleUrl(ServerId $id) : array
     {
         return $this->client->get(
             "vms/{$id}/console"
@@ -166,7 +166,7 @@ final class CloudSdk
      *
      * @return array<mixed>
      */
-    public function detachRescueIso(ServerId $id): array
+    public function detachRescueIso(ServerId $id) : array
     {
         return $this->client->post("vms/{$id}/detachRescue", [], [], 204);
     }
@@ -176,7 +176,7 @@ final class CloudSdk
      *
      * @return array<mixed>
      */
-    public function attachRescueIso(ServerId $id): array
+    public function attachRescueIso(ServerId $id) : array
     {
         return $this->client->post("vms/{$id}/attachRescue", [], [], 204);
     }
@@ -227,7 +227,7 @@ final class CloudSdk
      *
      * @return array<mixed>
      */
-    public function rebootServer(ServerId $id): array
+    public function rebootServer(ServerId $id) : array
     {
         return $this->client->post("vms/{$id}/reboot", [], [], 204);
     }
@@ -237,7 +237,7 @@ final class CloudSdk
      *
      * @return array<mixed>
      */
-    public function stopServer(ServerId $id): array
+    public function stopServer(ServerId $id) : array
     {
         return $this->client->post("vms/{$id}/stop", [], [], 204);
     }
@@ -247,7 +247,7 @@ final class CloudSdk
      *
      * @return array<mixed>
      */
-    public function startServer(ServerId $id): array
+    public function startServer(ServerId $id) : array
     {
         return $this->client->post("vms/{$id}/start", [], [], 204);
     }
@@ -257,7 +257,7 @@ final class CloudSdk
      *
      * @return array<mixed>
      */
-    public function deleteServer(ServerId $id): array
+    public function deleteServer(ServerId $id) : array
     {
         return $this->client->delete("vms/{$id}", [], 204);
     }
@@ -269,18 +269,17 @@ final class CloudSdk
      *
      * @return array<mixed>
      */
-    public function showDetails(ServerId $id): array
+    public function showDetails(ServerId $id) : array
     {
         return $this->client->get("vms/{$id}/details");
     }
-
 
     /**
      * Retrieve current resource usage of the account.
      *
      * @return Usage
      */
-    public function getUsage(): Usage
+    public function getUsage() : Usage
     {
         return Usage::fromArray(
             $this->client->get('limits/current_usage')
@@ -294,7 +293,7 @@ final class CloudSdk
      *
      * @return OfferCollection
      */
-    public function listOffers(): OfferCollection
+    public function listOffers() : OfferCollection
     {
         return OfferCollection::fromArray(
             $this->client->get(
@@ -303,7 +302,7 @@ final class CloudSdk
                     'filter[category]' => 'compute_servers',
                     'include' => 'categories',
                     'per_page' => 50,
-                    'page' => 1
+                    'page' => 1,
                 ]
             )
         );
@@ -317,7 +316,7 @@ final class CloudSdk
      *
      * @return OfferCollection
      */
-    public function listServerOffers(int $limit = 50, int $page = 1): OfferCollection
+    public function listServerOffers(int $limit = 50, int $page = 1) : OfferCollection
     {
         return OfferCollection::fromArray(
             $this->client->get(
@@ -326,7 +325,7 @@ final class CloudSdk
                     'filter[category]' => 'compute_servers',
                     'include' => 'categories',
                     'per_page' => $limit,
-                    'page' => $page
+                    'page' => $page,
                 ]
             )
         );
@@ -334,12 +333,13 @@ final class CloudSdk
 
     /**
      * List offers available for disk deployments.
+     *
      * @param int $limit
      * @param int $page
      *
      * @return OfferCollection
      */
-    public function listDiskOffers(int $limit = 50, int $page = 1): OfferCollection
+    public function listDiskOffers(int $limit = 50, int $page = 1) : OfferCollection
     {
         return OfferCollection::fromArray(
             $this->client->get(
@@ -348,7 +348,7 @@ final class CloudSdk
                     'filter[category]' => 'compute_disks',
                     'include' => 'categories',
                     'per_page' => $limit,
-                    'page' => $page
+                    'page' => $page,
                 ]
             )
         );

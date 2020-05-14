@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace SandwaveIo\CloudSdkPhp\Domain;
 
@@ -10,13 +10,13 @@ final class TemplateCollection extends AbstractCollection
         parent::__construct(...$items);
     }
 
-    public function current(): ?Template
+    public function current() : ?Template
     {
         return $this->items->current();
     }
 
     /** @param array<array> $data */
-    public static function fromArray(array $data): TemplateCollection
+    public static function fromArray(array $data) : TemplateCollection
     {
         $templates = [];
         foreach ($data as $item) {

@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace SandwaveIo\CloudSdkPhp\Domain;
 
@@ -13,13 +13,13 @@ final class Money
         $this->valueInCents = $valueInCents;
     }
 
-    public static function fromCents(int $cents): self
+    public function __toString() : string
     {
-        return new self($cents);
+        return sprintf('%.2f', $this->valueInCents / 100);
     }
 
-    public function __toString(): string
+    public static function fromCents(int $cents) : self
     {
-        return sprintf("%.2f", $this->valueInCents / 100);
+        return new self($cents);
     }
 }

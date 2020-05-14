@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace SandwaveIo\CloudSdkPhp\Domain;
 
@@ -57,15 +57,15 @@ final class Network
     /**
      * @param array<mixed> $data
      */
-    public static function fromArray(array $data): Network
+    public static function fromArray(array $data) : Network
     {
         $createdAt = DateTimeImmutable::createFromFormat(DateTime::W3C, $data['created_at']);
-        if (!$createdAt instanceof DateTimeImmutable) {
+        if (! $createdAt instanceof DateTimeImmutable) {
             throw new InvalidArgumentException('Cannot instantiate createdAt');
         }
 
         $updatedAt = DateTimeImmutable::createFromFormat(DateTime::W3C, $data['updated_at']);
-        if (!$updatedAt instanceof DateTimeImmutable) {
+        if (! $updatedAt instanceof DateTimeImmutable) {
             throw new InvalidArgumentException('Cannot instantiate updatedAt');
         }
 
@@ -81,42 +81,42 @@ final class Network
         );
     }
 
-    public function getId(): NetworkId
+    public function getId() : NetworkId
     {
         return $this->id;
     }
 
-    public function getDisplayName(): string
+    public function getDisplayName() : string
     {
         return $this->displayName;
     }
 
-    public function getDatacenterId(): DatacenterId
+    public function getDatacenterId() : DatacenterId
     {
         return $this->datacenterId;
     }
 
-    public function getManager(): string
+    public function getManager() : string
     {
         return $this->manager;
     }
 
-    public function getCidrIpv4(): string
+    public function getCidrIpv4() : string
     {
         return $this->cidrIpv4;
     }
 
-    public function getCidrIpv6(): string
+    public function getCidrIpv6() : string
     {
         return $this->cidrIpv6;
     }
 
-    public function getCreatedAt(): DateTimeInterface
+    public function getCreatedAt() : DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function getUpdatedAt(): DateTimeInterface
+    public function getUpdatedAt() : DateTimeInterface
     {
         return $this->updatedAt;
     }

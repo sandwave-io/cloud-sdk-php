@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace SandwaveIo\CloudSdkPhp\Domain;
 
@@ -10,13 +10,13 @@ final class OfferCollection extends AbstractCollection
         parent::__construct(...$items);
     }
 
-    public function current(): ?Offer
+    public function current() : ?Offer
     {
         return $this->items->current();
     }
 
     /** @param array<array> $data */
-    public static function fromArray(array $data): OfferCollection
+    public static function fromArray(array $data) : OfferCollection
     {
         $offers = [];
 

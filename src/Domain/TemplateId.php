@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace SandwaveIo\CloudSdkPhp\Domain;
 
@@ -8,7 +8,7 @@ use Ramsey\Uuid\Exception\InvalidUuidStringException;
 final class TemplateId extends AbstractId
 {
     /** @throws InvalidUuidStringException */
-    public static function fromString(string $value): TemplateId
+    public static function fromString(string $value) : TemplateId
     {
         return new TemplateId($value);
     }
