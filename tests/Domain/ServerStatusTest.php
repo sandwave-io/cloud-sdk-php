@@ -12,19 +12,19 @@ final class ServerStatusTest extends TestCase
     public function testCanConstruct() : void
     {
         $running = ServerStatus::running();
-        $this->assertEquals($running, ServerStatus::fromString((string) $running));
+        $this->assertTrue(ServerStatus::fromString((string) $running)->equals($running));
 
         $stopping = ServerStatus::stopping();
-        $this->assertEquals($stopping, ServerStatus::fromString((string) $stopping));
+        $this->assertTrue(ServerStatus::fromString((string) $stopping)->equals($stopping));
 
         $stopped = ServerStatus::stopped();
-        $this->assertEquals($stopped, ServerStatus::fromString((string) $stopped));
+        $this->assertTrue(ServerStatus::fromString((string) $stopped)->equals($stopped));
 
         $starting = ServerStatus::starting();
-        $this->assertEquals($starting, ServerStatus::fromString((string) $starting));
+        $this->assertTrue(ServerStatus::fromString((string) $starting)->equals($starting));
 
         $rebooting = ServerStatus::rebooting();
-        $this->assertEquals($rebooting, ServerStatus::fromString((string) $rebooting));
+        $this->assertTrue(ServerStatus::fromString((string) $rebooting)->equals($rebooting));
     }
 
     public function testFromStringThrowsException() : void

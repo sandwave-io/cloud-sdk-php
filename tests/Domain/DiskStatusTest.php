@@ -12,22 +12,22 @@ final class DiskStatusTest extends TestCase
     public function testCanConstruct() : void
     {
         $creating = DiskStatus::creating();
-        $this->assertEquals($creating, DiskStatus::fromString((string) $creating));
+        $this->assertTrue(DiskStatus::fromString((string) $creating)->equals($creating));
 
         $allocated = DiskStatus::allocated();
-        $this->assertEquals($allocated, DiskStatus::fromString((string) $allocated));
+        $this->assertTrue(DiskStatus::fromString((string) $allocated)->equals($allocated));
 
         $ready = DiskStatus::ready();
-        $this->assertEquals($ready, DiskStatus::fromString((string) $ready));
+        $this->assertTrue(DiskStatus::fromString((string) $ready)->equals($ready));
 
         $destroy = DiskStatus::destroy();
-        $this->assertEquals($destroy, DiskStatus::fromString((string) $destroy));
+        $this->assertTrue(DiskStatus::fromString((string) $destroy)->equals($destroy));
 
         $expunging = DiskStatus::expunging();
-        $this->assertEquals($expunging, DiskStatus::fromString((string) $expunging));
+        $this->assertTrue(DiskStatus::fromString((string) $expunging)->equals($expunging));
 
         $expunged = DiskStatus::expunged();
-        $this->assertEquals($expunged, DiskStatus::fromString((string) $expunged));
+        $this->assertTrue(DiskStatus::fromString((string) $expunged)->equals($expunged));
     }
 
     public function testFromStringThrowsException() : void
