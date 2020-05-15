@@ -1,9 +1,25 @@
-<?php declare(strict_types = 1);
+<?php /** @noinspection ALL */
+declare(strict_types = 1);
 
 namespace SandwaveIo\CloudSdkPhp;
 
 use GuzzleHttp\Client;
 use SandwaveIo\CloudSdkPhp\Client\APIClient;
+use SandwaveIo\CloudSdkPhp\Domain\AccountId;
+use SandwaveIo\CloudSdkPhp\Domain\DataCenterCollection;
+use SandwaveIo\CloudSdkPhp\Domain\DatacenterId;
+use SandwaveIo\CloudSdkPhp\Domain\DiskCollection;
+use SandwaveIo\CloudSdkPhp\Domain\DiskId;
+use SandwaveIo\CloudSdkPhp\Domain\NetworkCollection;
+use SandwaveIo\CloudSdkPhp\Domain\NetworkId;
+use SandwaveIo\CloudSdkPhp\Domain\OfferCollection;
+use SandwaveIo\CloudSdkPhp\Domain\OfferId;
+use SandwaveIo\CloudSdkPhp\Domain\Server;
+use SandwaveIo\CloudSdkPhp\Domain\ServerCollection;
+use SandwaveIo\CloudSdkPhp\Domain\ServerId;
+use SandwaveIo\CloudSdkPhp\Domain\TemplateCollection;
+use SandwaveIo\CloudSdkPhp\Domain\TemplateId;
+use SandwaveIo\CloudSdkPhp\Domain\Usage;
 use SandwaveIo\CloudSdkPhp\Exceptions\CloudHttpException;
 use SandwaveIo\CloudSdkPhp\Support\UserDataFactory;
 
@@ -19,252 +35,203 @@ final class CloudSdk
      */
     private $userDataFactory;
 
-    /**
-     * CloudSdk constructor.
-     *
-     * @param string               $apiKey
-     * @param string               $accountId
-     * @param UserDataFactory|null $userDataFactory
-     * @param APIClient|null       $client
-     */
-    public function __construct(string $apiKey, string $accountId, ?UserDataFactory $userDataFactory= null, ?APIClient $client = null)
-    {
+    public function __construct(
+        string $apiKey,
+        AccountId $accountId,
+        ?UserDataFactory $userDataFactory = null,
+        ?APIClient $client = null
+    ) {
         $this->userDataFactory = $userDataFactory ?? new UserDataFactory();
 
-        $this->client = $client ?? new APIClient(
-            $apiKey,
-            $accountId,
-            new Client([
-                    'base_uri' => 'https://api.pcextreme.nl/v2/compute/',
-                ])
-        );
+        $this->client = $client ??
+            new APIClient(
+                $apiKey,
+                $accountId,
+                new Client(
+                    [
+                        'base_uri' => APIClient::BASE_URL,
+                    ]
+                )
+            );
     }
 
     /**
-     * @param string        $hostname
-     * @param string        $password
-     * @param string        $offerId
-     * @param string        $templateId
-     * @param string        $datacenterId
      * @param array<string> $sshKeys
-     *
-     * @return array<mixed>
      */
     public function createServer(
         string $hostname,
         string $password,
-        string $offerId,
-        string $templateId,
-        string $datacenterId,
+        OfferId $offerId,
+        TemplateId $templateId,
+        DatacenterId $datacenterId,
+        ?NetworkId $networkId,
         array $sshKeys
-    ) : array {
-        return $this->client->post(
-            'vms',
-            [
-                'display_name'  => $hostname,
-                'offer_id'      => $offerId,
-                'datacenter_id' => $datacenterId,
-                'template_id'   => $templateId,
-                'user_data'     => $this->userDataFactory->generateUserData($hostname, $password, $sshKeys),
-            ]
+    ) : ServerId {
+        $postData = [
+            'display_name' => $hostname,
+            'offer_id' => (string) $offerId,
+            'datacenter_id' => (string) $datacenterId,
+            'template_id' => (string) $templateId,
+            'user_data' => $this->userDataFactory->generateUserData($hostname, $password, $sshKeys),
+        ];
+
+        if ($networkId instanceof NetworkId) {
+            $postData['network_id'] = (string) $networkId;
+        }
+
+        $data = $this->client->post('vms', $postData);
+
+        if (! array_key_exists('id', $data)) {
+            throw new CloudHttpException('Could not resolve ID of created server.');
+        }
+
+        return ServerId::fromString($data['id']);
+    }
+
+    public function listServers(int $limit = 50, int $page = 1) : ServerCollection
+    {
+        return ServerCollection::fromArray(
+            $this->client->get(
+                'vms',
+                [
+                    'include' => 'offer,datacenter',
+                    'per_page' => $limit,
+                    'page' => $page,
+                ]
+            )
         );
     }
 
-    /**
-     * @param int $limit
-     * @param int $page
-     *
-     * @return array<mixed>
-     */
-    public function listServers(int $limit = 50, int $page = 1) : array
+    public function showServer(ServerId $id) : Server
     {
-        return $this->client->get(
-            'vms',
-            [
-                'include' => 'offer,datacenter',
-                'limit'           => $limit,
-                'page'            => $page,
-            ]
+        return Server::fromArray(
+            $this->client->get(
+                "vms/{$id}",
+                [
+                    'include' => 'offer,datacenter,disks.offer',
+                ]
+            )
         );
     }
 
-    /**
-     * @param string $id UUID of server.
-     *
-     * @return array<mixed>
-     */
-    public function showServer(string $id) : array
+    public function upgradeServer(ServerId $id, OfferId $offerId) : void
     {
-        return $this->client->get(
+        $this->client->patch(
             "vms/{$id}",
             [
-                'include' => 'offer,datacenter,disks.offer',
+                'offer_id' => (string) $offerId,
             ]
         );
     }
 
-    /**
-     * @param string $id      UUID of server.
-     * @param string $offerId UUID of offer, use listOffers to acquire.
-     *
-     * @return array<mixed>
-     */
-    public function upgradeServer(string $id, string $offerId) : array
+    public function getConsoleUrl(ServerId $id) : string
     {
-        return $this->client->patch(
-            "vms/{$id}",
-            [
-                'offer_id' => $offerId,
-            ]
-        );
-    }
-
-    /**
-     * @param string $id UUID of server.
-     *
-     * @return array<mixed>
-     */
-    public function getConsoleUrl(string $id) : array
-    {
-        return $this->client->get(
+        $data = $this->client->get(
             "vms/{$id}/console"
         );
+
+        if (! array_key_exists('url', $data)) {
+            throw new CloudHttpException('Could not get console URL.');
+        }
+
+        return $data['url'];
     }
 
-    /**
-     * @param string $id UUID of server.
-     *
-     * @return array<mixed>
-     */
-    public function detachRescueIso(string $id) : array
+    public function detachRescueIso(ServerId $id) : void
     {
-        return $this->client->post("vms/{$id}/detachRescue", [], [], 204);
+        $this->client->post("vms/{$id}/detachRescue", [], [], 204);
     }
 
-    /**
-     * @param string $id UUID of server.
-     *
-     * @return array<mixed>
-     */
-    public function attachRescueIso(string $id) : array
+    public function attachRescueIso(ServerId $id) : void
     {
-        return $this->client->post("vms/{$id}/attachRescue", [], [], 204);
+        $this->client->post("vms/{$id}/attachRescue", [], [], 204);
     }
 
-    /**
-     * @param string $serverId    Server UUID.
-     * @param string $offerId     UUID of disk offer.
-     * @param string $displayName A friendly name for the disk.
-     *
-     * @return array<mixed>
-     */
-    public function createDisk(string $serverId, string $offerId, string $displayName) : array
+    public function createDisk(ServerId $serverId, OfferId $offerId, string $displayName) : DiskId
     {
-        return $this->client->post(
+        $data = $this->client->post(
             "vms/{$serverId}/disks",
             [
-                'offer_id' => $offerId,
+                'offer_id' => (string) $offerId,
                 'display_name' => $displayName,
             ],
             [],
             201
         );
+
+        if (! array_key_exists('id', $data)) {
+            throw new CloudHttpException('Could not resolve ID of created disk.');
+        }
+
+        return DiskId::fromString($data['id']);
     }
 
-    /**
-     * @param string $serverId UUID of server.
-     *
-     * @return array<mixed>
-     */
-    public function listDisks(string $serverId) : array
+    public function listDisks(ServerId $serverId) : DiskCollection
     {
-        return $this->client->get("vms/{$serverId}/disks");
+        return DiskCollection::fromArray(
+            $this->client->get("vms/{$serverId}/disks")
+        );
     }
 
-    /**
-     * @param string $serverId UUID of server.
-     * @param string $diskId   UUID of disk.
-     *
-     * @return array<mixed>
-     */
-    public function deleteDisk(string $serverId, string $diskId) : array
+    public function deleteDisk(ServerId $serverId, DiskId $diskId) : void
     {
-        return $this->client->delete("vms/{$serverId}/disks/{$diskId}", [], 204);
+        $this->client->delete("vms/{$serverId}/disks/{$diskId}", [], 204);
     }
 
-    /**
-     * @param string $id UUID of server.
-     *
-     * @return array<mixed>
-     */
-    public function rebootServer(string $id) : array
+    public function rebootServer(ServerId $id) : void
     {
-        return $this->client->post("vms/{$id}/reboot", [], [], 204);
+        $this->client->post("vms/{$id}/reboot", [], [], 204);
     }
 
-    /**
-     * @param string $id UUID of server.
-     *
-     * @return array<mixed>
-     */
-    public function stopServer(string $id) : array
+    public function stopServer(ServerId $id) : void
     {
-        return $this->client->post("vms/{$id}/stop", [], [], 204);
+        $this->client->post("vms/{$id}/stop", [], [], 204);
     }
 
-    /**
-     * @param string $id UUID of server.
-     *
-     * @return array<mixed>
-     */
-    public function startServer(string $id) : array
+    public function startServer(ServerId $id) : void
     {
-        return $this->client->post("vms/{$id}/start", [], [], 204);
+        $this->client->post("vms/{$id}/start", [], [], 204);
     }
 
-    /**
-     * @param string $id UUID of server.
-     *
-     * @return array<mixed>
-     */
-    public function deleteServer(string $id) : array
+    public function deleteServer(ServerId $id) : void
     {
-        return $this->client->delete("vms/{$id}", [], 204);
+        $this->client->delete("vms/{$id}", [], 204);
     }
 
     /**
      * @deprecated Some data from this endpoint will be added to the showServer endpoint.
      *
-     * @param string $id UUID of server.
-     *
      * @return array<mixed>
      */
-    public function showDetails(string $id) : array
+    public function showDetails(ServerId $id) : array
     {
         return $this->client->get("vms/{$id}/details");
     }
 
     /**
      * Retrieve current resource usage of the account.
-     *
-     * @return array<mixed>
      */
-    public function getUsage()
+    public function getUsage() : Usage
     {
-        return $this->client->get('limits/current_usage');
+        return Usage::fromArray(
+            $this->client->get('limits/current_usage')
+        );
     }
 
     /**
      * Check if an offer can be deployed under the account.
-     *
-     * @param string $offerId
-     *
-     * @return bool
      */
-    public function canDeployOffer(string $offerId) : bool
+    public function canDeployOffer(OfferId $offerId) : bool
     {
         try {
-            $this->client->get('limits/can_deploy', [], 204);
+            $this->client->get(
+                'limits/can_deploy',
+                [
+                    'offer_id' => (string) $offerId,
+                ],
+                204
+            );
+
             return true;
         } catch (CloudHttpException $e) {
             return false;
@@ -275,82 +242,76 @@ final class CloudSdk
      * List offers available for server deployments.
      *
      * @deprecated Use listServerOffers or listDiskOffers instead.
-     *
-     * @return array<mixed>
      */
-    public function listOffers() : array
+    public function listOffers() : OfferCollection
     {
-        return $this->client->get('/products/offers', [
-            'filter[category]'  => 'compute_servers',
-            'include'           => 'categories',
-            'limit'             => 50,
-            'page'              => 1,
-        ]);
+        return OfferCollection::fromArray(
+            $this->client->get(
+                '/products/offers',
+                [
+                    'filter[category]' => 'compute_servers',
+                    'include' => 'categories',
+                    'per_page' => 50,
+                    'page' => 1,
+                ]
+            )
+        );
     }
 
     /**
      * List offers available for server deployments.
-     *
-     * @param int $limit
-     * @param int $page
-     *
-     * @return array<mixed>
      */
-    public function listServerOffers(int $limit = 50, int $page = 1) : array
+    public function listServerOffers(int $limit = 50, int $page = 1) : OfferCollection
     {
-        return $this->client->get('/products/offers', [
-            'filter[category]'  => 'compute_servers',
-            'include'           => 'categories',
-            'limit'             => $limit,
-            'page'              => $page,
-        ]);
+        return OfferCollection::fromArray(
+            $this->client->get(
+                '/products/offers',
+                [
+                    'filter[category]' => 'compute_servers',
+                    'include' => 'categories',
+                    'per_page' => $limit,
+                    'page' => $page,
+                ]
+            )
+        );
     }
 
     /**
      * List offers available for disk deployments.
-     *
-     * @param int $limit
-     * @param int $page
-     *
-     * @return array<mixed>
      */
-    public function listDiskOffers(int $limit = 50, int $page = 1) : array
+    public function listDiskOffers(int $limit = 50, int $page = 1) : OfferCollection
     {
-        return $this->client->get('/products/offers', [
-            'filter[category]'  => 'compute_disks',
-            'include'           => 'categories',
-            'limit'             => $limit,
-            'page'              => $page,
-        ]);
+        return OfferCollection::fromArray(
+            $this->client->get(
+                '/products/offers',
+                [
+                    'filter[category]' => 'compute_disks',
+                    'include' => 'categories',
+                    'per_page' => $limit,
+                    'page' => $page,
+                ]
+            )
+        );
     }
 
-    /**
-     * List datacenters available for server deployments.
-     *
-     * @return array<mixed>
-     */
-    public function listDatacenters() : array
+    public function listDatacenters() : DataCenterCollection
     {
-        return $this->client->get('datacenters');
+        return DataCenterCollection::fromArray(
+            $this->client->get('datacenters')
+        );
     }
 
-    /**
-     * List templates available for server deployments.
-     *
-     * @return array<mixed>
-     */
-    public function listTemplates() : array
+    public function listTemplates() : TemplateCollection
     {
-        return $this->client->get('templates');
+        return TemplateCollection::fromArray(
+            $this->client->get('templates')
+        );
     }
 
-    /**
-     * List networks available for server deployments.
-     *
-     * @return array<mixed>
-     */
-    public function listNetworks() : array
+    public function listNetworks() : NetworkCollection
     {
-        return $this->client->get('networks');
+        return NetworkCollection::fromArray(
+            $this->client->get('networks')
+        );
     }
 }

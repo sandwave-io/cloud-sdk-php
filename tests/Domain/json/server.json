@@ -1,0 +1,66 @@
+{
+  "id": "6a6256cc-e6ff-41d2-9894-95a066d2b7a4",
+  "display_name": "web01.seasidehosting.nl",
+  "status": "Running",
+  "rescue_iso_attached": false,
+  "has_security_group": true,
+  "created_at": "2020-03-04T13:48:35+00:00",
+  "updated_at": "2020-03-30T11:01:17+00:00",
+  "offer": {
+    "data": {
+      "id": "ade61745-e399-401e-bdb4-b25487143e30",
+      "account_id": null,
+      "billing_period": 1,
+      "price": 500,
+      "type": "usage",
+      "sku": "compute_standard_1gb",
+      "name": "Standard 1GB server",
+      "description": "Standard 1GB server",
+      "show_in_store": true,
+      "specifications": {
+        "cpu": {
+          "value": "1",
+          "unit": "amount"
+        },
+        "memory": {
+          "value": "1",
+          "unit": "GB"
+        },
+        "storage": {
+          "value": "25",
+          "unit": "GB"
+        },
+        "storage_type": {
+          "value": "standard",
+          "unit": "type"
+        },
+        "legacy_prod": {
+          "value": "13",
+          "unit": "id"
+        },
+        "legacy_prodid": {
+          "value": "155",
+          "unit": "id"
+        },
+        "network_type": {
+          "value": "regular",
+          "unit": "type"
+        }
+      },
+      "created_at": "2020-04-02T09:50:13+00:00",
+      "updated_at": "2020-04-02T09:50:13+00:00"
+    }
+  },
+  "datacenter": {
+    "data": {
+      "id": "5427178b-fc9b-4561-8a8b-fb45353fdb37",
+      "name": "ams01",
+      "description": "Tele 2",
+      "city": "Amsterdam",
+      "country": "NL",
+      "timezone": "Europe/Amsterdam",
+      "standard_enabled": false,
+      "ha_enabled": false
+    }
+  }
+}
