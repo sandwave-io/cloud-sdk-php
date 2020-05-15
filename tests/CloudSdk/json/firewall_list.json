@@ -1,0 +1,121 @@
+{
+  "data": {
+    "name": "SG-web01seasidehostingnl_2020_03_04_134837",
+    "egressrule": [
+      {
+        "ruleid": "2bbb994d-e8eb-4c83-a534-457dd0e3be97",
+        "protocol": "tcp",
+        "startport": 1,
+        "endport": 24,
+        "cidr": "0.0.0.0/0",
+        "tags": []
+      },
+      {
+        "ruleid": "964a3292-1723-430f-ab2d-6d3687080da8",
+        "protocol": "tcp",
+        "startport": 26,
+        "endport": 65535,
+        "cidr": "0.0.0.0/0",
+        "tags": []
+      },
+      {
+        "ruleid": "3ff364ff-416e-48be-adcb-647278911048",
+        "protocol": "udp",
+        "startport": 1,
+        "endport": 65535,
+        "cidr": "0.0.0.0/0",
+        "tags": []
+      },
+      {
+        "ruleid": "5e758953-9564-4ddc-a51f-f0c44027c370",
+        "protocol": "udp",
+        "startport": 1,
+        "endport": 65535,
+        "cidr": "::/0",
+        "tags": []
+      },
+      {
+        "ruleid": "37089eaf-386b-4c19-9bd8-80f37b2754e7",
+        "protocol": "icmp",
+        "icmptype": -1,
+        "icmpcode": -1,
+        "cidr": "0.0.0.0/0",
+        "tags": []
+      },
+      {
+        "ruleid": "7c9c74db-f8f9-4fa6-a1c0-df4e8736e8a8",
+        "protocol": "icmp",
+        "icmptype": -1,
+        "icmpcode": -1,
+        "cidr": "::/0",
+        "tags": []
+      },
+      {
+        "ruleid": "61f621dd-2612-4990-be79-835fe7215077",
+        "protocol": "tcp",
+        "startport": 1,
+        "endport": 65535,
+        "cidr": "::/0",
+        "tags": []
+      },
+      {
+        "ruleid": "e672b217-60f1-4dcf-bfdd-e29ac16168cc",
+        "protocol": "tcp",
+        "startport": 1,
+        "endport": 25,
+        "cidr": "0.0.0.0/0",
+        "tags": []
+      }
+    ],
+    "ingressrule": [
+      {
+        "ruleid": "d7780976-d71e-496f-b647-ff8ed37a0dc5",
+        "protocol": "tcp",
+        "startport": 1,
+        "endport": 65535,
+        "cidr": "0.0.0.0/0",
+        "tags": []
+      },
+      {
+        "ruleid": "15303084-053f-4e9c-9b2f-735ff4a9564b",
+        "protocol": "tcp",
+        "startport": 1,
+        "endport": 65535,
+        "cidr": "::/0",
+        "tags": []
+      },
+      {
+        "ruleid": "c79bc234-1733-49a6-9ebe-07d5c7632da4",
+        "protocol": "udp",
+        "startport": 1,
+        "endport": 65535,
+        "cidr": "0.0.0.0/0",
+        "tags": []
+      },
+      {
+        "ruleid": "f5e94b8b-a5b0-403e-a921-8f8e22b66462",
+        "protocol": "udp",
+        "startport": 1,
+        "endport": 65535,
+        "cidr": "::/0",
+        "tags": []
+      },
+      {
+        "ruleid": "6c430438-683c-49f4-aad2-948a05fbd0ce",
+        "protocol": "icmp",
+        "icmptype": -1,
+        "icmpcode": -1,
+        "cidr": "0.0.0.0/0",
+        "tags": []
+      },
+      {
+        "ruleid": "a28ed592-5301-489c-a42b-f6ac1e035516",
+        "protocol": "icmp",
+        "icmptype": 128,
+        "icmpcode": 0,
+        "cidr": "::/0",
+        "tags": []
+      }
+    ]
+  }
+}
