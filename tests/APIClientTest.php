@@ -7,7 +7,9 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
+use Ramsey\Uuid\Uuid;
 use SandwaveIo\CloudSdkPhp\Client\APIClient;
+use SandwaveIo\CloudSdkPhp\Domain\AccountId;
 use SandwaveIo\CloudSdkPhp\Exceptions\CloudHttpException;
 use SandwaveIo\CloudSdkPhp\Exceptions\CloudNotFoundException;
 
@@ -15,7 +17,7 @@ class APIClientTest extends TestCase
 {
     public function test_client_constructor()
     {
-        $client = new APIClient('this-is-my-api-key', 'this-is-my-account-id');
+        $client = new APIClient('this-is-my-api-key', AccountId::fromString(Uuid::NIL));
         $this->assertNotNull($client);
     }
 
@@ -24,7 +26,7 @@ class APIClientTest extends TestCase
         $handlerStack = HandlerStack::create(new MockHandler([
             new Response(200, [], '{"data": {"foo": "bar"}}'),
         ]));
-        $client = new APIClient('this-is-my-api-key', 'this-is-my-account-id', new Client(['handler' => $handlerStack]));
+        $client = new APIClient('this-is-my-api-key', AccountId::fromString(Uuid::NIL), new Client(['handler' => $handlerStack]));
 
         $response = $client->get('/test');
         $this->assertSame(['foo' => 'bar'], $response);
@@ -35,7 +37,7 @@ class APIClientTest extends TestCase
         $handlerStack = HandlerStack::create(new MockHandler([
             new Response(404, [], '{"data": null}'),
         ]));
-        $client = new APIClient('this-is-my-api-key', 'this-is-my-account-id', new Client(['handler' => $handlerStack]));
+        $client = new APIClient('this-is-my-api-key', AccountId::fromString(Uuid::NIL), new Client(['handler' => $handlerStack]));
 
         $this->expectException(CloudNotFoundException::class);
         $client->get('/test');
@@ -46,7 +48,7 @@ class APIClientTest extends TestCase
         $handlerStack = HandlerStack::create(new MockHandler([
             new Response(200, [], '{"data": dit is geen valide json 123 😂}'),
         ]));
-        $client = new APIClient('this-is-my-api-key', 'this-is-my-account-id', new Client(['handler' => $handlerStack]));
+        $client = new APIClient('this-is-my-api-key', AccountId::fromString(Uuid::NIL), new Client(['handler' => $handlerStack]));
 
         $this->expectException(CloudHttpException::class);
         $client->get('/test');
@@ -57,7 +59,7 @@ class APIClientTest extends TestCase
         $handlerStack = HandlerStack::create(new MockHandler([
             new Response(200, ['Content-Length' => 0], ''),
         ]));
-        $client = new APIClient('this-is-my-api-key', 'this-is-my-account-id', new Client(['handler' => $handlerStack]));
+        $client = new APIClient('this-is-my-api-key', AccountId::fromString(Uuid::NIL), new Client(['handler' => $handlerStack]));
 
         $response = $client->get('/test');
         $this->assertSame([], $response);
@@ -68,7 +70,7 @@ class APIClientTest extends TestCase
         $handlerStack = HandlerStack::create(new MockHandler([
             new Response(201, [], '{"data": {"foo": "bar"}}'),
         ]));
-        $client = new APIClient('this-is-my-api-key', 'this-is-my-account-id', new Client(['handler' => $handlerStack]));
+        $client = new APIClient('this-is-my-api-key', AccountId::fromString(Uuid::NIL), new Client(['handler' => $handlerStack]));
 
         $response = $client->post('/test');
         $this->assertSame(['foo' => 'bar'], $response);
@@ -79,7 +81,7 @@ class APIClientTest extends TestCase
         $handlerStack = HandlerStack::create(new MockHandler([
             new Response(204, [], '{"data": {"foo": "bar"}}'),
         ]));
-        $client = new APIClient('this-is-my-api-key', 'this-is-my-account-id', new Client(['handler' => $handlerStack]));
+        $client = new APIClient('this-is-my-api-key', AccountId::fromString(Uuid::NIL), new Client(['handler' => $handlerStack]));
 
         $response = $client->put('/test');
         $this->assertSame(['foo' => 'bar'], $response);
@@ -90,7 +92,7 @@ class APIClientTest extends TestCase
         $handlerStack = HandlerStack::create(new MockHandler([
             new Response(204, [], '{"data": {"foo": "bar"}}'),
         ]));
-        $client = new APIClient('this-is-my-api-key', 'this-is-my-account-id', new Client(['handler' => $handlerStack]));
+        $client = new APIClient('this-is-my-api-key', AccountId::fromString(Uuid::NIL), new Client(['handler' => $handlerStack]));
 
         $response = $client->delete('/test');
         $this->assertSame(['foo' => 'bar'], $response);
@@ -101,7 +103,7 @@ class APIClientTest extends TestCase
         $handlerStack = HandlerStack::create(new MockHandler([
             new Response(204, [], '{"data": {"foo": "bar"}}'),
         ]));
-        $client = new APIClient('this-is-my-api-key', 'this-is-my-account-id', new Client(['handler' => $handlerStack]));
+        $client = new APIClient('this-is-my-api-key', AccountId::fromString(Uuid::NIL), new Client(['handler' => $handlerStack]));
 
         $response = $client->patch('/test');
         $this->assertSame(['foo' => 'bar'], $response);

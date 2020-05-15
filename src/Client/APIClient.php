@@ -4,18 +4,21 @@ namespace SandwaveIo\CloudSdkPhp\Client;
 
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
+use SandwaveIo\CloudSdkPhp\Domain\AccountId;
 use SandwaveIo\CloudSdkPhp\Exceptions\CloudHttpException;
 use SandwaveIo\CloudSdkPhp\Exceptions\CloudNotFoundException;
 
 final class APIClient
 {
+    const BASE_URL = 'https://api.pcextreme.nl/v2/compute/';
+
     /**
      * @var string
      */
     private $apiKey;
 
     /**
-     * @var string
+     * @var AccountId
      */
     private $accountId;
 
@@ -24,12 +27,12 @@ final class APIClient
      */
     private $client;
 
-    public function __construct(string $apiKey, string $accountId, ?Client $client = null)
+    public function __construct(string $apiKey, AccountId $accountId, ?Client $client = null)
     {
         $this->apiKey = $apiKey;
         $this->accountId = $accountId;
         $this->client = $client ?? new Client([
-            'base_uri' => 'https://api.pcextreme.nl/v2/',
+            'base_uri' => self::BASE_URL,
         ]);
     }
 
@@ -57,8 +60,12 @@ final class APIClient
      *
      * @return array<mixed>
      */
-    public function post(string $endpoint, array $body = [], array $queryParameters = [], int $expectedResponse = 201) : array
-    {
+    public function post(
+        string $endpoint,
+        array $body = [],
+        array $queryParameters = [],
+        int $expectedResponse = 201
+    ) : array {
         $response = $this->client->post($endpoint . $this->queryParameters($queryParameters), [
             'headers' => $this->buildHeaders(),
             'http_errors' => false,
@@ -75,8 +82,12 @@ final class APIClient
      *
      * @return array<mixed>
      */
-    public function patch(string $endpoint, array $body = [], array $queryParameters = [], int $expectedResponse = 204) : array
-    {
+    public function patch(
+        string $endpoint,
+        array $body = [],
+        array $queryParameters = [],
+        int $expectedResponse = 204
+    ) : array {
         $response = $this->client->patch($endpoint . $this->queryParameters($queryParameters), [
             'headers' => $this->buildHeaders(),
             'http_errors' => false,
@@ -93,8 +104,12 @@ final class APIClient
      *
      * @return array<mixed>
      */
-    public function put(string $endpoint, array $body = [], array $queryParameters = [], int $expectedResponse = 204) : array
-    {
+    public function put(
+        string $endpoint,
+        array $body = [],
+        array $queryParameters = [],
+        int $expectedResponse = 204
+    ) : array {
         $response = $this->client->put($endpoint . $this->queryParameters($queryParameters), [
             'headers' => $this->buildHeaders(),
             'http_errors' => false,
@@ -155,7 +170,9 @@ final class APIClient
             throw new CloudHttpException("Could not parse JSON reponse body:\n" . $response->getBody());
         }
 
-        return ($response->getStatusCode() === $expectedResponse && array_key_exists('data', $json)) ? $json['data'] : $json;
+        return ($response->getStatusCode() === $expectedResponse && array_key_exists('data', $json)) ?
+            $json['data'] :
+            $json;
     }
 
     /**
@@ -180,8 +197,14 @@ final class APIClient
      */
     private function queryParameters(array $parameters) : string
     {
-        return '?' . http_build_query(
-            array_merge($parameters, ['account_id' => $this->accountId])
-        );
+        return '?' .
+            http_build_query(
+                array_merge(
+                    $parameters,
+                    [
+                        'account_id' => (string) $this->accountId,
+                    ]
+                )
+            );
     }
 }

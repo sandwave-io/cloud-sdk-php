@@ -2,6 +2,8 @@
 
 namespace SandwaveIo\CloudSdkPhp\Tests\CloudSdk;
 
+use SandwaveIo\CloudSdkPhp\Domain\NetworkCollection;
+
 class NetworkTest extends AbstractCloudSdkCase
 {
     public function test_list_templates()
@@ -13,10 +15,11 @@ class NetworkTest extends AbstractCloudSdkCase
             'networks'
         );
 
-        $json = $sdk->listNetworks();
+        $networks = $sdk->listNetworks();
 
-        $this->assertTrue(is_array($json));
-        $this->assertNotSame([], $json);
-        $this->assertArrayContains('manager', 'man.zone03.ams02.cldin.net', $json);
+        $this->assertInstanceOf(NetworkCollection::class, $networks);
+        $this->assertNotSame(0, $networks->count());
+
+        $this->assertSame('man.zone03.ams02.cldin.net', $networks->current()->getManager());
     }
 }
