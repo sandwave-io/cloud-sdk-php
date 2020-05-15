@@ -6,12 +6,11 @@ namespace SandwaveIo\CloudSdkPhp\Tests\Domain;
 use DateTime;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use SandwaveIo\CloudSdkPhp\Domain\Network;
 use SandwaveIo\CloudSdkPhp\Domain\Template;
 
 final class TemplateTest extends TestCase
 {
-    public function testCanConstruct(): void
+    public function testCanConstruct() : void
     {
         $template = Template::fromArray(
             json_decode(

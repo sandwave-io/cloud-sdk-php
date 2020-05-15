@@ -9,7 +9,7 @@ use SandwaveIo\CloudSdkPhp\Domain\ServerStatus;
 
 final class ServerStatusTest extends TestCase
 {
-    public function testCanConstruct(): void
+    public function testCanConstruct() : void
     {
         $running = ServerStatus::running();
         $this->assertEquals($running, ServerStatus::fromString((string) $running));
@@ -27,7 +27,7 @@ final class ServerStatusTest extends TestCase
         $this->assertEquals($rebooting, ServerStatus::fromString((string) $rebooting));
     }
 
-    public function testFromStringThrowsException(): void
+    public function testFromStringThrowsException() : void
     {
         $this->expectException(InvalidArgumentException::class);
         $bla = ServerStatus::fromString('nonexisting status!');

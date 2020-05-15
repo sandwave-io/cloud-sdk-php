@@ -6,7 +6,6 @@ namespace SandwaveIo\CloudSdkPhp\Tests\Domain;
 use DateTime;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use SandwaveIo\CloudSdkPhp\Domain\Network;
 use SandwaveIo\CloudSdkPhp\Domain\Offer;
 
 final class OfferTest extends TestCase
@@ -34,6 +33,11 @@ final class OfferTest extends TestCase
         $specifications = $offer->getSpecifications();
         $this->assertSame(7, $specifications->count());
 
+        $firstSpecification = $specifications->current();
+        $this->assertSame('cpu', $firstSpecification->getTitle());
+        $this->assertSame('1', $firstSpecification->getValue());
+        $this->assertSame('amount', $firstSpecification->getUnit());
+
         $this->assertSame('2019-09-09T08:58:05+00:00', $offer->getCreatedAt()->format(DateTime::W3C));
         $this->assertSame('2019-09-09T08:58:05+00:00', $offer->getUpdatedAt()->format(DateTime::W3C));
     }
@@ -41,7 +45,7 @@ final class OfferTest extends TestCase
     public function testConstructorThrowsExceptionForInvalidCreatedAt() : void
     {
         $this->expectException(InvalidArgumentException::class);
-        $network = Network::fromArray(
+        $network = Offer::fromArray(
             json_decode(
                 file_get_contents('tests/Domain/json/offer_invalid_createdat.json'),
                 true
@@ -52,7 +56,7 @@ final class OfferTest extends TestCase
     public function testConstructorThrowsExceptionForInvalidUpdatedAt() : void
     {
         $this->expectException(InvalidArgumentException::class);
-        $network = Network::fromArray(
+        $network = Offer::fromArray(
             json_decode(
                 file_get_contents('tests/Domain/json/offer_invalid_updatedat.json'),
                 true

@@ -4,7 +4,7 @@ namespace SandwaveIo\CloudSdkPhp\Tests\CloudSdk;
 
 use SandwaveIo\CloudSdkPhp\Domain\TemplateCollection;
 
-class TemplatesTest extends AbstractCloudSdkCase
+class TemplateTest extends AbstractCloudSdkCase
 {
     public function test_list_templates()
     {
@@ -18,7 +18,7 @@ class TemplatesTest extends AbstractCloudSdkCase
         $templates = $sdk->listTemplates();
 
         $this->assertInstanceOf(TemplateCollection::class, $templates);
-        $this->assertEquals(6, $templates->count());
+        $this->assertSame(6, $templates->count());
 
         $displayNames = [];
         foreach ($templates as $template) {

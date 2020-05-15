@@ -7,7 +7,6 @@ use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
 use InvalidArgumentException;
-use Ramsey\Uuid\Exception\InvalidUuidStringException;
 
 final class Template
 {

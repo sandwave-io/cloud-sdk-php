@@ -16,8 +16,13 @@ use SandwaveIo\CloudSdkPhp\Support\UserDataFactory;
 
 class AbstractCloudSdkCase extends TestCase
 {
-    protected function getSdkWithMockedClient(int $responseCode, ?string $responsePath, string $assertMethod, string $assertPath, string $assertQuery = 'account_id=00000000-0000-0000-0000-000000000000') : CloudSdk
-    {
+    protected function getSdkWithMockedClient(
+        int $responseCode,
+        ?string $responsePath,
+        string $assertMethod,
+        string $assertPath,
+        string $assertQuery = 'account_id=00000000-0000-0000-0000-000000000000'
+    ) : CloudSdk {
         $response = ($responsePath) ? file_get_contents(__DIR__ . '/' . $responsePath) : '';
         $handlerStack = HandlerStack::create(new MockHandler([
             new Response($responseCode, [], $response),
@@ -38,8 +43,12 @@ class AbstractCloudSdkCase extends TestCase
         return new CloudSdk('a', AccountId::fromString(Uuid::NIL), new UserDataFactory(), $client);
     }
 
-    protected function assertArrayContains(string $expectedKey, $expectedValue, array $array, string $message = 'Failed asserting that array contains value.') : void
-    {
+    protected function assertArrayContains(
+        string $expectedKey,
+        $expectedValue,
+        array $array,
+        string $message = 'Failed asserting that array contains value.'
+    ) : void {
         $found = false;
         array_walk_recursive($array, function ($value, $key) use (&$found, $expectedKey, $expectedValue) {
             if ($key === $expectedKey && $value === $expectedValue) {

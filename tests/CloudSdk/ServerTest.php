@@ -63,6 +63,19 @@ class ServerTest extends AbstractCloudSdkCase
         );
     }
 
+    public function test_console_server_throwsException() : void
+    {
+        $sdk = $this->getSdkWithMockedClient(
+            200,
+            'json/server_console_no_url.json',
+            'get',
+            'vms/6a6256cc-e6ff-41d2-9894-95a066d2b7a4/console'
+        );
+
+        $this->expectException(CloudHttpException::class);
+        $sdk->getConsoleUrl(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
+    }
+
     public function test_details_server()
     {
         $sdk = $this->getSdkWithMockedClient(
@@ -99,7 +112,7 @@ class ServerTest extends AbstractCloudSdkCase
         );
 
         $this->assertInstanceOf(ServerId::class, $serverId);
-        $this->assertEquals(ServerId::fromString('2f811c1b-3bf5-4592-b7b5-00ff80f43968'), $serverId);
+        $this->assertSame('2f811c1b-3bf5-4592-b7b5-00ff80f43968', (string) $serverId);
         $this->assertSame(
             '2f811c1b-3bf5-4592-b7b5-00ff80f43968',
             (string) $serverId
@@ -111,6 +124,27 @@ class ServerTest extends AbstractCloudSdkCase
         $sdk = $this->getSdkWithMockedClient(
             422,
             'json/server_create.json',
+            'post',
+            'vms'
+        );
+
+        $this->expectException(CloudHttpException::class);
+        $json = $sdk->createServer(
+            'test.example.com',
+            'Admin123',
+            OfferId::fromString('8cbfe407-1cbc-49ea-b7a2-c4e6fd147474'),
+            TemplateId::fromString('8b38ce30-485b-4610-bb85-1bf02299cbc5'),
+            DatacenterId::fromString('36616598-8e93-4118-a03c-94f99e5e1169'),
+            NetworkId::fromString('36616598-8e93-4118-a03c-94f99e5e1169'),
+            []
+        );
+    }
+
+    public function test_create_server_throwsException_noId() : void
+    {
+        $sdk = $this->getSdkWithMockedClient(
+            201,
+            'json/server_create_no_id.json',
             'post',
             'vms'
         );

@@ -131,7 +131,7 @@ final class CloudSdk
         );
 
         if (! array_key_exists('url', $data)) {
-            throw new CloudHttpException('Could not console URL.');
+            throw new CloudHttpException('Could not get console URL.');
         }
 
         return $data['url'];
