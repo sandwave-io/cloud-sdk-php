@@ -45,4 +45,4 @@ test-74:
     - vendor/bin/php-cs-fixer fix --allow-risky=yes --dry-run --diff
     - vendor/bin/phpstan analyze --no-progress
     - phpdbg -qrr vendor/bin/phpunit --coverage-text --coverage-php=coverage_report.php --colors=never
-    - php test_coverage.php
+    - phpdbg -qrr test_coverage.php
