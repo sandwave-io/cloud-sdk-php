@@ -6,7 +6,7 @@ PHP package to to deploy and configure virtual servers on the [PCextreme](https:
 | Package | PHP | Development | Bugfixes |
 |:---:|:---:|:---:|:---:|
 | **`0.1.x`** | **`^7.1`** | ❌ | ❌ |
-| **`0.2.x`** | **`^7.1`** | ❌ | ❌ |
+| **`0.2.x`** | **`^7.1`** | ❌ | ✅ |
 | **`0.3.x`** | **`^7.1`** | ✅ | ✅ |
 
 ## Contributing
