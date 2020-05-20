@@ -11,7 +11,7 @@ cache:
     - vendor/
 
 test-71:
-  image: mileschou/xdebug:7.1
+  image: php:7.1
   stage: test
   script:
     - composer validate --strict
@@ -20,7 +20,7 @@ test-71:
     - vendor/bin/phpunit
 
 test-72:
-  image: mileschou/xdebug:7.2
+  image: php:7.2
   stage: test
   script:
     - composer validate --strict
@@ -29,7 +29,7 @@ test-72:
     - vendor/bin/phpunit
 
 test-73:
-  image: mileschou/xdebug:7.3
+  image: php:7.3
   stage: test
   script:
     - composer validate --strict
@@ -38,11 +38,8 @@ test-73:
     - vendor/bin/phpunit
 
 test-74:
-  image: mileschou/xdebug:7.4
+  image: php:7.4
   stage: test
-  artifacts:
-    paths:
-      - ./coverage_report
   script:
     - composer validate --strict
     - vendor/bin/php-cs-fixer fix --allow-risky=yes --dry-run --diff
