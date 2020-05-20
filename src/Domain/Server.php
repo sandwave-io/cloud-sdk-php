@@ -32,6 +32,15 @@ final class Server
     /** @var DateTimeInterface */
     private $updatedAt;
 
+    /** @var string|null */
+    private $ipv4Address;
+
+    /** @var string|null */
+    private $ipv6Address;
+
+    /** @var NetworkId|null */
+    private $networkId;
+
     /** @var ?DiskCollection */
     private $disks;
 
@@ -49,6 +58,9 @@ final class Server
         bool $hasSecurityGroup,
         DateTimeInterface $createdAt,
         DateTimeInterface $updatedAt,
+        ?string $ipv4Address,
+        ?string $ipv6Address,
+        ?NetworkId $networkId,
         ?Offer $offer,
         ?DataCenter $dataCenter,
         ?DiskCollection $disks
@@ -60,6 +72,9 @@ final class Server
         $this->hasSecurityGroup = $hasSecurityGroup;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
+        $this->ipv4Address = $ipv4Address;
+        $this->ipv6Address = $ipv6Address;
+        $this->networkId = $networkId;
         $this->offer = $offer;
         $this->dataCenter = $dataCenter;
         $this->disks = $disks;
@@ -86,6 +101,9 @@ final class Server
         $offer = isset($data['offer']['data']) ? Offer::fromArray($data['offer']['data']) : null;
         $dataCenter = isset($data['datacenter']['data']) ? DataCenter::fromArray($data['datacenter']['data']) : null;
         $disks = isset($data['disks']['data']) ? DiskCollection::fromArray($data['disks']['data']) : null;
+        $ipv4Address = isset($data['ipv4_address']) ? $data['ipv4_address'] : null;
+        $ipv6Address = isset($data['ipv6_address']) ? $data['ipv6_address'] : null;
+        $networkId = isset($data['network_id']) ? NetworkId::fromString($data['network_id']) : null;
 
         return new Server(
             ServerId::fromString($data['id']),
@@ -95,6 +113,9 @@ final class Server
             boolval($data['has_security_group']),
             $createdAt,
             $updatedAt,
+            $ipv4Address,
+            $ipv6Address,
+            $networkId,
             $offer,
             $dataCenter,
             $disks
@@ -134,6 +155,21 @@ final class Server
     public function getUpdatedAt() : DateTimeInterface
     {
         return $this->updatedAt;
+    }
+
+    public function getIPv4Address() : ?string
+    {
+        return $this->ipv4Address;
+    }
+
+    public function getIPv6Address() : ?string
+    {
+        return $this->ipv6Address;
+    }
+
+    public function getNetworkId() : ?NetworkId
+    {
+        return $this->networkId;
     }
 
     public function getOffer() : ?Offer

@@ -1,0 +1,14 @@
+{
+  "data": {
+    "id": "99735991-d2b6-4e99-9728-b9b50fc4a014",
+    "display_name": "git.sandwave.io",
+    "status": "Running",
+    "rescue_iso_attached": false,
+    "has_security_group": false,
+    "ipv4_address": "185.109.216.103",
+    "ipv6_address": "2a05:1500:600:0:1c00:83ff:fe00:63",
+    "network_id": "a0234ec3-bdb6-46b8-80a1-37144d7c3928",
+    "created_at": "2020-04-09T12:27:43+00:00",
+    "updated_at": "2020-04-14T19:46:48+00:00"
+  }
+}
