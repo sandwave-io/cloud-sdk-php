@@ -44,6 +44,28 @@ class ServerTest extends AbstractCloudSdkCase
 
         $this->assertInstanceOf(Server::class, $server);
         $this->assertSame('Running', (string) $server->getStatus());
+        $this->assertNull($server->getIPv4Address());
+        $this->assertNull($server->getIPv6Address());
+        $this->assertNull($server->getNetworkId());
+    }
+
+    public function test_show_server_detailed()
+    {
+        $sdk = $this->getSdkWithMockedClient(
+            200,
+            'json/server_show_detailed.json',
+            'get',
+            'vms/6a6256cc-e6ff-41d2-9894-95a066d2b7a4',
+            'include=offer%2Cdatacenter%2Cdisks.offer&account_id=00000000-0000-0000-0000-000000000000'
+        );
+
+        $server = $sdk->showServer(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
+
+        $this->assertInstanceOf(Server::class, $server);
+        $this->assertSame('Running', (string) $server->getStatus());
+        $this->assertSame('185.109.216.103', $server->getIPv4Address());
+        $this->assertSame('2a05:1500:600:0:1c00:83ff:fe00:63', $server->getIPv6Address());
+        $this->assertSame('a0234ec3-bdb6-46b8-80a1-37144d7c3928', (string) $server->getNetworkId());
     }
 
     public function test_console_server()
