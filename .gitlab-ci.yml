@@ -47,5 +47,5 @@ test-74:
     - composer validate --strict
     - vendor/bin/php-cs-fixer fix --allow-risky=yes --dry-run --diff
     - vendor/bin/phpstan analyze --no-progress
-    - vendor/bin/phpunit --coverage-text --coverage-php=coverage_report.php --coverage-html=coverage_report --colors=never
+    - phpdbg -qrr vendor/bin/phpunit --coverage-text --coverage-php=coverage_report.php --colors=never
 #    - php test_coverage.php
