@@ -40,9 +40,12 @@ test-73:
 test-74:
   image: mileschou/xdebug:7.4
   stage: test
+  artifacts:
+    paths:
+      - ./coverage_report
   script:
     - composer validate --strict
     - vendor/bin/php-cs-fixer fix --allow-risky=yes --dry-run --diff
     - vendor/bin/phpstan analyze --no-progress
-    - vendor/bin/phpunit --coverage-text --coverage-php=coverage_report.php --colors=never
-    - php test_coverage.php
+    - vendor/bin/phpunit --coverage-text --coverage-php=coverage_report.php --coverage-html=coverage_report --colors=never
+#    - php test_coverage.php
