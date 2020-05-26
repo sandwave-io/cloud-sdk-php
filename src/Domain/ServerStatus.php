@@ -4,7 +4,6 @@ declare(strict_types = 1);
 namespace SandwaveIo\CloudSdkPhp\Domain;
 
 use InvalidArgumentException;
-use phpDocumentor\Reflection\DocBlock\Serializer;
 
 final class ServerStatus
 {
