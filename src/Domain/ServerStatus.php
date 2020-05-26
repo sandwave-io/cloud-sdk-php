@@ -28,7 +28,7 @@ final class ServerStatus
             ServerStatus::STATUS_STOPPED,
             ServerStatus::STATUS_STARTING,
             ServerStatus::STATUS_REBOOTING,
-            ServerStatus::STATUS_DESTROYED
+            ServerStatus::STATUS_DESTROYED,
         ];
 
         if (! in_array($value, $options)) {
@@ -70,7 +70,7 @@ final class ServerStatus
         return new ServerStatus(ServerStatus::STATUS_STOPPING);
     }
 
-    public static function destroyed(): ServerStatus
+    public static function destroyed() : ServerStatus
     {
         return new ServerStatus(ServerStatus::STATUS_DESTROYED);
     }
