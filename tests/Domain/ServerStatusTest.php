@@ -25,6 +25,9 @@ final class ServerStatusTest extends TestCase
 
         $rebooting = ServerStatus::rebooting();
         $this->assertTrue(ServerStatus::fromString((string) $rebooting)->equals($rebooting));
+
+        $destroyed = ServerStatus::destroyed();
+        $this->assertTrue(ServerStatus::fromString((string) $destroyed)->equals($destroyed));
     }
 
     public function testFromStringThrowsException() : void
