@@ -12,6 +12,7 @@ final class ServerStatus
     private const STATUS_STOPPED = 'Stopped';
     private const STATUS_STARTING = 'starting';
     private const STATUS_REBOOTING = 'rebooting';
+    private const STATUS_DESTROYED = 'Destroyed';
 
     /** @var string */
     private $value;
@@ -27,6 +28,7 @@ final class ServerStatus
             ServerStatus::STATUS_STOPPED,
             ServerStatus::STATUS_STARTING,
             ServerStatus::STATUS_REBOOTING,
+            ServerStatus::STATUS_DESTROYED,
         ];
 
         if (! in_array($value, $options)) {
@@ -66,6 +68,11 @@ final class ServerStatus
     public static function stopping() : ServerStatus
     {
         return new ServerStatus(ServerStatus::STATUS_STOPPING);
+    }
+
+    public static function destroyed() : ServerStatus
+    {
+        return new ServerStatus(ServerStatus::STATUS_DESTROYED);
     }
 
     public function equals(ServerStatus $other) : bool
