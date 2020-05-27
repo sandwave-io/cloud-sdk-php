@@ -10,7 +10,7 @@ use SandwaveIo\CloudSdkPhp\Domain\Template;
 
 final class TemplateTest extends TestCase
 {
-    public function testCanConstruct() : void
+    public function testCanConstruct(): void
     {
         $template = Template::fromArray(
             json_decode(
@@ -27,7 +27,7 @@ final class TemplateTest extends TestCase
         $this->assertSame('2020-04-02T09:50:13+00:00', $template->getUpdatedAt()->format(DateTime::W3C));
     }
 
-    public function testConstructorThrowsExceptionForInvalidCreatedAt() : void
+    public function testConstructorThrowsExceptionForInvalidCreatedAt(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $network = Template::fromArray(
@@ -38,7 +38,7 @@ final class TemplateTest extends TestCase
         );
     }
 
-    public function testConstructorThrowsExceptionForInvalidUpdatedAt() : void
+    public function testConstructorThrowsExceptionForInvalidUpdatedAt(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $network = Template::fromArray(

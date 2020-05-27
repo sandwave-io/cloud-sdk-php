@@ -40,48 +40,48 @@ final class DiskStatus
         $this->value = $value;
     }
 
-    public function __toString() : string
+    public function __toString(): string
     {
         return $this->value;
     }
 
-    public static function creating() : DiskStatus
+    public static function creating(): DiskStatus
     {
         return new DiskStatus(DiskStatus::STATUS_CREATING);
     }
 
-    public static function allocated() : DiskStatus
+    public static function allocated(): DiskStatus
     {
         return new DiskStatus(DiskStatus::STATUS_ALLOCATED);
     }
 
-    public static function ready() : DiskStatus
+    public static function ready(): DiskStatus
     {
         return new DiskStatus(DiskStatus::STATUS_READY);
     }
 
-    public static function destroy() : DiskStatus
+    public static function destroy(): DiskStatus
     {
         return new DiskStatus(DiskStatus::STATUS_DESTROY);
     }
 
-    public static function expunging() : DiskStatus
+    public static function expunging(): DiskStatus
     {
         return new DiskStatus(DiskStatus::STATUS_EXPUNGING);
     }
 
-    public static function expunged() : DiskStatus
+    public static function expunged(): DiskStatus
     {
         return new DiskStatus(DiskStatus::STATUS_EXPUNGED);
     }
 
-    public function equals(DiskStatus $other) : bool
+    public function equals(DiskStatus $other): bool
     {
         return $this->value === $other->value;
     }
 
     /** @throws InvalidArgumentException */
-    public static function fromString(string $value) : DiskStatus
+    public static function fromString(string $value): DiskStatus
     {
         return new DiskStatus($value);
     }

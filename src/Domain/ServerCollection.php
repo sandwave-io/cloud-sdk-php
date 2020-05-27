@@ -10,13 +10,13 @@ final class ServerCollection extends AbstractCollection
         parent::__construct(...$items);
     }
 
-    public function current() : ?Server
+    public function current(): ?Server
     {
         return $this->items->current();
     }
 
     /** @param array<array> $data */
-    public static function fromArray(array $data) : ServerCollection
+    public static function fromArray(array $data): ServerCollection
     {
         $servers = [];
 

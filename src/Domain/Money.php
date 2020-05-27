@@ -13,17 +13,17 @@ final class Money
         $this->valueInCents = $valueInCents;
     }
 
-    public function __toString() : string
+    public function __toString(): string
     {
         return sprintf('%.2f', $this->valueInCents / 100);
     }
 
-    public static function fromCents(int $cents) : self
+    public static function fromCents(int $cents): self
     {
         return new self($cents);
     }
 
-    public function toCents() : int
+    public function toCents(): int
     {
         return $this->valueInCents;
     }

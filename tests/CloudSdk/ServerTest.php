@@ -85,7 +85,7 @@ class ServerTest extends AbstractCloudSdkCase
         );
     }
 
-    public function test_console_server_throwsException() : void
+    public function test_console_server_throwsException(): void
     {
         $sdk = $this->getSdkWithMockedClient(
             200,
@@ -162,7 +162,7 @@ class ServerTest extends AbstractCloudSdkCase
         );
     }
 
-    public function test_create_server_throwsException_noId() : void
+    public function test_create_server_throwsException_noId(): void
     {
         $sdk = $this->getSdkWithMockedClient(
             201,

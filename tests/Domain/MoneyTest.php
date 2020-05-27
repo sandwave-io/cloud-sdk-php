@@ -8,7 +8,7 @@ use SandwaveIo\CloudSdkPhp\Domain\Money;
 
 final class MoneyTest extends TestCase
 {
-    public function testTostring() : void
+    public function testTostring(): void
     {
         $money = Money::fromCents(123456);
 

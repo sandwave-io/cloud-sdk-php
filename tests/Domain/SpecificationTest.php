@@ -8,7 +8,7 @@ use SandwaveIo\CloudSdkPhp\Domain\Specification;
 
 final class SpecificationTest extends TestCase
 {
-    public function testCanConstruct() : void
+    public function testCanConstruct(): void
     {
         $title = 'A Title';
         $value = 'A value';

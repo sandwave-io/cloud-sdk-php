@@ -21,7 +21,7 @@ abstract class AbstractCollection implements Iterator, Countable
     /** @return mixed */
     abstract public function current();
 
-    public function next() : void
+    public function next(): void
     {
         $this->items->next();
     }
@@ -36,17 +36,17 @@ abstract class AbstractCollection implements Iterator, Countable
         return $this->items->key();
     }
 
-    public function valid() : bool
+    public function valid(): bool
     {
         return $this->items->valid();
     }
 
-    public function rewind() : void
+    public function rewind(): void
     {
         $this->items->rewind();
     }
 
-    public function count() : int
+    public function count(): int
     {
         return $this->items->count();
     }

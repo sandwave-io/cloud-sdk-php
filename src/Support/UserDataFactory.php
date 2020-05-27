@@ -13,7 +13,7 @@ class UserDataFactory
      *
      * @return string
      */
-    public function generateUserData(string $hostname, string $password, array $sshKeys = []) : string
+    public function generateUserData(string $hostname, string $password, array $sshKeys = []): string
     {
         $dump = Yaml::dump(
             [

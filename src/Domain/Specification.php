@@ -21,17 +21,17 @@ final class Specification
         $this->unit = $unit;
     }
 
-    public function getTitle() : string
+    public function getTitle(): string
     {
         return $this->title;
     }
 
-    public function getValue() : string
+    public function getValue(): string
     {
         return $this->value;
     }
 
-    public function getUnit() : string
+    public function getUnit(): string
     {
         return $this->unit;
     }

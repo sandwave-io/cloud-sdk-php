@@ -8,7 +8,7 @@ use SandwaveIo\CloudSdkPhp\Domain\DataCenter;
 
 final class DataCenterTest extends TestCase
 {
-    public function test_constructor() : void
+    public function test_constructor(): void
     {
         $datacenter = DataCenter::fromArray(
             json_decode(

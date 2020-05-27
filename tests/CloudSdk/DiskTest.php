@@ -48,7 +48,7 @@ class DiskTest extends AbstractCloudSdkCase
         );
     }
 
-    public function test_create_disk_throwsException() : void
+    public function test_create_disk_throwsException(): void
     {
         $sdk = $this->getSdkWithMockedClient(
             201,

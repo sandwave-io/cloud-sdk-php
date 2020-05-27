@@ -43,7 +43,7 @@ final class APIClient
      *
      * @return array<mixed>
      */
-    public function get(string $endpoint, array $queryParameters = [], int $expectedResponse = 200) : array
+    public function get(string $endpoint, array $queryParameters = [], int $expectedResponse = 200): array
     {
         $response = $this->client->get($endpoint . $this->queryParameters($queryParameters), [
             'headers' => $this->buildHeaders(),
@@ -65,7 +65,7 @@ final class APIClient
         array $body = [],
         array $queryParameters = [],
         int $expectedResponse = 201
-    ) : array {
+    ): array {
         $response = $this->client->post($endpoint . $this->queryParameters($queryParameters), [
             'headers' => $this->buildHeaders(),
             'http_errors' => false,
@@ -87,7 +87,7 @@ final class APIClient
         array $body = [],
         array $queryParameters = [],
         int $expectedResponse = 204
-    ) : array {
+    ): array {
         $response = $this->client->patch($endpoint . $this->queryParameters($queryParameters), [
             'headers' => $this->buildHeaders(),
             'http_errors' => false,
@@ -109,7 +109,7 @@ final class APIClient
         array $body = [],
         array $queryParameters = [],
         int $expectedResponse = 204
-    ) : array {
+    ): array {
         $response = $this->client->put($endpoint . $this->queryParameters($queryParameters), [
             'headers' => $this->buildHeaders(),
             'http_errors' => false,
@@ -125,7 +125,7 @@ final class APIClient
      *
      * @return array<mixed>
      */
-    public function delete(string $endpoint, array $queryParameters = [], int $expectedResponse = 204) : array
+    public function delete(string $endpoint, array $queryParameters = [], int $expectedResponse = 204): array
     {
         $response = $this->client->delete($endpoint . $this->queryParameters($queryParameters), [
             'headers' => $this->buildHeaders(),
@@ -142,7 +142,7 @@ final class APIClient
      *
      * @return array<mixed>
      */
-    private function handleResponse(ResponseInterface $response, int $expectedResponse = 200) : array
+    private function handleResponse(ResponseInterface $response, int $expectedResponse = 200): array
     {
         if ($response->getStatusCode() !== $expectedResponse) {
             $message = sprintf(
@@ -180,7 +180,7 @@ final class APIClient
      *
      * @return array<string,string>
      */
-    private function buildHeaders() : array
+    private function buildHeaders(): array
     {
         return [
             'Authorization' => 'Bearer ' . $this->apiKey,
@@ -195,7 +195,7 @@ final class APIClient
      *
      * @return string
      */
-    private function queryParameters(array $parameters) : string
+    private function queryParameters(array $parameters): string
     {
         return '?' .
             http_build_query(

@@ -40,48 +40,48 @@ final class ServerStatus
         $this->value = $value;
     }
 
-    public function __toString() : string
+    public function __toString(): string
     {
         return $this->value;
     }
 
-    public static function running() : ServerStatus
+    public static function running(): ServerStatus
     {
         return new ServerStatus(ServerStatus::STATUS_RUNNING);
     }
 
-    public static function stopped() : ServerStatus
+    public static function stopped(): ServerStatus
     {
         return new ServerStatus(ServerStatus::STATUS_STOPPED);
     }
 
-    public static function starting() : ServerStatus
+    public static function starting(): ServerStatus
     {
         return new ServerStatus(ServerStatus::STATUS_STARTING);
     }
 
-    public static function rebooting() : ServerStatus
+    public static function rebooting(): ServerStatus
     {
         return new ServerStatus(ServerStatus::STATUS_REBOOTING);
     }
 
-    public static function stopping() : ServerStatus
+    public static function stopping(): ServerStatus
     {
         return new ServerStatus(ServerStatus::STATUS_STOPPING);
     }
 
-    public static function destroyed() : ServerStatus
+    public static function destroyed(): ServerStatus
     {
         return new ServerStatus(ServerStatus::STATUS_DESTROYED);
     }
 
-    public function equals(ServerStatus $other) : bool
+    public function equals(ServerStatus $other): bool
     {
         return $this->value === $other->value;
     }
 
     /** @throws InvalidArgumentException */
-    public static function fromString(string $value) : ServerStatus
+    public static function fromString(string $value): ServerStatus
     {
         return new ServerStatus($value);
     }

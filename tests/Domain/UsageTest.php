@@ -8,7 +8,7 @@ use SandwaveIo\CloudSdkPhp\Domain\Usage;
 
 final class UsageTest extends TestCase
 {
-    public function testCanConstruct() : void
+    public function testCanConstruct(): void
     {
         $usage = Usage::fromArray(
             json_decode(
