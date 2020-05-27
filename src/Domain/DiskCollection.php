@@ -10,12 +10,12 @@ final class DiskCollection extends AbstractCollection
         parent::__construct(...$items);
     }
 
-    public function current() : ?Disk
+    public function current(): ?Disk
     {
         return $this->items->current();
     }
 
-    public static function fromArray(array $data) : DiskCollection
+    public static function fromArray(array $data): DiskCollection
     {
         $disks = [];
 

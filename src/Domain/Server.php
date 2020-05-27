@@ -86,7 +86,7 @@ final class Server
      * @throws InvalidArgumentException
      * @throws InvalidUuidStringException
      */
-    public static function fromArray(array $data) : Server
+    public static function fromArray(array $data): Server
     {
         $createdAt = DateTimeImmutable::createFromFormat(DateTime::W3C, $data['created_at']);
         if (! $createdAt instanceof DateTimeImmutable) {
@@ -122,62 +122,62 @@ final class Server
         );
     }
 
-    public function getId() : ServerId
+    public function getId(): ServerId
     {
         return $this->id;
     }
 
-    public function getDisplayName() : string
+    public function getDisplayName(): string
     {
         return $this->displayName;
     }
 
-    public function getStatus() : ServerStatus
+    public function getStatus(): ServerStatus
     {
         return $this->status;
     }
 
-    public function isRescueIsoAttached() : bool
+    public function isRescueIsoAttached(): bool
     {
         return $this->rescueIsoAttached;
     }
 
-    public function isHasSecurityGroup() : bool
+    public function isHasSecurityGroup(): bool
     {
         return $this->hasSecurityGroup;
     }
 
-    public function getCreatedAt() : DateTimeInterface
+    public function getCreatedAt(): DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function getUpdatedAt() : DateTimeInterface
+    public function getUpdatedAt(): DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    public function getIPv4Address() : ?string
+    public function getIPv4Address(): ?string
     {
         return $this->ipv4Address;
     }
 
-    public function getIPv6Address() : ?string
+    public function getIPv6Address(): ?string
     {
         return $this->ipv6Address;
     }
 
-    public function getNetworkId() : ?NetworkId
+    public function getNetworkId(): ?NetworkId
     {
         return $this->networkId;
     }
 
-    public function getOffer() : ?Offer
+    public function getOffer(): ?Offer
     {
         return $this->offer;
     }
 
-    public function getDataCenter() : ?DataCenter
+    public function getDataCenter(): ?DataCenter
     {
         return $this->dataCenter;
     }

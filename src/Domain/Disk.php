@@ -49,7 +49,7 @@ final class Disk
      *
      * @throws InvalidArgumentException
      */
-    public static function fromArray(array $data) : Disk
+    public static function fromArray(array $data): Disk
     {
         $createdAt = DateTimeImmutable::createFromFormat(DateTime::W3C, $data['created_at']);
         if (! $createdAt instanceof DateTimeImmutable) {
@@ -73,32 +73,32 @@ final class Disk
         );
     }
 
-    public function getId() : DiskId
+    public function getId(): DiskId
     {
         return $this->id;
     }
 
-    public function getDisplayName() : string
+    public function getDisplayName(): string
     {
         return $this->displayName;
     }
 
-    public function getStatus() : DiskStatus
+    public function getStatus(): DiskStatus
     {
         return $this->status;
     }
 
-    public function getCreatedAt() : DateTimeInterface
+    public function getCreatedAt(): DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function getUpdatedAt() : DateTimeInterface
+    public function getUpdatedAt(): DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    public function getOffer() : ?Offer
+    public function getOffer(): ?Offer
     {
         return $this->offer;
     }

@@ -10,7 +10,7 @@ final class DataCenterCollection extends AbstractCollection
         parent::__construct(...$items);
     }
 
-    public function current() : ?DataCenter
+    public function current(): ?DataCenter
     {
         return $this->items->current();
     }
@@ -18,7 +18,7 @@ final class DataCenterCollection extends AbstractCollection
     /**
      * @param array<array> $data
      */
-    public static function fromArray(array $data) : DataCenterCollection
+    public static function fromArray(array $data): DataCenterCollection
     {
         $datacenters = [];
 

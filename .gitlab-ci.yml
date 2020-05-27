@@ -15,7 +15,7 @@ test-71:
   stage: test
   script:
     - composer validate --strict
-    - vendor/bin/php-cs-fixer fix --allow-risky=yes --dry-run --diff
+    - vendor/bin/php-cs-fixer fix --dry-run --diff
     - vendor/bin/phpstan analyze --no-progress
     - vendor/bin/phpunit
 
@@ -24,7 +24,7 @@ test-72:
   stage: test
   script:
     - composer validate --strict
-    - vendor/bin/php-cs-fixer fix --allow-risky=yes --dry-run --diff
+    - vendor/bin/php-cs-fixer fix --dry-run --diff
     - vendor/bin/phpstan analyze --no-progress
     - vendor/bin/phpunit
 
@@ -33,7 +33,7 @@ test-73:
   stage: test
   script:
     - composer validate --strict
-    - vendor/bin/php-cs-fixer fix --allow-risky=yes --dry-run --diff
+    - vendor/bin/php-cs-fixer fix --dry-run --diff
     - vendor/bin/phpstan analyze --no-progress
     - vendor/bin/phpunit
 
@@ -42,7 +42,7 @@ test-74:
   stage: test
   script:
     - composer validate --strict
-    - vendor/bin/php-cs-fixer fix --allow-risky=yes --dry-run --diff
+    - vendor/bin/php-cs-fixer fix --dry-run --diff
     - vendor/bin/phpstan analyze --no-progress
     - phpdbg -qrr vendor/bin/phpunit --coverage-text --coverage-php=coverage_report.php --colors=never
     - phpdbg -qrr test_coverage.php

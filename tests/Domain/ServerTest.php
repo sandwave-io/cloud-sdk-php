@@ -74,7 +74,7 @@ final class ServerTest extends TestCase
         $this->assertNull($server->getOffer());
     }
 
-    public function testConstructorThrowsExceptionOnInvalidCreatedAt() : void
+    public function testConstructorThrowsExceptionOnInvalidCreatedAt(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $server = Server::fromArray(
@@ -85,7 +85,7 @@ final class ServerTest extends TestCase
         );
     }
 
-    public function testConstructorThrowsExceptionOnInvalidUpdatedAt() : void
+    public function testConstructorThrowsExceptionOnInvalidUpdatedAt(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $server = Server::fromArray(

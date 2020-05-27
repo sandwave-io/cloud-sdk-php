@@ -20,7 +20,7 @@ final class Usage
     /**
      * @param array<mixed> $data
      */
-    public static function fromArray(array $data) : Usage
+    public static function fromArray(array $data): Usage
     {
         return new Usage(
             $data['memory'],
@@ -28,12 +28,12 @@ final class Usage
         );
     }
 
-    public function getMemoryInGbs() : int
+    public function getMemoryInGbs(): int
     {
         return $this->memoryInGbs;
     }
 
-    public function getStorageInGbs() : int
+    public function getStorageInGbs(): int
     {
         return $this->storageInGbs;
     }

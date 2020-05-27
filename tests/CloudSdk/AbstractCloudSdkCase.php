@@ -22,7 +22,7 @@ class AbstractCloudSdkCase extends TestCase
         string $assertMethod,
         string $assertPath,
         string $assertQuery = 'account_id=00000000-0000-0000-0000-000000000000'
-    ) : CloudSdk {
+    ): CloudSdk {
         $response = ($responsePath) ? file_get_contents(__DIR__ . '/' . $responsePath) : '';
         $handlerStack = HandlerStack::create(new MockHandler([
             new Response($responseCode, [], $response),
@@ -48,7 +48,7 @@ class AbstractCloudSdkCase extends TestCase
         $expectedValue,
         array $array,
         string $message = 'Failed asserting that array contains value.'
-    ) : void {
+    ): void {
         $found = false;
         array_walk_recursive($array, function ($value, $key) use (&$found, $expectedKey, $expectedValue) {
             if ($key === $expectedKey && $value === $expectedValue) {

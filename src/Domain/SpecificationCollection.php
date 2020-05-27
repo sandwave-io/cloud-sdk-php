@@ -10,13 +10,13 @@ final class SpecificationCollection extends AbstractCollection
         parent::__construct(...$items);
     }
 
-    public function current() : ?Specification
+    public function current(): ?Specification
     {
         return $this->items->current();
     }
 
     /** @param array<array> $data */
-    public static function fromArray(array $data) : SpecificationCollection
+    public static function fromArray(array $data): SpecificationCollection
     {
         $specifications = [];
 

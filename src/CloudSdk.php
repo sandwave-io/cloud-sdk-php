@@ -65,7 +65,7 @@ final class CloudSdk
         DatacenterId $datacenterId,
         ?NetworkId $networkId,
         array $sshKeys
-    ) : ServerId {
+    ): ServerId {
         $postData = [
             'display_name' => $hostname,
             'offer_id' => (string) $offerId,
@@ -87,7 +87,7 @@ final class CloudSdk
         return ServerId::fromString($data['id']);
     }
 
-    public function listServers(int $limit = 50, int $page = 1) : ServerCollection
+    public function listServers(int $limit = 50, int $page = 1): ServerCollection
     {
         return ServerCollection::fromArray(
             $this->client->get(
@@ -101,7 +101,7 @@ final class CloudSdk
         );
     }
 
-    public function showServer(ServerId $id) : Server
+    public function showServer(ServerId $id): Server
     {
         return Server::fromArray(
             $this->client->get(
@@ -113,7 +113,7 @@ final class CloudSdk
         );
     }
 
-    public function upgradeServer(ServerId $id, OfferId $offerId) : void
+    public function upgradeServer(ServerId $id, OfferId $offerId): void
     {
         $this->client->patch(
             "vms/{$id}",
@@ -123,7 +123,7 @@ final class CloudSdk
         );
     }
 
-    public function getConsoleUrl(ServerId $id) : string
+    public function getConsoleUrl(ServerId $id): string
     {
         $data = $this->client->get(
             "vms/{$id}/console"
@@ -136,17 +136,17 @@ final class CloudSdk
         return $data['url'];
     }
 
-    public function detachRescueIso(ServerId $id) : void
+    public function detachRescueIso(ServerId $id): void
     {
         $this->client->post("vms/{$id}/detachRescue", [], [], 204);
     }
 
-    public function attachRescueIso(ServerId $id) : void
+    public function attachRescueIso(ServerId $id): void
     {
         $this->client->post("vms/{$id}/attachRescue", [], [], 204);
     }
 
-    public function createDisk(ServerId $serverId, OfferId $offerId, string $displayName) : DiskId
+    public function createDisk(ServerId $serverId, OfferId $offerId, string $displayName): DiskId
     {
         $data = $this->client->post(
             "vms/{$serverId}/disks",
@@ -165,34 +165,34 @@ final class CloudSdk
         return DiskId::fromString($data['id']);
     }
 
-    public function listDisks(ServerId $serverId) : DiskCollection
+    public function listDisks(ServerId $serverId): DiskCollection
     {
         return DiskCollection::fromArray(
             $this->client->get("vms/{$serverId}/disks")
         );
     }
 
-    public function deleteDisk(ServerId $serverId, DiskId $diskId) : void
+    public function deleteDisk(ServerId $serverId, DiskId $diskId): void
     {
         $this->client->delete("vms/{$serverId}/disks/{$diskId}", [], 204);
     }
 
-    public function rebootServer(ServerId $id) : void
+    public function rebootServer(ServerId $id): void
     {
         $this->client->post("vms/{$id}/reboot", [], [], 204);
     }
 
-    public function stopServer(ServerId $id) : void
+    public function stopServer(ServerId $id): void
     {
         $this->client->post("vms/{$id}/stop", [], [], 204);
     }
 
-    public function startServer(ServerId $id) : void
+    public function startServer(ServerId $id): void
     {
         $this->client->post("vms/{$id}/start", [], [], 204);
     }
 
-    public function deleteServer(ServerId $id) : void
+    public function deleteServer(ServerId $id): void
     {
         $this->client->delete("vms/{$id}", [], 204);
     }
@@ -202,7 +202,7 @@ final class CloudSdk
      *
      * @return array<mixed>
      */
-    public function showDetails(ServerId $id) : array
+    public function showDetails(ServerId $id): array
     {
         return $this->client->get("vms/{$id}/details");
     }
@@ -210,7 +210,7 @@ final class CloudSdk
     /**
      * Retrieve current resource usage of the account.
      */
-    public function getUsage() : Usage
+    public function getUsage(): Usage
     {
         return Usage::fromArray(
             $this->client->get('limits/current_usage')
@@ -220,7 +220,7 @@ final class CloudSdk
     /**
      * Check if an offer can be deployed under the account.
      */
-    public function canDeployOffer(OfferId $offerId) : bool
+    public function canDeployOffer(OfferId $offerId): bool
     {
         try {
             $this->client->get(
@@ -242,7 +242,7 @@ final class CloudSdk
      *
      * @deprecated Use listServerOffers or listDiskOffers instead.
      */
-    public function listOffers() : OfferCollection
+    public function listOffers(): OfferCollection
     {
         return OfferCollection::fromArray(
             $this->client->get(
@@ -260,7 +260,7 @@ final class CloudSdk
     /**
      * List offers available for server deployments.
      */
-    public function listServerOffers(int $limit = 50, int $page = 1) : OfferCollection
+    public function listServerOffers(int $limit = 50, int $page = 1): OfferCollection
     {
         return OfferCollection::fromArray(
             $this->client->get(
@@ -278,7 +278,7 @@ final class CloudSdk
     /**
      * List offers available for disk deployments.
      */
-    public function listDiskOffers(int $limit = 50, int $page = 1) : OfferCollection
+    public function listDiskOffers(int $limit = 50, int $page = 1): OfferCollection
     {
         return OfferCollection::fromArray(
             $this->client->get(
@@ -293,21 +293,21 @@ final class CloudSdk
         );
     }
 
-    public function listDatacenters() : DataCenterCollection
+    public function listDatacenters(): DataCenterCollection
     {
         return DataCenterCollection::fromArray(
             $this->client->get('datacenters')
         );
     }
 
-    public function listTemplates() : TemplateCollection
+    public function listTemplates(): TemplateCollection
     {
         return TemplateCollection::fromArray(
             $this->client->get('templates')
         );
     }
 
-    public function listNetworks() : NetworkCollection
+    public function listNetworks(): NetworkCollection
     {
         return NetworkCollection::fromArray(
             $this->client->get('networks')

@@ -68,7 +68,7 @@ final class DiskTest extends TestCase
         $this->assertNull($disk->getOffer());
     }
 
-    public function testConstructorThrowsExceptionOnInvalidCreatedAt() : void
+    public function testConstructorThrowsExceptionOnInvalidCreatedAt(): void
     {
         $this->expectException(InvalidArgumentException::class);
         Disk::fromArray(
@@ -79,7 +79,7 @@ final class DiskTest extends TestCase
         );
     }
 
-    public function testConstructorThrowsExceptionOnInvalidUpdatedAt() : void
+    public function testConstructorThrowsExceptionOnInvalidUpdatedAt(): void
     {
         $this->expectException(InvalidArgumentException::class);
         Disk::fromArray(

@@ -10,7 +10,7 @@ use SandwaveIo\CloudSdkPhp\Domain\Offer;
 
 final class OfferTest extends TestCase
 {
-    public function test_constructor() : void
+    public function test_constructor(): void
     {
         $offer = Offer::fromArray(
             json_decode(
@@ -42,7 +42,7 @@ final class OfferTest extends TestCase
         $this->assertSame('2019-09-09T08:58:05+00:00', $offer->getUpdatedAt()->format(DateTime::W3C));
     }
 
-    public function testConstructorThrowsExceptionForInvalidCreatedAt() : void
+    public function testConstructorThrowsExceptionForInvalidCreatedAt(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $network = Offer::fromArray(
@@ -53,7 +53,7 @@ final class OfferTest extends TestCase
         );
     }
 
-    public function testConstructorThrowsExceptionForInvalidUpdatedAt() : void
+    public function testConstructorThrowsExceptionForInvalidUpdatedAt(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $network = Offer::fromArray(

@@ -10,7 +10,7 @@ use SandwaveIo\CloudSdkPhp\Domain\Network;
 
 final class NetworkTest extends TestCase
 {
-    public function test_constructor() : void
+    public function test_constructor(): void
     {
         $network = Network::fromArray(
             json_decode(
@@ -29,7 +29,7 @@ final class NetworkTest extends TestCase
         $this->assertSame('2019-09-09T08:58:05+00:00', $network->getUpdatedAt()->format(DateTime::W3C));
     }
 
-    public function testConstructorThrowsExceptionForInvalidCreatedAt() : void
+    public function testConstructorThrowsExceptionForInvalidCreatedAt(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $network = Network::fromArray(
@@ -40,7 +40,7 @@ final class NetworkTest extends TestCase
         );
     }
 
-    public function testConstructorThrowsExceptionForInvalidUpdatedAt() : void
+    public function testConstructorThrowsExceptionForInvalidUpdatedAt(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $network = Network::fromArray(

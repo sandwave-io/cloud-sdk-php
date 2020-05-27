@@ -9,7 +9,7 @@ use SandwaveIo\CloudSdkPhp\Domain\DiskStatus;
 
 final class DiskStatusTest extends TestCase
 {
-    public function testCanConstruct() : void
+    public function testCanConstruct(): void
     {
         $creating = DiskStatus::creating();
         $this->assertTrue(DiskStatus::fromString((string) $creating)->equals($creating));
@@ -30,7 +30,7 @@ final class DiskStatusTest extends TestCase
         $this->assertTrue(DiskStatus::fromString((string) $expunged)->equals($expunged));
     }
 
-    public function testFromStringThrowsException() : void
+    public function testFromStringThrowsException(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $bla = DiskStatus::fromString('nonexisting status!');
