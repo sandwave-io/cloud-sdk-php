@@ -183,6 +183,23 @@ class ServerTest extends AbstractCloudSdkCase
         );
     }
 
+    public function test_reset_server()
+    {
+        $sdk = $this->getSdkWithMockedClient(
+            204,
+            null,
+            'post',
+            'vms/6a6256cc-e6ff-41d2-9894-95a066d2b7a4/reset'
+        );
+
+        $sdk->resetServer(
+            ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'),
+            'test.example.com',
+            'Admin123',
+            []
+        );
+    }
+
     public function test_attach_rescue_iso_server()
     {
         $sdk = $this->getSdkWithMockedClient(

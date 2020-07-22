@@ -61,6 +61,7 @@ implemented, create an issue or open a PR. 🙂
 * [Show server](#show-server)
 * [Server details](#server-details)
 * [Upgrade server](#upgrade-server)
+* [Upgrade server](#reset-server)
 * [Detach rescue ISO server](#detach-rescue-iso-server)
 * [Attach rescue ISO server](#attach-rescue-iso-server)
 * [Reboot server](#reboot-server)
@@ -239,6 +240,17 @@ $cloudSdk->upgradeServer(
 );
 ``` 
 
+#### Reset server
+
+```php
+$cloudSdk->resetServer(
+    'aaaa-bbbb-cccc-dddd-eeee',
+    'hostname',
+    'password',
+    ['ssh_authorized_keys' => 'ssh_keys']
+);
+```
+
 #### Detach rescue ISO server
 
 Rescue ISO's can be used to salvage a broken server.
@@ -259,7 +271,7 @@ $cloudSdk->detachRescueIso('aaaa-bbbb-cccc-dddd-eeee');
 
 ```php
 $cloudSdk->rebootServer('aaaa-bbbb-cccc-dddd-eeee');
-```  
+```
 
 #### Start server
 
