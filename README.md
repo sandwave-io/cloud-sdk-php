@@ -247,7 +247,10 @@ $cloudSdk->resetServer(
     'aaaa-bbbb-cccc-dddd-eeee',
     'hostname',
     'password',
-    ['ssh_authorized_keys' => 'ssh_keys']
+    [
+    'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC7IMV7yEMeKxzJeFJmyCEpuH9u==',
+    'ssh-rsa tGwoW1BRomau8fB8PIuILX/7seiEdcNgkgdVpVTc19tTmvjiTOxwfVJ2oL',
+    ]
 );
 ```
 
