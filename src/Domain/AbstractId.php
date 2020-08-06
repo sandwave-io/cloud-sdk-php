@@ -12,7 +12,7 @@ abstract class AbstractId
     /** @var UuidInterface */
     private $value;
 
-    /** * @throws InvalidUuidStringException */
+    /** @throws InvalidUuidStringException */
     protected function __construct(string $value)
     {
         $this->value = Uuid::fromString($value);

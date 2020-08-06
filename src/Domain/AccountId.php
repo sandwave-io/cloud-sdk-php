@@ -7,7 +7,7 @@ use Ramsey\Uuid\Exception\InvalidUuidStringException;
 
 final class AccountId extends AbstractId
 {
-    /** * @throws InvalidUuidStringException */
+    /** @throws InvalidUuidStringException */
     public static function fromString(string $value): AccountId
     {
         return new AccountId($value);
