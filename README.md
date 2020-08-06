@@ -270,6 +270,15 @@ Rescue ISO's can be used to salvage a broken server.
 $cloudSdk->detachRescueIso('aaaa-bbbb-cccc-dddd-eeee');
 ``` 
 
+#### Edit display name server
+
+```php
+$cloudSdk->updateServerHostname(
+    'aaaa-bbbb-cccc-dddd-eeee',
+    'hostname',
+);
+```
+
 #### Reboot server
 
 ```php

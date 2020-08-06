@@ -224,6 +224,21 @@ class ServerTest extends AbstractCloudSdkCase
         $sdk->detachRescueIso(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
     }
 
+    public function test_update_server_hostname()
+    {
+        $sdk = $this->getSdkWithMockedClient(
+            204,
+            null,
+            'patch',
+            'vms/6a6256cc-e6ff-41d2-9894-95a066d2b7a4'
+        );
+
+        $sdk->updateServerHostname(
+            ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'),
+            'hoihoi.testdomein.nl'
+        );
+    }
+
     public function test_reboot_server()
     {
         $sdk = $this->getSdkWithMockedClient(

@@ -194,6 +194,16 @@ final class CloudSdk
         $this->client->delete("vms/{$serverId}/disks/{$diskId}", [], 204);
     }
 
+    public function updateServerHostname(ServerId $id, string $hostname): void
+    {
+        $this->client->patch(
+            "vms/{$id}",
+            [
+                'display_name' => $hostname,
+            ]
+        );
+    }
+
     public function rebootServer(ServerId $id): void
     {
         $this->client->post("vms/{$id}/reboot", [], [], 204);

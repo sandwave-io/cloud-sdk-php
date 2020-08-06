@@ -17,9 +17,7 @@ final class Usage
         $this->storageInGbs = $storageInGbs;
     }
 
-    /**
-     * @param array<mixed> $data
-     */
+    /** @param array<mixed> $data */
     public static function fromArray(array $data): Usage
     {
         return new Usage(

@@ -54,9 +54,7 @@ final class Network
         $this->updatedAt = $updatedAt;
     }
 
-    /**
-     * @param array<mixed> $data
-     */
+    /** @param array<mixed> $data */
     public static function fromArray(array $data): Network
     {
         $createdAt = DateTimeImmutable::createFromFormat(DateTime::W3C, $data['created_at']);

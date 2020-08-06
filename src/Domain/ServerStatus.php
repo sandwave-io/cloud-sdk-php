@@ -17,9 +17,7 @@ final class ServerStatus
     /** @var string */
     private $value;
 
-    /**
-     * @throws InvalidArgumentException
-     */
+    /** @throws InvalidArgumentException */
     private function __construct(string $value)
     {
         $options = [
