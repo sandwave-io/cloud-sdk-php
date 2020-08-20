@@ -13,7 +13,7 @@ abstract class AbstractCollection implements Iterator, Countable
     protected $items;
 
     /** @param array<int, mixed> $items */
-    public function __construct(...$items)
+    protected function __construct(...$items)
     {
         $this->items = new ArrayIterator($items);
     }

@@ -5,7 +5,7 @@ namespace SandwaveIo\CloudSdkPhp\Domain;
 
 final class DiskCollection extends AbstractCollection
 {
-    public function __construct(Disk ...$items)
+    protected function __construct(Disk ...$items)
     {
         parent::__construct(...$items);
     }

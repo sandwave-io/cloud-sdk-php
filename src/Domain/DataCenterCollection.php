@@ -5,7 +5,7 @@ namespace SandwaveIo\CloudSdkPhp\Domain;
 
 final class DataCenterCollection extends AbstractCollection
 {
-    public function __construct(DataCenter ...$items)
+    protected function __construct(DataCenter ...$items)
     {
         parent::__construct(...$items);
     }

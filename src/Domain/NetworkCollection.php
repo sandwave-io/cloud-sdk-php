@@ -5,7 +5,7 @@ namespace SandwaveIo\CloudSdkPhp\Domain;
 
 final class NetworkCollection extends AbstractCollection
 {
-    public function __construct(Network ...$items)
+    protected function __construct(Network ...$items)
     {
         parent::__construct(...$items);
     }
