@@ -5,7 +5,7 @@ namespace SandwaveIo\CloudSdkPhp\Domain;
 
 final class OfferCollection extends AbstractCollection
 {
-    public function __construct(Offer ...$items)
+    protected function __construct(Offer ...$items)
     {
         parent::__construct(...$items);
     }

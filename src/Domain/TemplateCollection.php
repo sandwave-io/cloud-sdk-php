@@ -5,7 +5,7 @@ namespace SandwaveIo\CloudSdkPhp\Domain;
 
 final class TemplateCollection extends AbstractCollection
 {
-    public function __construct(Template ...$items)
+    protected function __construct(Template ...$items)
     {
         parent::__construct(...$items);
     }

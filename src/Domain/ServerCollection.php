@@ -5,7 +5,7 @@ namespace SandwaveIo\CloudSdkPhp\Domain;
 
 final class ServerCollection extends AbstractCollection
 {
-    public function __construct(Server ...$items)
+    protected function __construct(Server ...$items)
     {
         parent::__construct(...$items);
     }
