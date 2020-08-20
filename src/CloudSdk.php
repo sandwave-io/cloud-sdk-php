@@ -123,21 +123,9 @@ final class CloudSdk
         );
     }
 
-    /**
-     * @param array<string> $sshKeys
-     */
-    public function resetServer(
-        ServerId $id,
-        string $hostname,
-        string $password,
-        array $sshKeys
-    ): void {
-        $this->client->post(
-            "vms/{$id}/reset",
-            ['user_data' => $this->userDataFactory->generateUserData($hostname, $password, $sshKeys)],
-            [],
-            204
-        );
+    public function resetServer(ServerId $id): void
+    {
+        $this->client->post("vms/{$id}/reset", [], [], 204);
     }
 
     public function getConsoleUrl(ServerId $id): string
