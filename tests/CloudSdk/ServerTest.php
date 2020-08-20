@@ -192,12 +192,7 @@ class ServerTest extends AbstractCloudSdkCase
             'vms/6a6256cc-e6ff-41d2-9894-95a066d2b7a4/reset'
         );
 
-        $sdk->resetServer(
-            ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'),
-            'test.example.com',
-            'Admin123',
-            []
-        );
+        $sdk->resetServer(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
     }
 
     public function test_attach_rescue_iso_server()

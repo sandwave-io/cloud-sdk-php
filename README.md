@@ -243,15 +243,7 @@ $cloudSdk->upgradeServer(
 #### Reset server
 
 ```php
-$cloudSdk->resetServer(
-    'aaaa-bbbb-cccc-dddd-eeee',
-    'hostname',
-    'password',
-    [
-    'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC7IMV7yEMeKxzJeFJmyCEpuH9u==',
-    'ssh-rsa tGwoW1BRomau8fB8PIuILX/7seiEdcNgkgdVpVTc19tTmvjiTOxwfVJ2oL',
-    ]
-);
+$cloudSdk->resetServer('aaaa-bbbb-cccc-dddd-eeee');
 ```
 
 #### Detach rescue ISO server
