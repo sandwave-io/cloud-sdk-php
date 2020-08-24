@@ -5,9 +5,9 @@ namespace SandwaveIo\CloudSdkPhp\Tests\Domain;
 
 use DateTime;
 use PHPUnit\Framework\TestCase;
-use SandwaveIo\CloudSdkPhp\Domain\Server;
-use SandwaveIo\CloudSdkPhp\Domain\ServerCollection;
-use SandwaveIo\CloudSdkPhp\Domain\ServerStatus;
+use SandwaveIo\CloudSdkPhp\Domain\Compute\Server;
+use SandwaveIo\CloudSdkPhp\Domain\Compute\ServerCollection;
+use SandwaveIo\CloudSdkPhp\Domain\Compute\ServerStatus;
 use UnexpectedValueException;
 
 final class ServerCollectionTest extends TestCase
