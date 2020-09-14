@@ -15,13 +15,6 @@ final class IPv4Address
         $this->address = $address;
     }
 
-    private static function assertValidIPv4Address(string $address): void
-    {
-        if (! filter_var($address, FILTER_VALIDATE_IP)) {
-            throw new InvalidArgumentException("{$address} is not a valid IPv4 address.");
-        }
-    }
-
     public function __toString(): string
     {
         return $this->address;
@@ -31,5 +24,12 @@ final class IPv4Address
     {
         IPv4Address::assertValidIPv4Address($address);
         return new IPv4Address($address);
+    }
+
+    private static function assertValidIPv4Address(string $address): void
+    {
+        if (! filter_var($address, FILTER_VALIDATE_IP)) {
+            throw new InvalidArgumentException("{$address} is not a valid IPv4 address.");
+        }
     }
 }

@@ -21,7 +21,6 @@ final class IPv4AddressTest extends TestCase
     /** @dataProvider ipAddresses */
     public function testFromAndToString(string $address, bool $valid): void
     {
-
         if (! $valid) {
             $this->expectException(InvalidArgumentException::class);
             $this->expectExceptionMessage("{$address} is not a valid IPv4 address.");
