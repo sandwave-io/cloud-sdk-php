@@ -136,10 +136,6 @@ class ServerTest extends AbstractComputeSdkCase
 
         $this->assertInstanceOf(ServerId::class, $serverId);
         $this->assertSame('2f811c1b-3bf5-4592-b7b5-00ff80f43968', (string) $serverId);
-        $this->assertSame(
-            '2f811c1b-3bf5-4592-b7b5-00ff80f43968',
-            (string) $serverId
-        );
     }
 
     public function test_create_server_with_ip()
@@ -164,10 +160,6 @@ class ServerTest extends AbstractComputeSdkCase
 
         $this->assertInstanceOf(ServerId::class, $serverId);
         $this->assertSame('2f811c1b-3bf5-4592-b7b5-00ff80f43968', (string) $serverId);
-        $this->assertSame(
-            '2f811c1b-3bf5-4592-b7b5-00ff80f43968',
-            (string) $serverId
-        );
     }
 
     public function test_create_server_negative()
