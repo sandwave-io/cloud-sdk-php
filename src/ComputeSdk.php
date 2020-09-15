@@ -16,6 +16,7 @@ use SandwaveIo\CloudSdkPhp\Domain\Compute\ServerCollection;
 use SandwaveIo\CloudSdkPhp\Domain\Compute\ServerId;
 use SandwaveIo\CloudSdkPhp\Domain\Compute\TemplateCollection;
 use SandwaveIo\CloudSdkPhp\Domain\Compute\TemplateId;
+use SandwaveIo\CloudSdkPhp\Domain\IPv4Address;
 use SandwaveIo\CloudSdkPhp\Domain\OfferCollection;
 use SandwaveIo\CloudSdkPhp\Domain\OfferId;
 use SandwaveIo\CloudSdkPhp\Domain\Usage;
@@ -64,7 +65,8 @@ final class ComputeSdk
         TemplateId $templateId,
         DatacenterId $datacenterId,
         ?NetworkId $networkId,
-        array $sshKeys
+        array $sshKeys,
+        ?IPv4Address $ipAddress = null
     ): ServerId {
         $postData = [
             'display_name' => $hostname,
@@ -76,6 +78,10 @@ final class ComputeSdk
 
         if ($networkId instanceof NetworkId) {
             $postData['network_id'] = (string) $networkId;
+
+            if ($ipAddress instanceof IPv4Address) {
+                $postData['ip_address'] = (string) $ipAddress;
+            }
         }
 
         $data = $this->client->post('vms', $postData);

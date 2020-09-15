@@ -8,6 +8,7 @@ use SandwaveIo\CloudSdkPhp\Domain\Compute\Server;
 use SandwaveIo\CloudSdkPhp\Domain\Compute\ServerCollection;
 use SandwaveIo\CloudSdkPhp\Domain\Compute\ServerId;
 use SandwaveIo\CloudSdkPhp\Domain\Compute\TemplateId;
+use SandwaveIo\CloudSdkPhp\Domain\IPv4Address;
 use SandwaveIo\CloudSdkPhp\Domain\OfferId;
 use SandwaveIo\CloudSdkPhp\Exceptions\CloudHttpException;
 
@@ -135,10 +136,30 @@ class ServerTest extends AbstractComputeSdkCase
 
         $this->assertInstanceOf(ServerId::class, $serverId);
         $this->assertSame('2f811c1b-3bf5-4592-b7b5-00ff80f43968', (string) $serverId);
-        $this->assertSame(
-            '2f811c1b-3bf5-4592-b7b5-00ff80f43968',
-            (string) $serverId
+    }
+
+    public function test_create_server_with_ip()
+    {
+        $sdk = $this->getSdkWithMockedClient(
+            201,
+            'json/server_create.json',
+            'post',
+            'vms'
         );
+
+        $serverId = $sdk->createServer(
+            'test.example.com',
+            'Admin123',
+            OfferId::fromString('8cbfe407-1cbc-49ea-b7a2-c4e6fd147474'),
+            TemplateId::fromString('8b38ce30-485b-4610-bb85-1bf02299cbc5'),
+            DatacenterId::fromString('36616598-8e93-4118-a03c-94f99e5e1169'),
+            NetworkId::fromString('36616598-8e93-4118-a03c-94f99e5e1169'),
+            [],
+            IPv4Address::fromString('123.123.123.123')
+        );
+
+        $this->assertInstanceOf(ServerId::class, $serverId);
+        $this->assertSame('2f811c1b-3bf5-4592-b7b5-00ff80f43968', (string) $serverId);
     }
 
     public function test_create_server_negative()
