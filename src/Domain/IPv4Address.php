@@ -28,7 +28,7 @@ final class IPv4Address
 
     private static function assertValidIPv4Address(string $address): void
     {
-        if (! filter_var($address, FILTER_VALIDATE_IP)) {
+        if (! filter_var($address, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
             throw new InvalidArgumentException("{$address} is not a valid IPv4 address.");
         }
     }

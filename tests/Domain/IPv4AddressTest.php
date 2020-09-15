@@ -15,6 +15,7 @@ final class IPv4AddressTest extends TestCase
             ['123.123.123.123', true],
             ['123.123.123123', false],
             ['123.323.123.123', false],
+            ['2a00:f10:101:1::1009', false],
         ];
     }
 
