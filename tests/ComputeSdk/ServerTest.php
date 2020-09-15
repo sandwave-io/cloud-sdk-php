@@ -296,4 +296,16 @@ class ServerTest extends AbstractComputeSdkCase
 
         $sdk->deleteServer(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
     }
+
+    public function test_password_reset_server()
+    {
+        $sdk = $this->getSdkWithMockedClient(
+            204,
+            null,
+            'post',
+            'vms/6a6256cc-e6ff-41d2-9894-95a066d2b7a4/reset_password'
+        );
+
+        $sdk->resetServerPassword(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'), 'test');
+    }
 }
