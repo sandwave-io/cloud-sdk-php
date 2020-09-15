@@ -334,4 +334,11 @@ final class ComputeSdk
             $this->client->get('networks')
         );
     }
+
+    public function resetServerPassword(ServerId $id, string $password): void
+    {
+        $this->client->post("vms/{$id}/reset_password", [
+            'password' => $password,
+        ], [], 204);
+    }
 }
