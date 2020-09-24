@@ -1,38 +1,32 @@
-# sandwave-io/cloud-sdk-php
+[![](https://user-images.githubusercontent.com/60096509/91668964-54ecd500-eb11-11ea-9c35-e8f0b20b277a.png)](https://sandwave.io)
 
-PHP package to to deploy and configure virtual servers on the [PCextreme](https://pcextreme.com) infrastructure.
+# PCextreme Cloud API - PHP SDK
 
-## Contributing
+[![Codecov](https://codecov.io/gh/sandwave-io/cloud-sdk-php/branch/master/graph/badge.svg?token=CWWIFWRKZC)](https://packagist.org/packages/sandwave-io/cloud-sdk-php)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/sandwave-io/cloud-sdk-php/CI)](https://packagist.org/packages/sandwave-io/cloud-sdk-php)
+[![Packagist PHP Version Support](https://img.shields.io/packagist/php-v/sandwave-io/cloud-sdk-php)](https://packagist.org/packages/sandwave-io/cloud-sdk-php)
+[![Packagist PHP Version Support](https://img.shields.io/packagist/v/sandwave-io/cloud-sdk-php)](https://packagist.org/packages/sandwave-io/cloud-sdk-php)
+[![Packagist Downloads](https://img.shields.io/packagist/dt/sandwave-io/cloud-sdk-php)](https://packagist.org/packages/sandwave-io/cloud-sdk-php)
 
-### PHP-CS-Fixer
+## How to contribute
 
-Run PHP-CS-Fixer:
+Feel free to create a PR if you have any ideas for improvements. Or create an issue.
 
-```
+* When adding code, make sure to add tests for it (phpunit).
+* Make sure the code adheres to our coding standards (use php-cs-fixer to check/fix). 
+* Also make sure PHPStan does not find any bugs.
+
+```bash
+
 vendor/bin/php-cs-fixer fix
-```
 
-The config can be found in `.php_cs.dist`
+vendor/bin/phpstan analyze
 
-### Unit testing
-
-Run PHPUnit:
+vendor/bin/phpunit --coverage-text
 
 ```
-vendor/bin/phpunit
-```
 
-The config can be found in `phpunit.xml`
-
-### PHPStan
-
-You can run PHPStan like so:
-
-```
-vendor/bin/phpstan analyze src --level=8
-```
-
-The config can be found in `phpstan.neon`
+These tools will also run in GitHub actions on PR's and pushes on master.
 
 ## Usage
 
