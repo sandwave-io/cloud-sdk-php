@@ -55,57 +55,57 @@ final class ServerStatus
 
     public static function deploying(): ServerStatus
     {
-        return new ServerStatus(ServerStatus::STATUS_DEPLOYING);
+        return new ServerStatus(ucfirst(ServerStatus::STATUS_DEPLOYING));
     }
 
     public static function deployed(): ServerStatus
     {
-        return new ServerStatus(ServerStatus::STATUS_DEPLOYED);
+        return new ServerStatus(ucfirst(ServerStatus::STATUS_DEPLOYED));
     }
 
     public static function error(): ServerStatus
     {
-        return new ServerStatus(ServerStatus::STATUS_ERROR);
+        return new ServerStatus(ucfirst(ServerStatus::STATUS_ERROR));
     }
 
     public static function deleting(): ServerStatus
     {
-        return new ServerStatus(ServerStatus::STATUS_DELETING);
+        return new ServerStatus(ucfirst(ServerStatus::STATUS_DELETING));
     }
 
     public static function deleted(): ServerStatus
     {
-        return new ServerStatus(ServerStatus::STATUS_DELETED);
+        return new ServerStatus(ucfirst(ServerStatus::STATUS_DELETED));
     }
 
     public static function running(): ServerStatus
     {
-        return new ServerStatus(ServerStatus::STATUS_RUNNING);
+        return new ServerStatus(ucfirst(ServerStatus::STATUS_RUNNING));
     }
 
     public static function stopped(): ServerStatus
     {
-        return new ServerStatus(ServerStatus::STATUS_STOPPED);
+        return new ServerStatus(ucfirst(ServerStatus::STATUS_STOPPED));
     }
 
     public static function starting(): ServerStatus
     {
-        return new ServerStatus(ServerStatus::STATUS_STARTING);
+        return new ServerStatus(ucfirst(ServerStatus::STATUS_STARTING));
     }
 
     public static function rebooting(): ServerStatus
     {
-        return new ServerStatus(ServerStatus::STATUS_REBOOTING);
+        return new ServerStatus(ucfirst(ServerStatus::STATUS_REBOOTING));
     }
 
     public static function stopping(): ServerStatus
     {
-        return new ServerStatus(ServerStatus::STATUS_STOPPING);
+        return new ServerStatus(ucfirst(ServerStatus::STATUS_STOPPING));
     }
 
     public static function destroyed(): ServerStatus
     {
-        return new ServerStatus(ServerStatus::STATUS_DESTROYED);
+        return new ServerStatus(ucfirst(ServerStatus::STATUS_DESTROYED));
     }
 
     public function equals(ServerStatus $other): bool
