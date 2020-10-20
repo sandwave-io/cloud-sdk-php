@@ -11,6 +11,21 @@ final class ServerStatusTest extends TestCase
 {
     public function testCanConstruct(): void
     {
+        $deleting = ServerStatus::deleting();
+        $this->assertTrue(ServerStatus::fromString((string) $deleting)->equals($deleting));
+
+        $deleted = ServerStatus::deleted();
+        $this->assertTrue(ServerStatus::fromString((string) $deleted)->equals($deleted));
+
+        $deploying = ServerStatus::deploying();
+        $this->assertTrue(ServerStatus::fromString((string) $deploying)->equals($deploying));
+
+        $deployed = ServerStatus::deployed();
+        $this->assertTrue(ServerStatus::fromString((string) $deployed)->equals($deployed));
+
+        $error = ServerStatus::error();
+        $this->assertTrue(ServerStatus::fromString((string) $error)->equals($error));
+
         $running = ServerStatus::running();
         $this->assertTrue(ServerStatus::fromString((string) $running)->equals($running));
 
