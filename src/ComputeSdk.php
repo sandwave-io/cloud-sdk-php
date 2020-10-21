@@ -213,9 +213,9 @@ final class ComputeSdk
         $this->client->post("vms/{$id}/start", [], [], 204);
     }
 
-    public function deleteServer(ServerId $id): void
+    public function deleteServer(ServerId $id): array
     {
-        $this->client->delete("vms/{$id}", [], 204);
+        return $this->client->delete("vms/{$id}", [], 204);
     }
 
     /**
