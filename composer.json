@@ -14,9 +14,9 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.4|^8.0",
         "ext-json": "*",
-        "guzzlehttp/guzzle": "^6.0",
+        "guzzlehttp/guzzle": "^7.3.0",
         "guzzlehttp/psr7": "^1.4.1",
         "ramsey/uuid": "^3.8",
         "symfony/yaml": "^4.4"
