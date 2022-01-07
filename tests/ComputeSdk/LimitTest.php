@@ -3,11 +3,10 @@
 namespace SandwaveIo\CloudSdkPhp\Tests\ComputeSdk;
 
 use SandwaveIo\CloudSdkPhp\Domain\OfferId;
-use SandwaveIo\CloudSdkPhp\Domain\Usage;
 
-class LimitTest extends AbstractComputeSdkCase
+final class LimitTest extends AbstractComputeSdkCase
 {
-    public function test_usage()
+    public function test_usage(): void
     {
         $sdk = $this->getSdkWithMockedClient(
             200,
@@ -18,11 +17,10 @@ class LimitTest extends AbstractComputeSdkCase
 
         $usage = $sdk->getUsage();
 
-        $this->assertInstanceOf(Usage::class, $usage);
-        $this->assertSame(58, $usage->getMemoryInGbs());
+        self::assertSame(58, $usage->getMemoryInGbs());
     }
 
-    public function test_can_deploy_positive()
+    public function test_can_deploy_positive(): void
     {
         $sdk = $this->getSdkWithMockedClient(
             204,
@@ -34,10 +32,10 @@ class LimitTest extends AbstractComputeSdkCase
 
         $canDeploy = $sdk->canDeployOffer(OfferId::fromString('175e7781-a186-47ed-91a7-b24e94b8e5c2'));
 
-        $this->assertTrue($canDeploy);
+        self::assertTrue($canDeploy);
     }
 
-    public function test_can_deploy_negative()
+    public function test_can_deploy_negative(): void
     {
         $sdk = $this->getSdkWithMockedClient(
             403,
@@ -49,6 +47,6 @@ class LimitTest extends AbstractComputeSdkCase
 
         $canDeploy = $sdk->canDeployOffer(OfferId::fromString('175e7781-a186-47ed-91a7-b24e94b8e5c2'));
 
-        $this->assertFalse($canDeploy);
+        self::assertFalse($canDeploy);
     }
 }

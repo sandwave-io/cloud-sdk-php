@@ -12,44 +12,18 @@ use SandwaveIo\CloudSdkPhp\Domain\Offer;
 
 final class Server
 {
-    /** @var ServerId */
-    private $id;
-
-    /** @var string */
-    private $displayName;
-
-    /** @var ServerStatus */
-    private $status;
-
-    /** @var bool */
-    private $rescueIsoAttached;
-
-    /** @var bool */
-    private $hasSecurityGroup;
-
-    /** @var DateTimeInterface */
-    private $createdAt;
-
-    /** @var DateTimeInterface */
-    private $updatedAt;
-
-    /** @var string|null */
-    private $ipv4Address;
-
-    /** @var string|null */
-    private $ipv6Address;
-
-    /** @var NetworkId|null */
-    private $networkId;
-
-    /** @var ?DiskCollection */
-    private $disks;
-
-    /** @var ?Offer */
-    private $offer;
-
-    /** @var ?DataCenter */
-    private $dataCenter;
+    private ServerId $id;
+    private string $displayName;
+    private ServerStatus $status;
+    private bool $rescueIsoAttached;
+    private bool $hasSecurityGroup;
+    private DateTimeInterface $createdAt;
+    private DateTimeInterface $updatedAt;
+    private ?string $ipv4Address;
+    private ?string $ipv6Address;
+    private ?NetworkId $networkId;
+    private ?Offer $offer;
+    private ?DataCenter $dataCenter;
 
     private function __construct(
         ServerId $id,
@@ -64,7 +38,6 @@ final class Server
         ?NetworkId $networkId,
         ?Offer $offer,
         ?DataCenter $dataCenter,
-        ?DiskCollection $disks
     ) {
         $this->id = $id;
         $this->displayName = $displayName;
@@ -78,7 +51,6 @@ final class Server
         $this->networkId = $networkId;
         $this->offer = $offer;
         $this->dataCenter = $dataCenter;
-        $this->disks = $disks;
     }
 
     /**
@@ -101,7 +73,6 @@ final class Server
 
         $offer = isset($data['offer']['data']) ? Offer::fromArray($data['offer']['data']) : null;
         $dataCenter = isset($data['datacenter']['data']) ? DataCenter::fromArray($data['datacenter']['data']) : null;
-        $disks = isset($data['disks']['data']) ? DiskCollection::fromArray($data['disks']['data']) : null;
         $ipv4Address = isset($data['ipv4_address']) ? $data['ipv4_address'] : null;
         $ipv6Address = isset($data['ipv6_address']) ? $data['ipv6_address'] : null;
         $networkId = isset($data['network_id']) ? NetworkId::fromString($data['network_id']) : null;
@@ -110,8 +81,8 @@ final class Server
             ServerId::fromString($data['id']),
             $data['display_name'],
             ServerStatus::fromString($data['status']),
-            boolval($data['rescue_iso_attached']),
-            boolval($data['has_security_group']),
+            (bool)$data['rescue_iso_attached'],
+            (bool)$data['has_security_group'],
             $createdAt,
             $updatedAt,
             $ipv4Address,
@@ -119,7 +90,6 @@ final class Server
             $networkId,
             $offer,
             $dataCenter,
-            $disks
         );
     }
 

@@ -7,11 +7,11 @@ use Ramsey\Uuid\Uuid;
 use SandwaveIo\CloudSdkPhp\ComputeSdk;
 use SandwaveIo\CloudSdkPhp\Domain\AccountId;
 
-class ComputeSdkTest extends TestCase
+final class ComputeSdkTest extends TestCase
 {
-    public function test_sdk_constructor()
+    public function test_sdk_constructor(): void
     {
         $sdk = new ComputeSdk('this-is-my-api-key', AccountId::fromString(Uuid::NIL));
-        $this->assertNotNull($sdk);
+        self::assertNotNull($sdk);
     }
 }

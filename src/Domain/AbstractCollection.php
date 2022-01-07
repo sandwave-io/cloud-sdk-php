@@ -7,10 +7,13 @@ use ArrayIterator;
 use Countable;
 use Iterator;
 
+/**
+ * @implements Iterator <int | string, mixed>
+ */
 abstract class AbstractCollection implements Iterator, Countable
 {
-    /** @var ArrayIterator */
-    protected $items;
+    /** @var ArrayIterator <mixed, mixed> */
+    protected ArrayIterator $items;
 
     /** @param array<int, mixed> $items */
     protected function __construct(...$items)
@@ -21,7 +24,7 @@ abstract class AbstractCollection implements Iterator, Countable
     /** @return mixed */
     abstract public function current();
 
-    public function next(): void
+    final public function next(): void
     {
         $this->items->next();
     }
@@ -31,22 +34,22 @@ abstract class AbstractCollection implements Iterator, Countable
      *
      * @return mixed
      */
-    public function key()
+    final public function key()
     {
         return $this->items->key();
     }
 
-    public function valid(): bool
+    final public function valid(): bool
     {
         return $this->items->valid();
     }
 
-    public function rewind(): void
+    final public function rewind(): void
     {
         $this->items->rewind();
     }
 
-    public function count(): int
+    final public function count(): int
     {
         return $this->items->count();
     }

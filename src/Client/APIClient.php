@@ -166,7 +166,7 @@ final class APIClient
         $responseText = (string) $response->getBody();
         $json = json_decode($responseText, true);
 
-        if (json_last_error()) {
+        if (json_last_error() !== 0) {
             throw new CloudHttpException("Could not parse JSON reponse body:\n" . $response->getBody());
         }
 

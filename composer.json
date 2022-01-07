@@ -16,16 +16,21 @@
     "require": {
         "php": ">=8.0",
         "ext-json": "*",
+        "ekino/phpstan-banned-code": "^1.0",
+        "ergebnis/phpstan-rules": "^1.0",
         "guzzlehttp/guzzle": "^7.3.0",
         "guzzlehttp/psr7": "^1.4.1",
+        "phpstan/phpstan-deprecation-rules": "^1.0",
+        "phpstan/phpstan-strict-rules": "^1.1",
         "ramsey/uuid": "^4.2.3",
-        "symfony/yaml": "^4.4"
+        "symfony/yaml": "^4.4",
+        "thecodingmachine/phpstan-strict-rules": "^1.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",
         "mockery/mockery": "^1.3",
-        "phpstan/phpstan": "^0.12.18",
-        "phpunit/phpunit": "^8.5.20",
+        "phpstan/phpstan": "^1.2.0",
+        "phpunit/phpunit": "^9.3.0",
         "uptimeproject/php-cs-fixer-config": "^1.0"
     },
     "autoload": {

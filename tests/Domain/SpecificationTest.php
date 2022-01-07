@@ -16,8 +16,8 @@ final class SpecificationTest extends TestCase
 
         $specification = new Specification($title, $value, $unit);
 
-        $this->assertSame($title, $specification->getTitle());
-        $this->assertSame($value, $specification->getValue());
-        $this->assertSame($unit, $specification->getUnit());
+        self::assertSame($title, $specification->getTitle());
+        self::assertSame($value, $specification->getValue());
+        self::assertSame($unit, $specification->getUnit());
     }
 }

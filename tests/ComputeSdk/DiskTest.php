@@ -2,15 +2,14 @@
 
 namespace SandwaveIo\CloudSdkPhp\Tests\ComputeSdk;
 
-use SandwaveIo\CloudSdkPhp\Domain\Compute\DiskCollection;
 use SandwaveIo\CloudSdkPhp\Domain\Compute\DiskId;
 use SandwaveIo\CloudSdkPhp\Domain\Compute\ServerId;
 use SandwaveIo\CloudSdkPhp\Domain\OfferId;
 use SandwaveIo\CloudSdkPhp\Exceptions\CloudHttpException;
 
-class DiskTest extends AbstractComputeSdkCase
+final class DiskTest extends AbstractComputeSdkCase
 {
-    public function test_list_disks()
+    public function test_list_disks(): void
     {
         $sdk = $this->getSdkWithMockedClient(
             200,
@@ -21,12 +20,11 @@ class DiskTest extends AbstractComputeSdkCase
 
         $diskList = $sdk->listDisks(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
 
-        $this->assertInstanceOf(DiskCollection::class, $diskList);
-        $this->assertSame(1, $diskList->count());
-        $this->assertSame('test', (string) $diskList->current()->getDisplayName());
+        self::assertSame(1, $diskList->count());
+        self::assertSame('test', (string) $diskList->current()?->getDisplayName());
     }
 
-    public function test_create_disk()
+    public function test_create_disk(): void
     {
         $sdk = $this->getSdkWithMockedClient(
             201,
@@ -41,8 +39,7 @@ class DiskTest extends AbstractComputeSdkCase
             'test'
         );
 
-        $this->assertInstanceOf(DiskId::class, $id);
-        $this->assertSame(
+        self::assertSame(
             '4031dfb0-a9a1-499b-8707-7f126bfcbda6',
             (string) $id
         );
@@ -65,7 +62,7 @@ class DiskTest extends AbstractComputeSdkCase
         );
     }
 
-    public function test_delete_disk()
+    public function test_delete_disk(): void
     {
         $sdk = $this->getSdkWithMockedClient(
             204,

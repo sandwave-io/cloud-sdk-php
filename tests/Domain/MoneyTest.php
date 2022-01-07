@@ -12,6 +12,6 @@ final class MoneyTest extends TestCase
     {
         $money = Money::fromCents(123456);
 
-        $this->assertSame('1234.56', (string) $money);
+        self::assertSame('1234.56', (string) $money);
     }
 }

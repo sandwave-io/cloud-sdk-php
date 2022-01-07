@@ -4,9 +4,9 @@ namespace SandwaveIo\CloudSdkPhp\Tests\ComputeSdk;
 
 use SandwaveIo\CloudSdkPhp\Domain\Compute\DataCenterCollection;
 
-class DatacenterTest extends AbstractComputeSdkCase
+final class DatacenterTest extends AbstractComputeSdkCase
 {
-    public function test_list_datacenters()
+    public function test_list_datacenters(): void
     {
         $sdk = $this->getSdkWithMockedClient(
             200,
@@ -17,9 +17,9 @@ class DatacenterTest extends AbstractComputeSdkCase
 
         $datacenters = $sdk->listDatacenters();
 
-        $this->assertInstanceOf(DataCenterCollection::class, $datacenters);
-        $this->assertNotSame(0, $datacenters->count());
+        self::assertInstanceOf(DataCenterCollection::class, $datacenters);
+        self::assertNotSame(0, $datacenters->count());
 
-        $this->assertSame('ams01', $datacenters->current()->getName());
+        self::assertSame('ams01', $datacenters->current()?->getName());
     }
 }

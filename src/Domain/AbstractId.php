@@ -18,7 +18,7 @@ abstract class AbstractId
         $this->value = Uuid::fromString($value);
     }
 
-    public function __toString(): string
+    final public function __toString(): string
     {
         return $this->value->toString();
     }

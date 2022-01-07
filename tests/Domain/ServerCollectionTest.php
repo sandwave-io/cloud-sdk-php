@@ -12,77 +12,89 @@ use UnexpectedValueException;
 
 final class ServerCollectionTest extends TestCase
 {
-    public function testFromArrayOfArrays()
+    /**
+     * @throws \JsonException
+     */
+    public function testFromArrayOfArrays(): void
     {
         $serverData = json_decode(
-            file_get_contents('tests/Domain/json/server.json'),
-            true
+            (string) file_get_contents('tests/Domain/json/server.json'),
+            true,
+            512,
+            JSON_THROW_ON_ERROR
         );
+
         $servers = ServerCollection::fromArray([$serverData]);
 
         foreach ($servers as $server) {
-            $this->assertSame(
+            self::assertSame(
                 '6a6256cc-e6ff-41d2-9894-95a066d2b7a4',
-                (string) $server->getId()
+                (string) $server?->getId()
             );
-            $this->assertSame('web01.seasidehosting.nl', $server->getDisplayName());
-            $this->assertTrue($server->getStatus()->equals(ServerStatus::running()));
-            $this->assertSame(false, $server->isRescueIsoAttached());
-            $this->assertSame(true, $server->isHasSecurityGroup());
-            $this->assertSame(
+            self::assertSame('web01.seasidehosting.nl', $server?->getDisplayName());
+            self::assertTrue($server?->getStatus()->equals(ServerStatus::running()));
+            self::assertFalse($server?->isRescueIsoAttached());
+            self::assertTrue($server?->isHasSecurityGroup());
+            self::assertSame(
                 '2020-03-04T13:48:35+00:00',
-                $server->getCreatedAt()->format(DateTime::W3C)
+                $server?->getCreatedAt()->format(DateTime::W3C)
             );
-            $this->assertSame(
+            self::assertSame(
                 '2020-03-30T11:01:17+00:00',
-                $server->getUpdatedAt()->format(DateTime::W3C)
+                $server?->getUpdatedAt()->format(DateTime::W3C)
             );
 
-            $this->assertSame(
+            self::assertSame(
                 '2020-04-02T09:50:13+00:00',
-                $server->getOffer()->getCreatedAt()->format(DateTime::W3C)
+                $server?->getOffer()?->getCreatedAt()->format(DateTime::W3C)
             );
-            $this->assertSame('ams01', $server->getDataCenter()->getName());
+            self::assertSame('ams01', $server?->getDataCenter()?->getName());
         }
     }
 
-    public function testFromArrayOfServers()
+    /**
+     * @throws \JsonException
+     */
+    public function testFromArrayOfServers(): void
     {
+
         $serverData = Server::fromArray(
             json_decode(
-                file_get_contents('tests/Domain/json/server.json'),
-                true
+                (string) file_get_contents('tests/Domain/json/server.json'),
+                true,
+                512,
+                JSON_THROW_ON_ERROR
             )
         );
         $servers = ServerCollection::fromArray([$serverData]);
 
         foreach ($servers as $server) {
-            $this->assertSame(
+            self::assertSame(
                 '6a6256cc-e6ff-41d2-9894-95a066d2b7a4',
-                (string) $server->getId()
+                (string) $server?->getId()
             );
-            $this->assertSame('web01.seasidehosting.nl', $server->getDisplayName());
-            $this->assertTrue($server->getStatus()->equals(ServerStatus::running()));
-            $this->assertSame(false, $server->isRescueIsoAttached());
-            $this->assertSame(true, $server->isHasSecurityGroup());
-            $this->assertSame(
+            self::assertSame('web01.seasidehosting.nl', $server?->getDisplayName());
+            self::assertTrue($server?->getStatus()->equals(ServerStatus::running()));
+            self::assertFalse($server?->isRescueIsoAttached());
+            self::assertTrue($server?->isHasSecurityGroup());
+            self::assertSame(
                 '2020-03-04T13:48:35+00:00',
-                $server->getCreatedAt()->format(DateTime::W3C)
+                $server?->getCreatedAt()->format(DateTime::W3C)
             );
-            $this->assertSame(
+            self::assertSame(
                 '2020-03-30T11:01:17+00:00',
-                $server->getUpdatedAt()->format(DateTime::W3C)
+                $server?->getUpdatedAt()->format(DateTime::W3C)
             );
 
-            $this->assertSame(
+            self::assertSame(
                 '2020-04-02T09:50:13+00:00',
-                $server->getOffer()->getCreatedAt()->format(DateTime::W3C)
+                $server?->getOffer()?->getCreatedAt()->format(DateTime::W3C)
             );
-            $this->assertSame('ams01', $server->getDataCenter()->getName());
+            self::assertSame('ams01', $server?->getDataCenter()?->getName());
         }
     }
 
-    public function testFromArrayOfDifferentTypes()
+    public function testFromArrayOfDifferentTypes(): void
     {
         $serversData = [
             'string',

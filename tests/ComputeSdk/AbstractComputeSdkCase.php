@@ -31,9 +31,9 @@ class AbstractComputeSdkCase extends TestCase
             return function (RequestInterface $request, array $options) use ($handler, $assertMethod, $assertPath, $assertQuery) {
 
                 // Make some assertions
-                $this->assertSame($assertPath, $request->getUri()->getPath());
-                $this->assertSame($assertQuery, $request->getUri()->getQuery());
-                $this->assertSame(strtolower($assertMethod), strtolower($request->getMethod()));
+                self::assertSame($assertPath, $request->getUri()->getPath());
+                self::assertSame($assertQuery, $request->getUri()->getQuery());
+                self::assertSame(strtolower($assertMethod), strtolower($request->getMethod()));
 
                 // Go on with business.
                 return $handler($request, $options);
@@ -57,6 +57,6 @@ class AbstractComputeSdkCase extends TestCase
             }
         });
 
-        $this->assertTrue($found, $message);
+        self::assertTrue($found, $message);
     }
 }

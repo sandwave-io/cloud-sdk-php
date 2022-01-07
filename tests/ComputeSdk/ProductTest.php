@@ -4,9 +4,9 @@ namespace SandwaveIo\CloudSdkPhp\Tests\ComputeSdk;
 
 use SandwaveIo\CloudSdkPhp\Domain\OfferCollection;
 
-class ProductTest extends AbstractComputeSdkCase
+final class ProductTest extends AbstractComputeSdkCase
 {
-    public function test_list_offers()
+    public function test_list_offers(): void
     {
         $sdk = $this->getSdkWithMockedClient(
             200,
@@ -18,17 +18,16 @@ class ProductTest extends AbstractComputeSdkCase
 
         $listOffers = $sdk->listOffers();
 
-        $this->assertInstanceOf(OfferCollection::class, $listOffers);
-        $this->assertNotSame(0, $listOffers->count());
+        self::assertNotSame(0, $listOffers->count());
 
         $skus = [];
         foreach ($listOffers as $listOffer) {
-            $skus[] = $listOffer->getSku();
+            $skus[] = $listOffer?->getSku();
         }
-        $this->assertSame($skus[14], 'compute_ha_32gb');
+        self::assertSame($skus[14], 'compute_ha_32gb');
     }
 
-    public function test_list_server_offers()
+    public function test_list_server_offers(): void
     {
         $sdk = $this->getSdkWithMockedClient(
             200,
@@ -40,17 +39,16 @@ class ProductTest extends AbstractComputeSdkCase
 
         $serverOffers = $sdk->listServerOffers(51, 2);
 
-        $this->assertInstanceOf(OfferCollection::class, $serverOffers);
-        $this->assertNotSame(0, $serverOffers->count());
+        self::assertNotSame(0, $serverOffers->count());
 
         $skus = [];
         foreach ($serverOffers as $serverOffer) {
-            $skus[] = $serverOffer->getSku();
+            $skus[] = $serverOffer?->getSku();
         }
-        $this->assertSame('compute_ha_32gb', $skus[14]);
+        self::assertSame('compute_ha_32gb', $skus[14]);
     }
 
-    public function test_list_disk_offers()
+    public function test_list_disk_offers(): void
     {
         $sdk = $this->getSdkWithMockedClient(
             200,
@@ -62,13 +60,13 @@ class ProductTest extends AbstractComputeSdkCase
 
         $diskOfferCollection = $sdk->listDiskOffers(51, 2);
 
-        $this->assertInstanceOf(OfferCollection::class, $diskOfferCollection);
-        $this->assertNotSame(0, $diskOfferCollection->count());
+        self::assertInstanceOf(OfferCollection::class, $diskOfferCollection);
+        self::assertNotSame(0, $diskOfferCollection->count());
 
         $skus = [];
         foreach ($diskOfferCollection as $diskOffer) {
-            $skus[] = $diskOffer->getSku();
+            $skus[] = $diskOffer?->getSku();
         }
-        $this->assertSame('compute_ssd_250gb', $skus[1]);
+        self::assertSame('compute_ssd_250gb', $skus[1]);
     }
 }

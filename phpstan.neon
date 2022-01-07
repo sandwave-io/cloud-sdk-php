@@ -1,5 +1,70 @@
+includes:
+    - vendor/phpstan/phpstan-strict-rules/rules.neon
+    - vendor/phpstan/phpstan-deprecation-rules/rules.neon
+    - vendor/ergebnis/phpstan-rules/rules.neon
+    - vendor/thecodingmachine/phpstan-strict-rules/phpstan-strict-rules.neon
+    - vendor/ekino/phpstan-banned-code/extension.neon
+    - phpstan-baseline.neon
 parameters:
-    checkGenericClassInNonGenericObjectType: false
-    level: 8
+    inferPrivatePropertyTypeFromConstructor: true
     paths:
-        - src
+        - 'tests'
+        - 'src'
+    parallel:
+    	processTimeout: 300.0
+    excludePaths:
+        - '%currentWorkingDirectory%/Modules/*/Database/Migrations/*'
+        - '%currentWorkingDirectory%/Modules/*/Database/factories/*'
+        - '%currentWorkingDirectory%/Modules/DnsPremium/Services/DnsMe.php'
+    level: 8
+    ignoreErrors:
+        - '#Access to an undefined property App\\Nova\\[a-zA-Z0-9\\_]+::\$[a-zA-Z0-9\\_]+.#'
+        - '#Access to an undefined property Laravel\\Nova\\Fields\\ActionFields::\$[a-zA-Z0-9\\_]+.#'
+        - '#Call to an undefined method Prophecy\\Prophecy\\ObjectProphecy::[a-zA-Z0-9]+().#'
+#        - '#Call to an undefined method Laravel\\Nova\\Fields\\BelongsTo::prepopulate\(\)#'
+        - '#Comparison operation \"\=\=\" between SimpleXMLElement and [0-9]+ results in an error.#'
+        - '#Comparison operation \"\!\=\" between SimpleXMLElement and [0-9]+ results in an error.#'
+        - '#^Dynamic call to static method Illuminate\\Database\\Eloquent\\Relations\\HasMany<App\\Models\\ModelHistory>::delete\(\).#'
+
+        # A bug in Laravel, fixed in Laravel v7. For more info https://github.com/nunomaduro/larastan/issues/434
+#        - "#^Function factory invoked with [0-9]{1} parameter[s]?, 0 required\\.$#"
+
+        # Ambiguity in laravel eloquent.
+        - '#where\(\).#'
+        - '#whereIn\(\).#'
+        - '#create\(\).#'
+        - '#exists\(\).#'
+        - '#firstOrFail\(\).#'
+#        - '#firstOrCreate\(\).#'
+        - '#whereNull\(\).#'
+        - '#whereNotNull\(\).#'
+        - '#orderBy\(\).#'
+        - '#whereHas\(\).#'
+        - '#first\(\).#'
+        - '#fields\(\).#'
+        - '#with\(\).#'
+        - '#latest\(\).#'
+        - '#count\(\).#'
+
+        # Extending classes.
+        - '#Class \"[a-zA-Z0-9\\_]+\" is not allowed to extend \"[a-zA-Z0-9\\_]+\".#'
+
+        # No switch rule.
+        - '#Control structures using switch should not be used.#'
+
+        # Nullable parameters.
+#        - '#Constructor in anonymous class has parameter \$[a-zA-Z0-9\\_]+ with default value.#'
+        - '#Constructor in [a-zA-Z0-9\\_]+ has parameter \$[a-zA-Z0-9\\_]+ with default value.#'
+#        - '#Method [a-zA-Z0-9\\_]+\(\) in anonymous class has parameter \$[a-zA-Z0-9\\_]+ with null as default value.#'
+        - '#Method [a-zA-Z0-9\\_]+::[a-zA-Z0-9\\_]+\(\) has parameter \$[a-zA-Z0-9\\_]+ with null as default value.#'
+        - '#Method [a-zA-Z0-9\\_]+::[a-zA-Z0-9\\_]+\(\) has a nullable return type declaration.#'
+#        - '#Method [a-zA-Z0-9\\_]+\(\) in anonymous class has parameter \$[a-zA-Z0-9\\_]+ with a nullable type declaration.#'
+        - '#Method [a-zA-Z0-9\\_]+::[a-zA-Z0-9\\_]+\(\) has parameter \$[a-zA-Z0-9\\_]+ with a nullable type declaration.#'
+        - '#Closure has a nullable return type declaration.#'
+#        - '#Closure has parameter \$[a-zA-Z0-9\\_]+ with null as default value.#'
+#        - '#Closure has parameter \$[a-zA-Z0-9\\_]+ with a nullable type declaration.#'
+#        - '#Function [a-zA-Z0-9\\_]+\(\) has a nullable return type declaration.#'
+#        - '#Function [a-zA-Z0-9\\_]+\(\) has parameter \$[a-zA-Z0-9\\_]+ with null as default value.#'
+#        - '#Function [a-zA-Z0-9\\_]+\(\) has parameter \$[a-zA-Z0-9\\_]+ with a nullable type declaration.#'
+
+        - '#Should not use [a-zA-Z0-9\\_]+ in the non-test file [a-zA-Z0-9\/\._]+#'

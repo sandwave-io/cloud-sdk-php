@@ -2,11 +2,9 @@
 
 namespace SandwaveIo\CloudSdkPhp\Tests\ComputeSdk;
 
-use SandwaveIo\CloudSdkPhp\Domain\Compute\TemplateCollection;
-
-class TemplateTest extends AbstractComputeSdkCase
+final class TemplateTest extends AbstractComputeSdkCase
 {
-    public function test_list_templates()
+    public function test_list_templates(): void
     {
         $sdk = $this->getSdkWithMockedClient(
             200,
@@ -17,13 +15,12 @@ class TemplateTest extends AbstractComputeSdkCase
 
         $templates = $sdk->listTemplates();
 
-        $this->assertInstanceOf(TemplateCollection::class, $templates);
-        $this->assertSame(6, $templates->count());
+        self::assertSame(6, $templates->count());
 
         $displayNames = [];
         foreach ($templates as $template) {
-            $displayNames[] = $template->getDisplayName();
+            $displayNames[] = $template?->getDisplayName();
         }
-        $this->assertSame('CentOS 8.1', $displayNames[5]);
+        self::assertSame('CentOS 8.1', $displayNames[5]);
     }
 }

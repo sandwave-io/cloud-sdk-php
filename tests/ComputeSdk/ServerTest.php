@@ -4,17 +4,15 @@ namespace SandwaveIo\CloudSdkPhp\Tests\ComputeSdk;
 
 use SandwaveIo\CloudSdkPhp\Domain\Compute\DatacenterId;
 use SandwaveIo\CloudSdkPhp\Domain\Compute\NetworkId;
-use SandwaveIo\CloudSdkPhp\Domain\Compute\Server;
-use SandwaveIo\CloudSdkPhp\Domain\Compute\ServerCollection;
 use SandwaveIo\CloudSdkPhp\Domain\Compute\ServerId;
 use SandwaveIo\CloudSdkPhp\Domain\Compute\TemplateId;
 use SandwaveIo\CloudSdkPhp\Domain\IPv4Address;
 use SandwaveIo\CloudSdkPhp\Domain\OfferId;
 use SandwaveIo\CloudSdkPhp\Exceptions\CloudHttpException;
 
-class ServerTest extends AbstractComputeSdkCase
+final class ServerTest extends AbstractComputeSdkCase
 {
-    public function test_list_servers()
+    public function test_list_servers(): void
     {
         $sdk = $this->getSdkWithMockedClient(
             200,
@@ -26,12 +24,11 @@ class ServerTest extends AbstractComputeSdkCase
 
         $serverlist = $sdk->listServers(51, 2);
 
-        $this->assertInstanceOf(ServerCollection::class, $serverlist);
-        $this->assertSame(2, $serverlist->count());
-        $this->assertSame('Running', (string) $serverlist->current()->getStatus());
+        self::assertSame(2, $serverlist->count());
+        self::assertSame('Running', (string) $serverlist->current()?->getStatus());
     }
 
-    public function test_show_server()
+    public function test_show_server(): void
     {
         $sdk = $this->getSdkWithMockedClient(
             200,
@@ -43,14 +40,13 @@ class ServerTest extends AbstractComputeSdkCase
 
         $server = $sdk->showServer(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
 
-        $this->assertInstanceOf(Server::class, $server);
-        $this->assertSame('Running', (string) $server->getStatus());
-        $this->assertNull($server->getIPv4Address());
-        $this->assertNull($server->getIPv6Address());
-        $this->assertNull($server->getNetworkId());
+        self::assertSame('Running', (string) $server->getStatus());
+        self::assertNull($server->getIPv4Address());
+        self::assertNull($server->getIPv6Address());
+        self::assertNull($server->getNetworkId());
     }
 
-    public function test_show_server_detailed()
+    public function test_show_server_detailed(): void
     {
         $sdk = $this->getSdkWithMockedClient(
             200,
@@ -62,14 +58,13 @@ class ServerTest extends AbstractComputeSdkCase
 
         $server = $sdk->showServer(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
 
-        $this->assertInstanceOf(Server::class, $server);
-        $this->assertSame('Running', (string) $server->getStatus());
-        $this->assertSame('185.109.216.103', $server->getIPv4Address());
-        $this->assertSame('2a05:1500:600:0:1c00:83ff:fe00:63', $server->getIPv6Address());
-        $this->assertSame('a0234ec3-bdb6-46b8-80a1-37144d7c3928', (string) $server->getNetworkId());
+        self::assertSame('Running', (string) $server->getStatus());
+        self::assertSame('185.109.216.103', $server->getIPv4Address());
+        self::assertSame('2a05:1500:600:0:1c00:83ff:fe00:63', $server->getIPv6Address());
+        self::assertSame('a0234ec3-bdb6-46b8-80a1-37144d7c3928', (string) $server->getNetworkId());
     }
 
-    public function test_console_server()
+    public function test_console_server(): void
     {
         $sdk = $this->getSdkWithMockedClient(
             200,
@@ -80,7 +75,7 @@ class ServerTest extends AbstractComputeSdkCase
 
         $url = $sdk->getConsoleUrl(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
 
-        $this->assertSame(
+        self::assertSame(
             'https://console.auroracompute.eu/ams3?apikey=hidden&cmd=hidden&sessionkey=hidden&timestamp=nidden&userid=hidden&vm=hidden&signature=hidden%3D',
             $url
         );
@@ -99,7 +94,7 @@ class ServerTest extends AbstractComputeSdkCase
         $sdk->getConsoleUrl(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
     }
 
-    public function test_details_server()
+    public function test_details_server(): void
     {
         $sdk = $this->getSdkWithMockedClient(
             200,
@@ -110,12 +105,12 @@ class ServerTest extends AbstractComputeSdkCase
 
         $json = $sdk->showDetails(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
 
-        $this->assertTrue(is_array($json));
-        $this->assertNotSame([], $json);
-        $this->assertArrayContains('ipaddress', '185.109.216.103', $json);
+        self::assertIsArray($json);
+        self::assertNotSame([], $json);
+        self::assertArrayContains('ipaddress', '185.109.216.103', $json);
     }
 
-    public function test_create_server()
+    public function test_create_server(): void
     {
         $sdk = $this->getSdkWithMockedClient(
             201,
@@ -134,11 +129,10 @@ class ServerTest extends AbstractComputeSdkCase
             []
         );
 
-        $this->assertInstanceOf(ServerId::class, $serverId);
-        $this->assertSame('2f811c1b-3bf5-4592-b7b5-00ff80f43968', (string) $serverId);
+        self::assertSame('2f811c1b-3bf5-4592-b7b5-00ff80f43968', (string) $serverId);
     }
 
-    public function test_create_server_with_ip()
+    public function test_create_server_with_ip(): void
     {
         $sdk = $this->getSdkWithMockedClient(
             201,
@@ -158,11 +152,10 @@ class ServerTest extends AbstractComputeSdkCase
             IPv4Address::fromString('123.123.123.123')
         );
 
-        $this->assertInstanceOf(ServerId::class, $serverId);
-        $this->assertSame('2f811c1b-3bf5-4592-b7b5-00ff80f43968', (string) $serverId);
+        self::assertSame('2f811c1b-3bf5-4592-b7b5-00ff80f43968', (string) $serverId);
     }
 
-    public function test_create_server_negative()
+    public function test_create_server_negative(): void
     {
         $sdk = $this->getSdkWithMockedClient(
             422,
@@ -204,7 +197,7 @@ class ServerTest extends AbstractComputeSdkCase
         );
     }
 
-    public function test_reset_server()
+    public function test_reset_server(): void
     {
         $sdk = $this->getSdkWithMockedClient(
             204,
@@ -216,7 +209,7 @@ class ServerTest extends AbstractComputeSdkCase
         $sdk->resetServer(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
     }
 
-    public function test_attach_rescue_iso_server()
+    public function test_attach_rescue_iso_server(): void
     {
         $sdk = $this->getSdkWithMockedClient(
             204,
@@ -228,7 +221,7 @@ class ServerTest extends AbstractComputeSdkCase
         $sdk->attachRescueIso(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
     }
 
-    public function test_detach_rescue_iso_server()
+    public function test_detach_rescue_iso_server(): void
     {
         $sdk = $this->getSdkWithMockedClient(
             204,
@@ -240,7 +233,7 @@ class ServerTest extends AbstractComputeSdkCase
         $sdk->detachRescueIso(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
     }
 
-    public function test_update_server_hostname()
+    public function test_update_server_hostname(): void
     {
         $sdk = $this->getSdkWithMockedClient(
             204,
@@ -255,7 +248,7 @@ class ServerTest extends AbstractComputeSdkCase
         );
     }
 
-    public function test_reboot_server()
+    public function test_reboot_server(): void
     {
         $sdk = $this->getSdkWithMockedClient(
             204,
@@ -267,7 +260,7 @@ class ServerTest extends AbstractComputeSdkCase
         $sdk->rebootServer(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
     }
 
-    public function test_start_server()
+    public function test_start_server(): void
     {
         $sdk = $this->getSdkWithMockedClient(
             204,
@@ -279,7 +272,7 @@ class ServerTest extends AbstractComputeSdkCase
         $sdk->startServer(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
     }
 
-    public function test_stop_server()
+    public function test_stop_server(): void
     {
         $sdk = $this->getSdkWithMockedClient(
             204,
@@ -291,7 +284,7 @@ class ServerTest extends AbstractComputeSdkCase
         $sdk->stopServer(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
     }
 
-    public function test_upgrade_server()
+    public function test_upgrade_server(): void
     {
         $sdk = $this->getSdkWithMockedClient(
             204,
@@ -306,7 +299,7 @@ class ServerTest extends AbstractComputeSdkCase
         );
     }
 
-    public function test_delete_server()
+    public function test_delete_server(): void
     {
         $sdk = $this->getSdkWithMockedClient(
             204,
@@ -318,7 +311,7 @@ class ServerTest extends AbstractComputeSdkCase
         $sdk->deleteServer(ServerId::fromString('6a6256cc-e6ff-41d2-9894-95a066d2b7a4'));
     }
 
-    public function test_password_reset_server()
+    public function test_password_reset_server(): void
     {
         $sdk = $this->getSdkWithMockedClient(
             204,

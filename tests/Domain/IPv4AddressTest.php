@@ -27,6 +27,6 @@ final class IPv4AddressTest extends TestCase
             $this->expectExceptionMessage("{$address} is not a valid IPv4 address.");
         }
         $ipv4 = IPv4Address::fromString($address);
-        $this->assertSame($address, (string) $ipv4);
+        self::assertSame($address, (string) $ipv4);
     }
 }

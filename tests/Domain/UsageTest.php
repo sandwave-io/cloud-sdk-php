@@ -8,16 +8,21 @@ use SandwaveIo\CloudSdkPhp\Domain\Usage;
 
 final class UsageTest extends TestCase
 {
+    /**
+     * @throws \JsonException
+     */
     public function testCanConstruct(): void
     {
         $usage = Usage::fromArray(
             json_decode(
-                file_get_contents('tests/Domain/json/usage.json'),
-                true
+                (string) file_get_contents('tests/Domain/json/usage.json'),
+                true,
+                512,
+                JSON_THROW_ON_ERROR
             )
         );
 
-        $this->assertSame(16, $usage->getMemoryInGbs());
-        $this->assertSame(500, $usage->getStorageInGbs());
+        self::assertSame(16, $usage->getMemoryInGbs());
+        self::assertSame(500, $usage->getStorageInGbs());
     }
 }

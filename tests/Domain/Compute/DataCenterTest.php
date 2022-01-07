@@ -8,22 +8,27 @@ use SandwaveIo\CloudSdkPhp\Domain\Compute\DataCenter;
 
 final class DataCenterTest extends TestCase
 {
+    /**
+     * @throws \JsonException
+     */
     public function test_constructor(): void
     {
         $datacenter = DataCenter::fromArray(
             json_decode(
-                file_get_contents('tests/Domain/json/datacenter.json'),
-                true
+                (string) file_get_contents('tests/Domain/json/datacenter.json'),
+                true,
+                512,
+                JSON_THROW_ON_ERROR
             )
         );
 
-        $this->assertSame('5427178b-fc9b-4561-8a8b-fb45353fdb37', (string) $datacenter->getId());
-        $this->assertSame('ams01', $datacenter->getName());
-        $this->assertSame('Tele 2', $datacenter->getDescription());
-        $this->assertSame('Amsterdam', $datacenter->getCity());
-        $this->assertSame('NL', $datacenter->getCountry());
-        $this->assertSame('Europe/Amsterdam', $datacenter->getTimezone());
-        $this->assertFalse($datacenter->isStandardEnabled());
-        $this->assertFalse($datacenter->isHaEnabled());
+        self::assertSame('5427178b-fc9b-4561-8a8b-fb45353fdb37', (string) $datacenter->getId());
+        self::assertSame('ams01', $datacenter->getName());
+        self::assertSame('Tele 2', $datacenter->getDescription());
+        self::assertSame('Amsterdam', $datacenter->getCity());
+        self::assertSame('NL', $datacenter->getCountry());
+        self::assertSame('Europe/Amsterdam', $datacenter->getTimezone());
+        self::assertFalse($datacenter->isStandardEnabled());
+        self::assertFalse($datacenter->isHaEnabled());
     }
 }

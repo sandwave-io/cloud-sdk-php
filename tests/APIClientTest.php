@@ -15,13 +15,13 @@ use SandwaveIo\CloudSdkPhp\Exceptions\CloudNotFoundException;
 
 class APIClientTest extends TestCase
 {
-    public function test_client_constructor()
+    public function test_client_constructor(): void
     {
         $client = new APIClient('this-is-my-api-key', AccountId::fromString(Uuid::NIL));
-        $this->assertNotNull($client);
+        self::assertNotNull($client);
     }
 
-    public function test_get_request_success()
+    public function test_get_request_success(): void
     {
         $handlerStack = HandlerStack::create(new MockHandler([
             new Response(200, [], '{"data": {"foo": "bar"}}'),
@@ -29,10 +29,10 @@ class APIClientTest extends TestCase
         $client = new APIClient('this-is-my-api-key', AccountId::fromString(Uuid::NIL), new Client(['handler' => $handlerStack]));
 
         $response = $client->get('/test');
-        $this->assertSame(['foo' => 'bar'], $response);
+        self::assertSame(['foo' => 'bar'], $response);
     }
 
-    public function test_get_request_404()
+    public function test_get_request_404(): void
     {
         $handlerStack = HandlerStack::create(new MockHandler([
             new Response(404, [], '{"data": null}'),
@@ -43,7 +43,7 @@ class APIClientTest extends TestCase
         $client->get('/test');
     }
 
-    public function test_get_request_bad_json()
+    public function test_get_request_bad_json(): void
     {
         $handlerStack = HandlerStack::create(new MockHandler([
             new Response(200, [], '{"data": dit is geen valide json 123 😂}'),
@@ -54,7 +54,7 @@ class APIClientTest extends TestCase
         $client->get('/test');
     }
 
-    public function test_get_request_empty_body()
+    public function test_get_request_empty_body(): void
     {
         $handlerStack = HandlerStack::create(new MockHandler([
             new Response(200, ['Content-Length' => 0], ''),
@@ -62,10 +62,10 @@ class APIClientTest extends TestCase
         $client = new APIClient('this-is-my-api-key', AccountId::fromString(Uuid::NIL), new Client(['handler' => $handlerStack]));
 
         $response = $client->get('/test');
-        $this->assertSame([], $response);
+        self::assertSame([], $response);
     }
 
-    public function test_post_request_success()
+    public function test_post_request_success(): void
     {
         $handlerStack = HandlerStack::create(new MockHandler([
             new Response(201, [], '{"data": {"foo": "bar"}}'),
@@ -73,10 +73,10 @@ class APIClientTest extends TestCase
         $client = new APIClient('this-is-my-api-key', AccountId::fromString(Uuid::NIL), new Client(['handler' => $handlerStack]));
 
         $response = $client->post('/test');
-        $this->assertSame(['foo' => 'bar'], $response);
+        self::assertSame(['foo' => 'bar'], $response);
     }
 
-    public function test_put_request_success()
+    public function test_put_request_success(): void
     {
         $handlerStack = HandlerStack::create(new MockHandler([
             new Response(204, [], '{"data": {"foo": "bar"}}'),
@@ -84,10 +84,10 @@ class APIClientTest extends TestCase
         $client = new APIClient('this-is-my-api-key', AccountId::fromString(Uuid::NIL), new Client(['handler' => $handlerStack]));
 
         $response = $client->put('/test');
-        $this->assertSame(['foo' => 'bar'], $response);
+        self::assertSame(['foo' => 'bar'], $response);
     }
 
-    public function test_delete_request_success()
+    public function test_delete_request_success(): void
     {
         $handlerStack = HandlerStack::create(new MockHandler([
             new Response(204, [], '{"data": {"foo": "bar"}}'),
@@ -95,10 +95,10 @@ class APIClientTest extends TestCase
         $client = new APIClient('this-is-my-api-key', AccountId::fromString(Uuid::NIL), new Client(['handler' => $handlerStack]));
 
         $response = $client->delete('/test');
-        $this->assertSame(['foo' => 'bar'], $response);
+        self::assertSame(['foo' => 'bar'], $response);
     }
 
-    public function test_patch_request_success()
+    public function test_patch_request_success(): void
     {
         $handlerStack = HandlerStack::create(new MockHandler([
             new Response(204, [], '{"data": {"foo": "bar"}}'),
@@ -106,6 +106,6 @@ class APIClientTest extends TestCase
         $client = new APIClient('this-is-my-api-key', AccountId::fromString(Uuid::NIL), new Client(['handler' => $handlerStack]));
 
         $response = $client->patch('/test');
-        $this->assertSame(['foo' => 'bar'], $response);
+        self::assertSame(['foo' => 'bar'], $response);
     }
 }
