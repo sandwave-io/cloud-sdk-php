@@ -173,6 +173,11 @@ final class Server
         return $this->networkId;
     }
 
+    public function getDisks(): ?DiskCollection
+    {
+        return $this->disks;
+    }
+
     public function getOffer(): ?Offer
     {
         return $this->offer;

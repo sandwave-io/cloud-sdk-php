@@ -15,7 +15,6 @@ final class SpecificationCollection extends AbstractCollection
         return $this->items->current();
     }
 
-    /** @param array<array> $data */
     public static function fromArray(array $data): SpecificationCollection
     {
         $specifications = [];

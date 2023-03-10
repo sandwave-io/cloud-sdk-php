@@ -19,7 +19,7 @@ final class ServerCollection extends AbstractCollection
         return $this->items->current();
     }
 
-    /** @param array<array>|Server[] $data */
+    /** @param array<array<mixed>>|Server[] $data */
     public static function fromArray(array $data): ServerCollection
     {
         $servers = [];

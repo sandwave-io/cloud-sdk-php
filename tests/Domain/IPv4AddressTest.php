@@ -9,7 +9,7 @@ use SandwaveIo\CloudSdkPhp\Domain\IPv4Address;
 
 final class IPv4AddressTest extends TestCase
 {
-    public function ipAddresses(): array
+    public static function ipAddresses(): array
     {
         return [
             ['123.123.123.123', true],

@@ -18,8 +18,7 @@ abstract class AbstractCollection implements Iterator, Countable
         $this->items = new ArrayIterator($items);
     }
 
-    /** @return mixed */
-    abstract public function current();
+    abstract public function current(): mixed;
 
     public function next(): void
     {
@@ -28,10 +27,8 @@ abstract class AbstractCollection implements Iterator, Countable
 
     /**
      * @codeCoverageIgnore
-     *
-     * @return mixed
      */
-    public function key()
+    public function key(): mixed
     {
         return $this->items->key();
     }
@@ -52,9 +49,7 @@ abstract class AbstractCollection implements Iterator, Countable
     }
 
     /**
-     * @param array<array> $data
-     *
-     * @return mixed
+     * @param array<mixed> $data
      */
-    abstract public static function fromArray(array $data);
+    abstract public static function fromArray(array $data): mixed;
 }

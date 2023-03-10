@@ -29,7 +29,6 @@ class AbstractComputeSdkCase extends TestCase
         ]));
         $handlerStack->push(function (callable $handler) use ($assertMethod, $assertPath, $assertQuery) {
             return function (RequestInterface $request, array $options) use ($handler, $assertMethod, $assertPath, $assertQuery) {
-
                 // Make some assertions
                 $this->assertSame($assertPath, $request->getUri()->getPath());
                 $this->assertSame($assertQuery, $request->getUri()->getQuery());

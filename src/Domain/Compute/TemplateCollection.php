@@ -17,7 +17,6 @@ final class TemplateCollection extends AbstractCollection
         return $this->items->current();
     }
 
-    /** @param array<array> $data */
     public static function fromArray(array $data): TemplateCollection
     {
         $templates = [];
