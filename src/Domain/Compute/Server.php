@@ -42,6 +42,9 @@ final class Server
     /** @var NetworkId|null */
     private $networkId;
 
+    /** @var ?DiskCollection */
+    private $disks;
+
     /** @var ?Offer */
     private $offer;
 
@@ -60,7 +63,8 @@ final class Server
         ?string $ipv6Address,
         ?NetworkId $networkId,
         ?Offer $offer,
-        ?DataCenter $dataCenter
+        ?DataCenter $dataCenter,
+        ?DiskCollection $disks
     ) {
         $this->id = $id;
         $this->displayName = $displayName;
@@ -74,6 +78,7 @@ final class Server
         $this->networkId = $networkId;
         $this->offer = $offer;
         $this->dataCenter = $dataCenter;
+        $this->disks = $disks;
     }
 
     /**
@@ -96,6 +101,7 @@ final class Server
 
         $offer = isset($data['offer']['data']) ? Offer::fromArray($data['offer']['data']) : null;
         $dataCenter = isset($data['datacenter']['data']) ? DataCenter::fromArray($data['datacenter']['data']) : null;
+        $disks = isset($data['disks']['data']) ? DiskCollection::fromArray($data['disks']['data']) : null;
         $ipv4Address = isset($data['ipv4_address']) ? $data['ipv4_address'] : null;
         $ipv6Address = isset($data['ipv6_address']) ? $data['ipv6_address'] : null;
         $networkId = isset($data['network_id']) ? NetworkId::fromString($data['network_id']) : null;
@@ -112,7 +118,8 @@ final class Server
             $ipv6Address,
             $networkId,
             $offer,
-            $dataCenter
+            $dataCenter,
+            $disks
         );
     }
 
@@ -164,6 +171,11 @@ final class Server
     public function getNetworkId(): ?NetworkId
     {
         return $this->networkId;
+    }
+
+    public function getDisks(): ?DiskCollection
+    {
+        return $this->disks;
     }
 
     public function getOffer(): ?Offer
