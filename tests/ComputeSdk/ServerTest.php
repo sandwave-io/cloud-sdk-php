@@ -48,6 +48,7 @@ class ServerTest extends AbstractComputeSdkCase
         $this->assertNull($server->getIPv4Address());
         $this->assertNull($server->getIPv6Address());
         $this->assertNull($server->getNetworkId());
+        $this->assertNull($server->getDisks());
     }
 
     public function test_show_server_detailed()
