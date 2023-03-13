@@ -3,7 +3,7 @@
 # PCextreme Cloud API - PHP SDK
 
 [![Codecov](https://codecov.io/gh/sandwave-io/cloud-sdk-php/branch/master/graph/badge.svg?token=CWWIFWRKZC)](https://packagist.org/packages/sandwave-io/cloud-sdk-php)
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/sandwave-io/cloud-sdk-php/CI)](https://packagist.org/packages/sandwave-io/cloud-sdk-php)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/sandwave-io/cloud-sdk-php/ci.yml?branch=main)](https://packagist.org/packages/sandwave-io/cloud-sdk-php)
 [![Packagist PHP Version Support](https://img.shields.io/packagist/php-v/sandwave-io/cloud-sdk-php)](https://packagist.org/packages/sandwave-io/cloud-sdk-php)
 [![Packagist PHP Version Support](https://img.shields.io/packagist/v/sandwave-io/cloud-sdk-php)](https://packagist.org/packages/sandwave-io/cloud-sdk-php)
 [![Packagist Downloads](https://img.shields.io/packagist/dt/sandwave-io/cloud-sdk-php)](https://packagist.org/packages/sandwave-io/cloud-sdk-php)
